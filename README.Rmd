@@ -23,6 +23,39 @@ knitr::opts_chunk$set(
 
 The goal of ohseer is to provide an R interface to the Mistral AI OCR (Optical Character Recognition) API. This package allows you to easily extract text from documents using Mistral's powerful OCR capabilities directly from your R environment.
 
+## Part of the EcoExtract Suite
+
+
+`OhSeeR` is the foundational first step in the **EcoExtract Suite**, a collection of R packages designed for extracting and structuring ecological data from academic literature. This suite facilitates a modular workflow from raw documents to validated, analysis-ready data.
+
+The overall workflow is visualized below:
+
+```{mermaid}
+graph TD
+    subgraph Input [ ]
+        A[(Source PDF Documents)]
+    end
+    subgraph Processing_Pipeline [ ]
+        A -- Raw PDF Data --> B(OhSeeR):::package;
+        B -- PDF Text --> C(sanitizeR):::package;
+        C -- Cleaned Text --> E{LLM API Call};
+        D(whispeR):::package -- Formatted Prompts --> E;
+        E -- Raw LLM Response --> F(structuR):::package;
+        F -- Structured Data --> H(auditR):::package;
+    end
+    subgraph Validation_Source [ ]
+        C --> H;
+    end
+    subgraph Output [ ]
+        H -- Validated Data --> I((Structured Dataset));
+    end
+    %% Styling classes for package nodes
+    classDef package fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px;
+    %% Remove subgraph backgrounds and borders
+    classDef subgraphStyle fill:transparent,stroke:transparent;
+    class Input,Processing_Pipeline,Validation_Source,Output subgraphStyle;
+```
+
 ## Features
 
 - Upload files to Mistral AI
