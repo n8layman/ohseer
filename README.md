@@ -78,8 +78,19 @@ remotes::install_github("n8layman/ohseer")
 
 ## Authentication
 
-To use this package, you’ll need a Mistral AI API key. Set your API key
-as an environment variable:
+To use this package, you’ll need a Mistral AI API key. To receive an api
+key you will need to:
+
+1.  Visit [mistral.ai](https://mistral.ai/)
+2.  Click ‘Try the API’ from the top menu bar
+3.  Sign in using Google, Apple, or Microsoft accounts or register
+4.  Create and name a workspace or organization
+5.  Click ‘Subscription’ and then ‘Compare plans’ from the left task
+    bar.
+6.  Chose ‘Experiment for Free’ to try out the service and subscribe.
+    This will require entering your phone number for validation
+7.  Click on ‘API keys’ and ’Create New Key\`
+8.  Copy down your API key and set it as an environment variable in R
 
 ``` r
 Sys.setenv(MISTRAL_API_KEY = "your-api-key-here")
@@ -87,7 +98,9 @@ Sys.setenv(MISTRAL_API_KEY = "your-api-key-here")
 
 For persistent authentication, add this to your `.Renviron` file:
 
-    MISTRAL_API_KEY=your-api-key-here
+``` r
+MISTRAL_API_KEY=your-api-key-here
+```
 
 ⚠️ **Security Warning**: Never commit `.env` or `.Renviron` files
 containing API keys to version control. Consider using encrypted
