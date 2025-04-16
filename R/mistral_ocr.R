@@ -71,25 +71,17 @@ mistral_ocr <- function(input, input_type = "auto", api_key = Sys.getenv("MISTRA
     }
   }
 
-  file_id <- NULL
-  file_metadata <- NULL
+  ocr_results <- NULL
 
-
-  response <- NULL
   if(input_type == "file") {
     response <- mistral_ocr_upload_file(input)
     metadata <- mistral_ocr_get_file_metadata(response$id)
     document_url <- mistral_ocr_get_file_url(response$id)
-    ocr_results <- mistral_ocr_process(document_url)
-    ocr_results2 <- mistral_ocr_url(document_url)
-    input_type == "id"
-    input <- response
-  }
-  if(input_type == "id") {
-    response <- mistral_ocr_retrieve_file(input)
+    input_type <- "url"
+    input <- document_url
   }
 
-  if(input_type == "url") response <- mistral_ocr_url(input)
+  if(input_type == "url") ocr_results <- mistral_ocr_process_url(input)
 
-  return(response)
+  return(ocr_results)
 }
