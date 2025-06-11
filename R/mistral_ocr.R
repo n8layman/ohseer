@@ -31,7 +31,7 @@
 #' @importFrom jsonlite toJSON write_json
 #' @importFrom stringr str_detect str_squish
 mistral_ocr <- function(input, input_type = "auto", api_key = Sys.getenv("MISTRAL_API_KEY"), 
-                        model = "mistral-ocr-latest", include_image_base64 = TRUE, output_file = NULL) {
+                        model = "mistral-ocr-latest", include_image_base64 = TRUE, output_file = NULL, ...) {
   
   # Validate inputs
   if (is.null(api_key) || api_key == "") {
@@ -74,7 +74,7 @@ mistral_ocr <- function(input, input_type = "auto", api_key = Sys.getenv("MISTRA
   ocr_results <- NULL
 
   if(input_type == "file") {
-    response <- mistral_ocr_upload_file(input)
+    response <- mistral_ocr_upload_file(input, ...)
     metadata <- mistral_ocr_get_file_metadata(response$id)
     document_url <- mistral_ocr_get_file_url(response$id)
     input_type <- "url"
