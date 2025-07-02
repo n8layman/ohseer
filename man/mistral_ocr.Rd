@@ -10,7 +10,8 @@ mistral_ocr(
   api_key = Sys.getenv("MISTRAL_API_KEY"),
   model = "mistral-ocr-latest",
   include_image_base64 = TRUE,
-  output_file = NULL
+  output_file = NULL,
+  ...
 )
 }
 \arguments{
