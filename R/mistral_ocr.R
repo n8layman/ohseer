@@ -11,6 +11,7 @@
 #' @param model Character string. The model to use for OCR processing. Default is "mistral-ocr-latest".
 #' @param include_image_base64 Logical. Whether to include base64-encoded images in the response. Default is TRUE.
 #' @param output_file Character string. Optional path to save the JSON response to a file. Default is NULL (no file output).
+#' @param timeout Numeric. Timeout in seconds for file upload operations. Default is 60.
 #'
 #' @return List. The parsed response from the Mistral AI OCR API containing recognized text and metadata.
 #'
@@ -31,7 +32,7 @@
 #' @importFrom jsonlite toJSON write_json
 #' @importFrom stringr str_detect str_squish
 mistral_ocr <- function(input, input_type = "auto", api_key = Sys.getenv("MISTRAL_API_KEY"), 
-                        model = "mistral-ocr-latest", include_image_base64 = TRUE, output_file = NULL, ...) {
+                        model = "mistral-ocr-latest", include_image_base64 = TRUE, output_file = NULL, timeout = 60, ...) {
   
   # Validate inputs
   if (is.null(api_key) || api_key == "") {
@@ -74,7 +75,7 @@ mistral_ocr <- function(input, input_type = "auto", api_key = Sys.getenv("MISTRA
   ocr_results <- NULL
 
   if(input_type == "file") {
-    response <- mistral_ocr_upload_file(input, ...)
+    response <- mistral_ocr_upload_file(input, timeout = timeout, ...)
     metadata <- mistral_ocr_get_file_metadata(response$id)
     document_url <- mistral_ocr_get_file_url(response$id)
     input_type <- "url"
