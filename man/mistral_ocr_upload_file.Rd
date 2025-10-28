@@ -9,7 +9,8 @@ mistral_ocr_upload_file(
   purpose = "ocr",
   api_key = Sys.getenv("MISTRAL_API_KEY"),
   endpoint = "https://api.mistral.ai/v1/files",
-  verbose = FALSE
+  verbose = FALSE,
+  timeout = 60
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ mistral_ocr_upload_file(
 \item{endpoint}{Character string. The Mistral AI API endpoint URL. Default is "https://api.mistral.ai/v1/files".}
 
 \item{verbose}{Logical. If TRUE, enables verbose HTTP request/response logging for debugging. Default is FALSE.}
+
+\item{timeout}{Numeric. Timeout in seconds for the upload request. Default is 60.}
 }
 \value{
 List. Parsed JSON response from the Mistral AI API containing file metadata including file ID.

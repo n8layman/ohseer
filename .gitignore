@@ -38,6 +38,12 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+.env
+
+# Test files and data
+data/articles/*.pdf
+test*.html
+test*.md
 
 # pkgdown site
 docs/

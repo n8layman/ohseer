@@ -11,6 +11,7 @@ mistral_ocr(
   model = "mistral-ocr-latest",
   include_image_base64 = TRUE,
   output_file = NULL,
+  timeout = 60,
   ...
 )
 }
@@ -26,6 +27,8 @@ mistral_ocr(
 \item{include_image_base64}{Logical. Whether to include base64-encoded images in the response. Default is TRUE.}
 
 \item{output_file}{Character string. Optional path to save the JSON response to a file. Default is NULL (no file output).}
+
+\item{timeout}{Numeric. Timeout in seconds for file upload operations. Default is 60.}
 }
 \value{
 List. The parsed response from the Mistral AI OCR API containing recognized text and metadata.

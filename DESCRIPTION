@@ -13,7 +13,6 @@ Imports:
     htmltools,
     httr2,
     jsonlite,
-    magick,
     markdown,
     stringr,
     base64enc

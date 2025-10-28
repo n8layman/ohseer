@@ -53,9 +53,11 @@ graph TD
 
 - Upload files to Mistral AI
 - Process documents via URL or uploaded files
-- Retrieve OCR processed files
+- Extract text and images from PDFs
+- Preview OCR results as HTML with embedded images
+- Embed base64 images in markdown for Shiny apps
 - Simple, consistent interface
-- Customizable API endpoints
+- No heavy image processing dependencies (no magick required)
 
 ## Installation
 
@@ -141,6 +143,28 @@ If you already have a file ID from a previous upload:
 file_content <- mistral_ocr("00edaf84-95b0-45db-8f83-f71138491f23")
 ```
 
+### Previewing OCR Results
+
+You can preview OCR results with embedded images:
+
+``` r
+# Process a document
+result <- mistral_ocr("path/to/document.pdf")
+
+# Preview a page as HTML with embedded images
+mistral_preview_html(result, page_num = 1)
+
+# For Shiny apps: embed images in markdown
+processed_markdown <- mistral_embed_images(
+  markdown_text = result$pages[[1]]$markdown,
+  mistral_response = result,
+  page_num = 1
+)
+
+# Then render with your preferred markdown renderer
+html_output <- commonmark::markdown_html(processed_markdown)
+```
+
 ### Direct API Access
 
 For more control, you can use the lower-level functions:
@@ -159,7 +183,7 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 
 ## API Functions
 
-The package provides three main functions:
+### Core OCR Functions
 
 - `mistral_ocr()`: Main function that auto-detects input type (URL,
   file, or file ID)
@@ -167,6 +191,15 @@ The package provides three main functions:
 - `mistral_ocr_upload_file()`: Upload a file to Mistral AI
 - `mistral_ocr_retrieve_file()`: Retrieve a file from Mistral AI using
   its ID
+
+### Preview and Display Functions
+
+- `mistral_preview_html()`: Generate a complete HTML preview with
+  embedded images
+- `mistral_embed_images()`: Embed base64 images into markdown text (for
+  Shiny apps)
+- `mistral_preview_page()`: Simple markdown-to-HTML preview (without
+  images)
 
 ## Notes
 
