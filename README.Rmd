@@ -194,7 +194,6 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 - `mistral_preview_html()`: Generate a complete HTML preview with embedded images
 - `mistral_embed_images()`: Embed base64 images into markdown text (for Shiny apps)
 - `mistral_preview_page()`: Simple markdown-to-HTML preview (without images)
-- `mistral_preview_image()`: Display individual images from OCR results
 
 ## Notes
 

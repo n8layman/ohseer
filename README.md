@@ -200,7 +200,6 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
   Shiny apps)
 - `mistral_preview_page()`: Simple markdown-to-HTML preview (without
   images)
-- `mistral_preview_image()`: Display individual images from OCR results
 
 ## Notes
 
