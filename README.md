@@ -1,6 +1,3 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # ohseer
 
 <!-- badges: start -->
@@ -9,10 +6,10 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of ohseer is to provide an R interface to the Mistral AI OCR
-(Optical Character Recognition) API. This package allows you to easily
-extract text from documents using Mistral’s powerful OCR capabilities
-directly from your R environment.
+The goal of ohseer is to provide R interfaces to OCR (Optical Character
+Recognition) APIs. This package supports both Mistral AI OCR and AWS
+Textract, allowing you to easily extract text and structured data from
+documents directly from your R environment.
 
 ## Part of the EcoExtract Suite
 
@@ -21,43 +18,31 @@ collection of R packages designed for extracting and structuring
 ecological data from academic literature. This suite facilitates a
 modular workflow from raw documents to validated, analysis-ready data.
 
-The overall workflow is visualized below:
-
-``` mermaid
-graph TD
-    subgraph Input [ ]
-        A[(Source PDF Documents)]
-    end
-    subgraph Processing_Pipeline [ ]
-        A -- Raw PDF Data --> B(OhSeeR):::package;
-        B -- PDF Text --> C(sanitizeR):::package;
-        C -- Cleaned Text --> E{LLM API Call};
-        D(whispeR):::package -- Formatted Prompts --> E;
-        E -- Raw LLM Response --> F(structuR):::package;
-        F -- Structured Data --> H(auditR):::package;
-    end
-    subgraph Validation_Source [ ]
-        C --> H;
-    end
-    subgraph Output [ ]
-        H -- Validated Data --> I((Structured Dataset));
-    end
-    %% Styling classes for package nodes
-    classDef package fill:#D6EAF8,stroke:#5DADE2,stroke-width:2px;
-    %% Remove subgraph backgrounds and borders
-    classDef subgraphStyle fill:transparent,stroke:transparent;
-    class Input,Processing_Pipeline,Validation_Source,Output subgraphStyle;
-```
+**Workflow**: Source PDF Documents → **OhSeeR** (OCR) → sanitizeR (text cleaning) → whispeR (prompts) → LLM API → structuR (structured data) → auditR (validation) → Structured Dataset
 
 ## Features
+
+### Mistral AI OCR
 
 - Upload files to Mistral AI
 - Process documents via URL or uploaded files
 - Extract text and images from PDFs
 - Preview OCR results as HTML with embedded images
 - Embed base64 images in markdown for Shiny apps
-- Simple, consistent interface
+
+### AWS Textract OCR
+
+- Extract structured data from documents (forms, tables, key-value
+  pairs)
+- Better for extracting citation metadata from academic papers
+- Supports tables, forms, layout, and signature detection
+- Process local PDF, PNG, JPEG, or TIFF files
+
+### General
+
+- Simple, consistent interface across OCR providers
 - No heavy image processing dependencies (no magick required)
+- Lightweight: uses only httr2 for all API calls
 
 ## Installation
 
@@ -80,38 +65,68 @@ remotes::install_github("n8layman/ohseer")
 
 ## Authentication
 
-To use this package, you’ll need a Mistral AI API key. To receive an api
-key you will need to:
+### Mistral AI
+
+To use Mistral OCR, you’ll need a Mistral AI API key:
 
 1.  Visit [mistral.ai](https://mistral.ai/)
 2.  Click ‘Try the API’ from the top menu bar
 3.  Sign in using Google, Apple, or Microsoft accounts or register
 4.  Create and name a workspace or organization
-5.  Click ‘Subscription’ and then ‘Compare plans’ from the left task
-    bar.
-6.  Chose ‘Experiment for Free’ to try out the service and subscribe.
-    This will require entering your phone number for validation
-7.  Click on ‘API keys’ and ’Create New Key\`
+5.  Click ‘Subscription’ and then ‘Compare plans’ from the left task bar
+6.  Choose ‘Experiment for Free’ to try out the service and subscribe
+7.  Click on ‘API keys’ and ‘Create New Key’
 8.  Copy down your API key and set it as an environment variable in R
 
 ``` r
 Sys.setenv(MISTRAL_API_KEY = "your-api-key-here")
 ```
 
-For persistent authentication, add this to your `.Renviron` file:
+### AWS Textract
+
+To use AWS Textract, you'll need AWS credentials:
+
+1.  Sign up for an [AWS account](https://aws.amazon.com/)
+2.  Create an IAM user with Textract permissions:
+    - Navigate to IAM > Users > Create user
+    - Choose a username (e.g., `textract-user`)
+    - On the permissions page, click "Attach policies directly"
+    - Search for and attach `AmazonTextractFullAccess` policy
+    - Complete user creation
+3.  Create access keys:
+    - Select the created user
+    - Go to "Security credentials" tab
+    - Click "Create access key"
+    - Choose "Application running outside AWS"
+    - Copy the Access Key ID and Secret Access Key
+4.  Set environment variables in R:
 
 ``` r
-MISTRAL_API_KEY=your-api-key-here
+Sys.setenv(
+  AWS_ACCESS_KEY_ID = "your-access-key-id",
+  AWS_SECRET_ACCESS_KEY = "your-secret-access-key"
+)
 ```
 
-⚠️ **Security Warning**: Never commit `.env` or `.Renviron` files
-containing API keys to version control. Consider using encrypted
-environment files or a secure credential management system for
-production environments.
+### Persistent Authentication
+
+Create a `.env` file in your project directory:
+
+``` bash
+# .env
+MISTRAL_API_KEY=your-api-key-here
+AWS_ACCESS_KEY_ID=your-access-key-id
+AWS_SECRET_ACCESS_KEY=your-secret-access-key
+```
+
+⚠️ **Security Warning**: Never commit `.env` files containing API keys
+to version control. Add `.env` to your `.gitignore` file.
 
 ## Examples
 
-### Basic OCR Processing
+### Mistral AI OCR
+
+#### Basic OCR Processing
 
 The simplest way to process a document is to provide a URL:
 
@@ -122,7 +137,7 @@ library(ohseer)
 result <- mistral_ocr("https://arxiv.org/pdf/2201.04234.pdf")
 ```
 
-### Processing Local Files
+#### Processing Local Files
 
 You can also process local documents:
 
@@ -132,6 +147,44 @@ result <- mistral_ocr("path/to/document.pdf")
 
 # Save the OCR results to a file
 result <- mistral_ocr("path/to/document.pdf", output_file = "ocr_result.json")
+```
+
+### AWS Textract OCR
+
+#### Extract Structured Data from PDFs
+
+Perfect for extracting citation metadata and structured information:
+
+``` r
+library(ohseer)
+
+# Process a PDF with structured extraction (forms and tables)
+result <- textract_ocr("paper.pdf")
+
+# Extract citation metadata and other structured data
+metadata <- textract_extract_metadata(result)
+
+# Access key-value pairs (e.g., Title, Authors, DOI, Journal)
+metadata$key_value_pairs
+#>        key                          value confidence
+#> 1   Title:  Machine Learning for OCR         95.2
+#> 2  Author:  Smith, J.; Jones, A.            98.1
+#> 3     DOI:  10.1038/nmeth.1234              99.5
+
+# Access extracted tables
+metadata$tables[[1]]
+
+# Full document text
+cat(metadata$text)
+```
+
+#### Simple Text Extraction
+
+For faster text-only extraction without structured data:
+
+``` r
+# Extract just text (no forms/tables)
+result <- textract_ocr("document.pdf", features = NULL)
 ```
 
 ### Working with File IDs
@@ -183,7 +236,7 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 
 ## API Functions
 
-### Core OCR Functions
+### Mistral AI OCR Functions
 
 - `mistral_ocr()`: Main function that auto-detects input type (URL,
   file, or file ID)
@@ -192,7 +245,7 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 - `mistral_ocr_retrieve_file()`: Retrieve a file from Mistral AI using
   its ID
 
-### Preview and Display Functions
+### Mistral Preview and Display Functions
 
 - `mistral_preview_html()`: Generate a complete HTML preview with
   embedded images
@@ -201,11 +254,32 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 - `mistral_preview_page()`: Simple markdown-to-HTML preview (without
   images)
 
+### AWS Textract OCR Functions
+
+- `textract_ocr()`: Main function for AWS Textract OCR with structured
+  data extraction
+- `textract_extract_metadata()`: Parse Textract output to extract
+  key-value pairs and tables
+- `textract_analyze_document()`: Low-level function for AnalyzeDocument
+  API
+- `textract_detect_document_text()`: Low-level function for
+  DetectDocumentText API
+
 ## Notes
 
 - This package is experimental and the API may change
 - Large files may take some time to process
-- Check Mistral AI documentation for the latest API information
+- **Mistral OCR**: Check [Mistral AI
+  documentation](https://docs.mistral.ai/) for the latest API
+  information
+- **AWS Textract**:
+  - Supports synchronous processing for documents up to 5 MB
+  - Check [AWS Textract
+    pricing](https://aws.amazon.com/textract/pricing/) for cost
+    information
+  - See [AWS Textract
+    documentation](https://docs.aws.amazon.com/textract/) for more
+    details
 
 ## License
 
