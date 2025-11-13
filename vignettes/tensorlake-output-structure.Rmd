@@ -1,0 +1,263 @@
+---
+title: "Understanding Tensorlake Output Structure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Understanding Tensorlake Output Structure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+This vignette explains the structure of objects returned by Tensorlake's OCR functions and shows how to extract different types of information from the results.
+
+## Basic Usage
+
+```{r, eval=FALSE}
+library(ohseer)
+
+# Parse a document with Tensorlake
+result <- tensorlake_ocr("document.pdf")
+```
+
+# Output Structure
+
+The `tensorlake_ocr()` function returns a list with the following top-level fields:
+
+## Top-Level Fields
+
+```{r, eval=FALSE}
+str(result, max.level = 1)
+```
+
+- **`parse_id`**: Unique identifier for the parse job
+- **`status`**: Parse job status (e.g., "successful", "failed")
+- **`total_pages`**: Total number of pages in the document
+- **`parsed_pages_count`**: Number of pages successfully parsed
+- **`pages`**: List of parsed page data (detailed below)
+- **`chunks`**: List of text chunks extracted from the document
+- **`page_classes`**: Classification of page types (if applicable)
+- **`created_at`**: Timestamp when parse job was created (ISO 8601 format)
+- **`finished_at`**: Timestamp when parse job completed (ISO 8601 format)
+- **`usage`**: API usage statistics (tokens, pages, etc.)
+
+# Page Structure
+
+Each element in `result$pages` represents one page and contains:
+
+## Page Fields
+
+```{r, eval=FALSE}
+page1 <- result$pages[[1]]
+str(page1, max.level = 1)
+```
+
+- **`page_number`**: Page number (integer)
+- **`page_fragments`**: List of content fragments found on the page
+- **`dimensions`**: Page dimensions (width, height)
+- **`page_dimensions`**: Alternative dimension measurements
+- **`classification_reason`**: Reason for page classification (if applicable)
+
+## Page Fragments
+
+Each page contains multiple fragments representing different content types:
+
+```{r, eval=FALSE}
+fragment <- page1$page_fragments[[1]]
+str(fragment, max.level = 2)
+```
+
+### Fragment Fields
+
+- **`fragment_type`**: Type of content (see types below)
+- **`content`**: The actual content (text or structured data)
+  - `content$content`: The text content
+  - `content$html`: HTML representation (for tables)
+- **`reading_order`**: Position in reading sequence (integer)
+- **`bbox`**: Bounding box coordinates
+  - `x1`, `y1`: Top-left corner
+  - `x2`, `y2`: Bottom-right corner
+
+### Fragment Types
+
+Tensorlake identifies several content types:
+
+| Fragment Type | Description |
+|--------------|-------------|
+| `page_header` | Headers at top of pages |
+| `page_number` | Page numbers |
+| `section_header` | Section/chapter headings |
+| `text` | Regular paragraph text |
+| `table` | Tables (with optional HTML) |
+| `table_caption` | Table captions/titles |
+| `figure` | Images or figures |
+| `figure_caption` | Figure captions |
+
+# Extracting Information
+
+## Extract All Text
+
+Use `tensorlake_extract_text()` to get text content:
+
+```{r, eval=FALSE}
+# Get text by page (character vector)
+text_by_page <- tensorlake_extract_text(result)
+
+# Get text from specific pages
+first_two_pages <- tensorlake_extract_text(result, pages = 1:2)
+
+# Get all text as single string
+full_text <- paste(tensorlake_extract_text(result), collapse = "\n\n")
+cat(full_text)
+```
+
+## Extract Tables
+
+Use `tensorlake_extract_tables()` to get table data:
+
+```{r, eval=FALSE}
+# Get all tables
+tables <- tensorlake_extract_tables(result)
+
+# Each table contains:
+table1 <- tables[[1]]
+table1$page_number     # Which page the table is on
+table1$content$content # Text content
+table1$content$html    # HTML representation (if available)
+table1$bbox            # Position on page
+
+# Get tables from specific pages
+page1_tables <- tensorlake_extract_tables(result, pages = 1)
+```
+
+## Extract Metadata
+
+Use `tensorlake_extract_metadata()` to get document statistics:
+
+```{r, eval=FALSE}
+metadata <- tensorlake_extract_metadata(result)
+
+# View processing statistics
+cat("Parse ID:", metadata$parse_id, "\n")
+cat("Pages processed:", metadata$parsed_pages_count, "of", metadata$total_pages, "\n")
+cat("Processing time:", round(metadata$processing_time, 2), "seconds\n")
+cat("Status:", metadata$status, "\n")
+
+# View usage statistics
+str(metadata$usage)
+```
+
+# Working with Fragments
+
+## Filter by Fragment Type
+
+Find all headers in a document:
+
+```{r, eval=FALSE}
+# Get all section headers
+headers <- list()
+for (page in result$pages) {
+  for (frag in page$page_fragments) {
+    if (frag$fragment_type == "section_header") {
+      headers[[length(headers) + 1]] <- list(
+        page = page$page_number,
+        text = frag$content$content,
+        order = frag$reading_order
+      )
+    }
+  }
+}
+
+# View headers
+do.call(rbind, lapply(headers, as.data.frame))
+```
+
+## Extract Text in Reading Order
+
+Get text fragments in the order they should be read:
+
+```{r, eval=FALSE}
+# For a specific page
+page_num <- 1
+page <- result$pages[[page_num]]
+
+# Sort fragments by reading order
+sorted_fragments <- page$page_fragments[order(sapply(page$page_fragments, function(f) f$reading_order))]
+
+# Extract text in order
+ordered_text <- sapply(sorted_fragments, function(frag) {
+  frag$content$content %||% ""
+})
+
+cat(paste(ordered_text, collapse = "\n"))
+```
+
+# Complete Example
+
+Here's a complete workflow for processing an academic paper:
+
+```{r, eval=FALSE}
+library(ohseer)
+
+# 1. Parse the document
+result <- tensorlake_ocr("paper.pdf")
+
+# 2. Extract metadata
+metadata <- tensorlake_extract_metadata(result)
+cat("Processed", metadata$total_pages, "pages in",
+    round(metadata$processing_time, 2), "seconds\n")
+
+# 3. Extract text from first 2 pages (usually contains citation info)
+first_pages_text <- paste(
+  tensorlake_extract_text(result, pages = 1:2),
+  collapse = "\n\n"
+)
+
+# 4. Extract all tables
+tables <- tensorlake_extract_tables(result)
+cat("Found", length(tables), "tables\n")
+
+# 5. Get full text for further processing
+full_text <- paste(tensorlake_extract_text(result), collapse = "\n\n")
+
+# Now you can:
+# - Use full_text for citation extraction with an LLM
+# - Parse tables for data extraction
+# - Process headers for document structure analysis
+```
+
+# Tips and Best Practices
+
+1. **Fragment Types**: Different documents may have different fragment types. Always check what's available:
+   ```{r, eval=FALSE}
+   all_types <- unique(unlist(lapply(result$pages, function(p) {
+     sapply(p$page_fragments, function(f) f$fragment_type)
+   })))
+   table(all_types)
+   ```
+
+2. **Reading Order**: Use `reading_order` to maintain document flow when extracting text.
+
+3. **Bounding Boxes**: Use `bbox` coordinates if you need to know where content appears on the page.
+
+4. **Page Selection**: For citation extraction, processing just the first 1-2 pages is usually sufficient and faster.
+
+5. **Error Handling**: Always check `result$status` to ensure parsing succeeded:
+   ```{r, eval=FALSE}
+   if (result$status != "successful") {
+     stop("Parsing failed or is incomplete")
+   }
+   ```
+
+# Further Reading
+
+- [Tensorlake Setup Guide](../TENSORLAKE_SETUP.md)
+- [Package README](../README.md)
+- Tensorlake API documentation: https://docs.tensorlake.ai

@@ -7,8 +7,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The goal of ohseer is to provide R interfaces to OCR (Optical Character
-Recognition) APIs. This package supports both Mistral AI OCR and AWS
-Textract, allowing you to easily extract text and structured data from
+Recognition) APIs. This package supports Mistral AI OCR, AWS Textract, and
+Tensorlake, allowing you to easily extract text and structured data from
 documents directly from your R environment.
 
 ## Part of the EcoExtract Suite
@@ -22,6 +22,15 @@ modular workflow from raw documents to validated, analysis-ready data.
 
 ## Features
 
+### Tensorlake (Recommended)
+
+- **Highest accuracy**: 91.7% for structured data extraction
+- Extract tables, forms, and key-value pairs from documents
+- No file size limit for synchronous processing
+- Support for PDF, DOCX, PPTX, images, and more
+- Simple API key authentication
+- Competitive pricing: $0.01 per page
+
 ### Mistral AI OCR
 
 - Upload files to Mistral AI
@@ -32,17 +41,16 @@ modular workflow from raw documents to validated, analysis-ready data.
 
 ### AWS Textract OCR
 
-- Extract structured data from documents (forms, tables, key-value
-  pairs)
-- Better for extracting citation metadata from academic papers
+- Extract structured data from documents (forms, tables, key-value pairs)
 - Supports tables, forms, layout, and signature detection
 - Process local PDF, PNG, JPEG, or TIFF files
+- **Note**: 5 MB file size limit (synchronous API)
 
 ### General
 
 - Simple, consistent interface across OCR providers
 - No heavy image processing dependencies (no magick required)
-- Lightweight: uses only httr2 for all API calls
+- Lightweight: uses httr2 for all API calls
 
 ## Installation
 
@@ -82,6 +90,24 @@ To use Mistral OCR, you’ll need a Mistral AI API key:
 Sys.setenv(MISTRAL_API_KEY = "your-api-key-here")
 ```
 
+### Tensorlake (Recommended)
+
+To use Tensorlake's high-accuracy parsing API (91.7% accuracy):
+
+1.  Sign up for a [Tensorlake account](https://cloud.tensorlake.ai/)
+2.  Get your API key from the dashboard
+3.  Set environment variable in R:
+
+``` r
+Sys.setenv(TENSORLAKE_API_KEY = "your-api-key-here")
+```
+
+**Why Tensorlake?**
+- Highest accuracy: 91.7% (vs AWS Textract 88.4%)
+- No file size limit for synchronous processing
+- Simple API key authentication
+- Competitive pricing: $0.01 per page
+
 ### AWS Textract
 
 To use AWS Textract, you'll need AWS credentials:
@@ -108,6 +134,8 @@ Sys.setenv(
 )
 ```
 
+**Note:** AWS Textract synchronous API has a 5 MB file size limit. Large PDFs are automatically reduced to first 2 pages.
+
 ### Persistent Authentication
 
 Create a `.env` file in your project directory:
@@ -115,6 +143,7 @@ Create a `.env` file in your project directory:
 ``` bash
 # .env
 MISTRAL_API_KEY=your-api-key-here
+TENSORLAKE_API_KEY=your-tensorlake-key-here
 AWS_ACCESS_KEY_ID=your-access-key-id
 AWS_SECRET_ACCESS_KEY=your-secret-access-key
 ```
@@ -123,6 +152,40 @@ AWS_SECRET_ACCESS_KEY=your-secret-access-key
 to version control. Add `.env` to your `.gitignore` file.
 
 ## Examples
+
+### Tensorlake OCR (Recommended)
+
+#### High-Accuracy Document Parsing
+
+Tensorlake offers the highest accuracy (91.7%) for structured data extraction:
+
+``` r
+library(ohseer)
+
+# Process a PDF with high-accuracy parsing
+result <- tensorlake_ocr("paper.pdf")
+
+# Extract text from the document
+text_by_page <- tensorlake_extract_text(result)
+full_text <- paste(text_by_page, collapse = "\n\n")
+
+# Extract tables
+tables <- tensorlake_extract_tables(result)
+cat("Found", length(tables), "tables\n")
+
+# Get metadata
+metadata <- tensorlake_extract_metadata(result)
+cat("Processed", metadata$total_pages, "pages in",
+    round(metadata$processing_time, 2), "seconds\n")
+```
+
+**Benefits over AWS Textract:**
+- Higher accuracy: 91.7% vs 88.4%
+- No 5 MB file size limit
+- Simpler authentication (just API key)
+- Competitive pricing: $0.01 per page
+
+See the [Tensorlake Output Structure vignette](vignettes/tensorlake-output-structure.Rmd) for detailed information on working with results.
 
 ### Mistral AI OCR
 
@@ -235,6 +298,19 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 ```
 
 ## API Functions
+
+### Tensorlake OCR Functions
+
+- `tensorlake_ocr()`: Main function for high-accuracy document parsing (recommended)
+- `tensorlake_upload_file()`: Upload a file to Tensorlake
+- `tensorlake_parse_document()`: Submit a parse job using file ID
+- `tensorlake_get_parse_result()`: Retrieve parse results by parse ID
+
+### Tensorlake Helper Functions
+
+- `tensorlake_extract_text()`: Extract text content from parse results
+- `tensorlake_extract_tables()`: Extract table data from parse results
+- `tensorlake_extract_metadata()`: Extract document metadata and statistics
 
 ### Mistral AI OCR Functions
 

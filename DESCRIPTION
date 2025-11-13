@@ -1,18 +1,27 @@
 Package: ohseer
-Title: Interface to the Mistral Optical Character Recognition (OCR) API
+Title: Multi-Provider OCR API Interface for R
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: Provides an interface to the Mistral OCR API for document
-    processing in R.
+Description: Provides interfaces to multiple OCR and document parsing APIs including
+    Mistral AI, AWS Textract, and Tensorlake for document processing in R. Supports
+    text extraction, table detection, form parsing, and structured data extraction.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports:
     htmltools,
     httr2,
     jsonlite,
     markdown,
     stringr,
-    base64enc
+    base64enc,
+    paws.machine.learning,
+    pdftools,
+    tools,
+    curl
+Suggests:
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
