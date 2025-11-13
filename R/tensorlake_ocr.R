@@ -7,7 +7,6 @@
 #' @author Nathan C. Layman
 #'
 #' @param file_path Character string. Path to a local PDF, DOCX, PPTX, image, or text file.
-#' @param pages Character string. Optional page range to parse (e.g., "1-5" or "1,3,5").
 #' @param tensorlake_api_key Character string. Tensorlake API key. Default retrieves from
 #'   environment variable "TENSORLAKE_API_KEY".
 #' @param max_wait_seconds Numeric. Maximum seconds to wait for parsing to complete. Default is 60.
@@ -29,21 +28,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Process a PDF with Tensorlake
+#' # Process entire PDF with Tensorlake
 #' result <- tensorlake_ocr("document.pdf")
-#'
-#' # Process only first 5 pages
-#' result <- tensorlake_ocr("document.pdf", pages = "1-5")
 #'
 #' # Save output to JSON file
 #' result <- tensorlake_ocr("document.pdf", output_file = "result.json")
+#'
+#' # Extract structured data from first 2 pages
+#' pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 #' }
 #'
 #' @export
 #'
 #' @importFrom jsonlite write_json
 tensorlake_ocr <- function(file_path,
-                           pages = NULL,
                            tensorlake_api_key = Sys.getenv("TENSORLAKE_API_KEY"),
                            max_wait_seconds = 60,
                            poll_interval = 2,
@@ -71,11 +69,11 @@ tensorlake_ocr <- function(file_path,
     stop("Failed to get file ID from upload response.", call. = FALSE)
   }
 
-  # Step 2: Submit parse job
+  # Step 2: Submit parse job (parses entire document)
   parse_response <- tensorlake_parse_document(
     file_id = file_id,
     tensorlake_api_key = tensorlake_api_key,
-    pages = pages
+    pages = NULL  # Tensorlake API doesn't support page selection
   )
 
   parse_id <- parse_response$parse_id %||% parse_response$id

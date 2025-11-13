@@ -40,10 +40,8 @@ tensorlake_parse_document <- function(file_id,
     file_id = file_id
   )
 
-  # Add optional parameters
-  if (!is.null(pages)) {
-    request_body$pages <- pages
-  }
+  # Note: pages parameter kept in function signature for future API support
+  # but not currently sent to API as it's not supported by Tensorlake
 
   # Make the API request
   message("Sending document to Tensorlake for parsing...")
