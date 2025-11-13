@@ -7,8 +7,9 @@
 #' @author Nathan C. Layman
 #'
 #' @param file_path Character string. Path to a local PDF, DOCX, PPTX, image, or text file.
-#' @param pages Integer vector. Optional page numbers to parse (e.g., c(1, 2) or 1:5).
-#'   If NULL (default), parses entire document. For PDFs only.
+#' @param pages Integer vector or character string. Optional page range to parse.
+#'   Can be a vector like c(1, 2) or 1:5, or a string like "1-5" or "1,3,5".
+#'   If NULL (default), parses entire document.
 #' @param tensorlake_api_key Character string. Tensorlake API key. Default retrieves from
 #'   environment variable "TENSORLAKE_API_KEY".
 #' @param max_wait_seconds Numeric. Maximum seconds to wait for parsing to complete. Default is 60.
@@ -63,33 +64,25 @@ tensorlake_ocr <- function(file_path,
     stop("File not found: ", file_path, call. = FALSE)
   }
 
-  # Handle page selection for PDFs
-  temp_file <- NULL
-  file_to_upload <- file_path
-
-  if (!is.null(pages) && tolower(tools::file_ext(file_path)) == "pdf") {
-    message("Extracting pages ", paste(range(pages), collapse = "-"), " to temporary file...")
-
-    # Create temp file
-    temp_file <- tempfile(fileext = ".pdf")
-
-    # Extract specified pages
-    pdftools::pdf_subset(file_path, pages = pages, output = temp_file)
-
-    file_to_upload <- temp_file
-  } else if (!is.null(pages)) {
-    warning("pages parameter only supported for PDF files. Ignoring and processing entire document.",
-            call. = FALSE)
+  # Convert pages parameter to string format if needed
+  page_range <- NULL
+  if (!is.null(pages)) {
+    if (is.numeric(pages)) {
+      # Convert numeric vector to range string
+      if (length(pages) == 1) {
+        page_range <- as.character(pages)
+      } else {
+        # Use range format: "1-5"
+        page_range <- paste0(min(pages), "-", max(pages))
+      }
+    } else if (is.character(pages)) {
+      page_range <- pages
+    }
   }
 
-  # Ensure cleanup on exit
-  if (!is.null(temp_file)) {
-    on.exit(unlink(temp_file), add = TRUE)
-  }
-
-  # Step 1: Upload file (use temp file if pages were selected)
+  # Step 1: Upload file
   upload_response <- tensorlake_upload_file(
-    file_path = file_to_upload,
+    file_path = file_path,
     tensorlake_api_key = tensorlake_api_key
   )
 
@@ -99,11 +92,11 @@ tensorlake_ocr <- function(file_path,
     stop("Failed to get file ID from upload response.", call. = FALSE)
   }
 
-  # Step 2: Submit parse job (parses entire document)
+  # Step 2: Submit parse job
   parse_response <- tensorlake_parse_document(
     file_id = file_id,
     tensorlake_api_key = tensorlake_api_key,
-    pages = NULL  # Tensorlake API doesn't support page selection
+    pages = page_range
   )
 
   parse_id <- parse_response$parse_id %||% parse_response$id

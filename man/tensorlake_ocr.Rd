@@ -16,8 +16,9 @@ tensorlake_ocr(
 \arguments{
 \item{file_path}{Character string. Path to a local PDF, DOCX, PPTX, image, or text file.}
 
-\item{pages}{Integer vector. Optional page numbers to parse (e.g., c(1, 2) or 1:5).
-If NULL (default), parses entire document. For PDFs only.}
+\item{pages}{Integer vector or character string. Optional page range to parse.
+Can be a vector like c(1, 2) or 1:5, or a string like "1-5" or "1,3,5".
+If NULL (default), parses entire document.}
 
 \item{tensorlake_api_key}{Character string. Tensorlake API key. Default retrieves from
 environment variable "TENSORLAKE_API_KEY".}

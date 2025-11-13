@@ -40,8 +40,10 @@ tensorlake_parse_document <- function(file_id,
     file_id = file_id
   )
 
-  # Note: pages parameter kept in function signature for future API support
-  # but not currently sent to API as it's not supported by Tensorlake
+  # Add page_range if specified
+  if (!is.null(pages)) {
+    request_body$page_range <- pages
+  }
 
   # Make the API request
   message("Sending document to Tensorlake for parsing...")
