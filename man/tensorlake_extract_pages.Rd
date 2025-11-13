@@ -6,14 +6,14 @@
 \usage{
 tensorlake_extract_pages(
   result,
-  pages = c(1, 2),
+  pages = NULL,
   exclude_types = c("page_number", "page_footer")
 )
 }
 \arguments{
 \item{result}{List. The parsed response from tensorlake_ocr().}
 
-\item{pages}{Integer vector. Page numbers to extract (default is c(1, 2)).}
+\item{pages}{Integer vector. Page numbers to extract. If NULL (default), extracts all pages.}
 
 \item{exclude_types}{Character vector. Fragment types to exclude. Default is
 c("page_number", "page_footer").}
@@ -37,10 +37,15 @@ types (page_header, section_header, text, table, etc.).
 \examples{
 \dontrun{
 result <- tensorlake_ocr("article.pdf")
-pages <- tensorlake_extract_pages(result, pages = c(1, 2))
+
+# Extract all pages
+all_pages <- tensorlake_extract_pages(result)
+
+# Extract specific pages
+first_two <- tensorlake_extract_pages(result, pages = c(1, 2))
 
 # Access first page data
-page1 <- pages[[1]]
+page1 <- all_pages[[1]]
 page1$page_header     # Journal citation
 page1$section_header  # Article title
 page1$text           # Body text in markdown

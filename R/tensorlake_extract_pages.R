@@ -7,7 +7,7 @@
 #' @author Nathan C. Layman
 #'
 #' @param result List. The parsed response from tensorlake_ocr().
-#' @param pages Integer vector. Page numbers to extract (default is c(1, 2)).
+#' @param pages Integer vector. Page numbers to extract. If NULL (default), extracts all pages.
 #' @param exclude_types Character vector. Fragment types to exclude. Default is
 #'   c("page_number", "page_footer").
 #'
@@ -24,10 +24,15 @@
 #' @examples
 #' \dontrun{
 #' result <- tensorlake_ocr("article.pdf")
-#' pages <- tensorlake_extract_pages(result, pages = c(1, 2))
+#'
+#' # Extract all pages
+#' all_pages <- tensorlake_extract_pages(result)
+#'
+#' # Extract specific pages
+#' first_two <- tensorlake_extract_pages(result, pages = c(1, 2))
 #'
 #' # Access first page data
-#' page1 <- pages[[1]]
+#' page1 <- all_pages[[1]]
 #' page1$page_header     # Journal citation
 #' page1$section_header  # Article title
 #' page1$text           # Body text in markdown
@@ -36,12 +41,17 @@
 #'
 #' @export
 tensorlake_extract_pages <- function(result,
-                                     pages = c(1, 2),
+                                     pages = NULL,
                                      exclude_types = c("page_number", "page_footer")) {
 
   # Validate result structure
   if (is.null(result$pages)) {
     stop("Invalid result structure: no pages found.", call. = FALSE)
+  }
+
+  # Default to all pages if not specified
+  if (is.null(pages)) {
+    pages <- seq_along(result$pages)
   }
 
   output <- list()
