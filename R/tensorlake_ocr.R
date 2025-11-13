@@ -7,6 +7,8 @@
 #' @author Nathan C. Layman
 #'
 #' @param file_path Character string. Path to a local PDF, DOCX, PPTX, image, or text file.
+#' @param pages Integer vector. Optional page numbers to parse (e.g., c(1, 2) or 1:5).
+#'   If NULL (default), parses entire document. For PDFs only.
 #' @param tensorlake_api_key Character string. Tensorlake API key. Default retrieves from
 #'   environment variable "TENSORLAKE_API_KEY".
 #' @param max_wait_seconds Numeric. Maximum seconds to wait for parsing to complete. Default is 60.
@@ -31,10 +33,13 @@
 #' # Process entire PDF with Tensorlake
 #' result <- tensorlake_ocr("document.pdf")
 #'
+#' # Process only first 2 pages (faster, cheaper)
+#' result <- tensorlake_ocr("document.pdf", pages = c(1, 2))
+#'
 #' # Save output to JSON file
 #' result <- tensorlake_ocr("document.pdf", output_file = "result.json")
 #'
-#' # Extract structured data from first 2 pages
+#' # Extract structured data
 #' pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 #' }
 #'
@@ -42,6 +47,7 @@
 #'
 #' @importFrom jsonlite write_json
 tensorlake_ocr <- function(file_path,
+                           pages = NULL,
                            tensorlake_api_key = Sys.getenv("TENSORLAKE_API_KEY"),
                            max_wait_seconds = 60,
                            poll_interval = 2,
@@ -57,9 +63,33 @@ tensorlake_ocr <- function(file_path,
     stop("File not found: ", file_path, call. = FALSE)
   }
 
-  # Step 1: Upload file
+  # Handle page selection for PDFs
+  temp_file <- NULL
+  file_to_upload <- file_path
+
+  if (!is.null(pages) && tolower(tools::file_ext(file_path)) == "pdf") {
+    message("Extracting pages ", paste(range(pages), collapse = "-"), " to temporary file...")
+
+    # Create temp file
+    temp_file <- tempfile(fileext = ".pdf")
+
+    # Extract specified pages
+    pdftools::pdf_subset(file_path, pages = pages, output = temp_file)
+
+    file_to_upload <- temp_file
+  } else if (!is.null(pages)) {
+    warning("pages parameter only supported for PDF files. Ignoring and processing entire document.",
+            call. = FALSE)
+  }
+
+  # Ensure cleanup on exit
+  if (!is.null(temp_file)) {
+    on.exit(unlink(temp_file), add = TRUE)
+  }
+
+  # Step 1: Upload file (use temp file if pages were selected)
   upload_response <- tensorlake_upload_file(
-    file_path = file_path,
+    file_path = file_to_upload,
     tensorlake_api_key = tensorlake_api_key
   )
 
