@@ -64,11 +64,11 @@ result$usage             # API usage stats
 ### Extract Citation Info from Academic Paper
 
 ```r
-# Parse document
-result <- tensorlake_ocr("paper.pdf")
+# Parse only first 2 pages (faster, cheaper for citations)
+result <- tensorlake_ocr("paper.pdf", pages = c(1, 2))
 
-# Extract structured data from first 2 pages
-pages <- tensorlake_extract_pages(result, pages = c(1, 2))
+# Extract all parsed pages (just pages 1-2)
+pages <- tensorlake_extract_pages(result)
 
 # Get citation components
 page1 <- pages[[1]]
@@ -86,11 +86,11 @@ json_for_llm <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ### Extract Tables from Document
 
 ```r
-# Parse document
+# Parse entire document
 result <- tensorlake_ocr("report.pdf")
 
-# Extract pages with tables
-pages <- tensorlake_extract_pages(result, pages = c(1, 2, 3))
+# Extract all pages
+pages <- tensorlake_extract_pages(result)
 
 # Process tables from each page
 for (page in pages) {
@@ -107,11 +107,11 @@ for (page in pages) {
 ### Get Structured Data for Multiple Pages
 
 ```r
-# Parse document
+# Parse entire document
 result <- tensorlake_ocr("document.pdf")
 
-# Extract all pages
-all_pages <- tensorlake_extract_pages(result, pages = 1:result$total_pages)
+# Extract all pages (default behavior)
+all_pages <- tensorlake_extract_pages(result)
 
 # Process each page
 for (page in all_pages) {
@@ -121,9 +121,6 @@ for (page in all_pages) {
   cat("Tables:", length(page$tables), "\n")
   cat("Text length:", nchar(page$text), "chars\n\n")
 }
-
-# Or as single string
-full_text <- paste(text_by_page, collapse = "\n\n")
 ```
 
 ## Output Structure Quick Reference

@@ -163,11 +163,15 @@ Tensorlake offers the highest accuracy (91.7%) for structured data extraction:
 library(ohseer)
 library(jsonlite)
 
-# Process a PDF with high-accuracy parsing
+# Process entire PDF with high-accuracy parsing
 result <- tensorlake_ocr("paper.pdf")
 
-# Extract structured data from first 2 pages
-pages <- tensorlake_extract_pages(result, pages = c(1, 2))
+# Extract all pages
+all_pages <- tensorlake_extract_pages(result)
+
+# Or extract just first 2 pages for citation metadata
+result <- tensorlake_ocr("paper.pdf", pages = c(1, 2))
+pages <- tensorlake_extract_pages(result)
 
 # Access citation info from first page
 page1 <- pages[[1]]
