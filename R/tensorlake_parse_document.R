@@ -18,7 +18,7 @@
 #'     \item{result}{Parsed document content (when completed)}
 #'   }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @importFrom httr2 request req_headers req_auth_bearer_token req_body_json req_perform resp_body_json
 tensorlake_parse_document <- function(file_id,

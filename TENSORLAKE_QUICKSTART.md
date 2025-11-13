@@ -29,41 +29,34 @@ result <- tensorlake_ocr("document.pdf")
 result <- tensorlake_ocr("document.pdf", pages = "1-5")
 ```
 
-### Extract Text
+### Extract Structured Page Data
 
 ```r
-# Get text by page
-text_pages <- tensorlake_extract_text(result)
+library(jsonlite)
 
-# Get text from first 2 pages
-first_two <- tensorlake_extract_text(result, pages = 1:2)
+# Extract structured data from first 2 pages
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 
-# Get all text as single string
-full_text <- paste(tensorlake_extract_text(result), collapse = "\n\n")
-```
+# Access first page
+page1 <- pages[[1]]
+page1$page_header      # Journal citation, page headers
+page1$section_header   # Article title, section headers
+page1$text            # Body text (markdown format)
+page1$tables          # List of tables with content/markdown/html
+page1$other           # Other fragment types
 
-### Extract Tables
-
-```r
-# Get all tables
-tables <- tensorlake_extract_tables(result)
-
-# Access table data
-table1 <- tables[[1]]
-table1$page_number     # Page where table appears
-table1$content$content # Text content
-table1$content$html    # HTML representation
+# Convert to JSON for LLM processing
+json_data <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ```
 
 ### Get Metadata
 
 ```r
-metadata <- tensorlake_extract_metadata(result)
-
-metadata$total_pages        # Total pages in document
-metadata$parsed_pages_count # Pages successfully parsed
-metadata$processing_time    # Processing time in seconds
-metadata$usage              # API usage stats
+# Access metadata directly from result
+result$total_pages        # Total pages in document
+result$parsed_pages_count # Pages successfully parsed
+result$status            # Parse status
+result$usage             # API usage stats
 ```
 
 ## Common Workflows
@@ -71,46 +64,62 @@ metadata$usage              # API usage stats
 ### Extract Citation Info from Academic Paper
 
 ```r
-# Parse first 2 pages (where citation info usually is)
-result <- tensorlake_ocr("paper.pdf", pages = "1-2")
+# Parse document
+result <- tensorlake_ocr("paper.pdf")
 
-# Get text
-citation_text <- paste(
-  tensorlake_extract_text(result),
-  collapse = "\n\n"
-)
+# Extract structured data from first 2 pages
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 
-# Now use an LLM to extract structured citation data
-# (title, authors, journal, DOI, etc.)
+# Get citation components
+page1 <- pages[[1]]
+citation <- page1$page_header     # e.g., "Journal Name, 30(3), 1994, pp. 439-444"
+title <- page1$section_header     # Article title
+authors_text <- page1$text        # Contains authors and affiliations
+
+# Convert to JSON for LLM extraction
+json_for_llm <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
+
+# Send json_for_llm to Claude or another LLM to extract:
+# - Authors, affiliations, journal, volume, pages, year, DOI, etc.
 ```
 
-### Extract All Tables from Report
+### Extract Tables from Document
 
 ```r
 # Parse document
 result <- tensorlake_ocr("report.pdf")
 
-# Get all tables
-tables <- tensorlake_extract_tables(result)
+# Extract pages with tables
+pages <- tensorlake_extract_pages(result, pages = c(1, 2, 3))
 
-# Process each table
-for (i in seq_along(tables)) {
-  cat("Table", i, "on page", tables[[i]]$page_number, "\n")
-  cat(tables[[i]]$content$content, "\n\n")
+# Process tables from each page
+for (page in pages) {
+  if (length(page$tables) > 0) {
+    cat("Page", page$page_number, "has", length(page$tables), "table(s)\n")
+    for (tbl in page$tables) {
+      cat(tbl$markdown, "\n\n")  # Markdown format
+      # Also available: tbl$html, tbl$content, tbl$summary
+    }
+  }
 }
 ```
 
-### Get Full Document Text
+### Get Structured Data for Multiple Pages
 
 ```r
 # Parse document
 result <- tensorlake_ocr("document.pdf")
 
-# Extract all text maintaining page breaks
-text_by_page <- tensorlake_extract_text(result)
-for (i in seq_along(text_by_page)) {
-  cat("=== PAGE", i, "===\n")
-  cat(text_by_page[i], "\n\n")
+# Extract all pages
+all_pages <- tensorlake_extract_pages(result, pages = 1:result$total_pages)
+
+# Process each page
+for (page in all_pages) {
+  cat("=== PAGE", page$page_number, "===\n")
+  cat("Headers:", paste(page$page_header, collapse = "; "), "\n")
+  cat("Sections:", paste(page$section_header, collapse = "; "), "\n")
+  cat("Tables:", length(page$tables), "\n")
+  cat("Text length:", nchar(page$text), "chars\n\n")
 }
 
 # Or as single string

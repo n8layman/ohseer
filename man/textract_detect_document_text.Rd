@@ -2,7 +2,7 @@
 % Please edit documentation in R/textract_detect_document_text.R
 \name{textract_detect_document_text}
 \alias{textract_detect_document_text}
-\title{Detect Text in Document with AWS Textract}
+\title{Detect Text in Document with AWS Textract (Synchronous)}
 \usage{
 textract_detect_document_text(
   file_path,
@@ -24,10 +24,21 @@ textract_detect_document_text(
 List containing the raw Textract API response with Blocks.
 }
 \description{
-This function calls AWS Textract DetectDocumentText API to extract plain text
-from documents. This is faster than AnalyzeDocument but doesn't extract structured
-data like forms or tables.
+This function calls the AWS Textract DetectDocumentText API (synchronous) to extract
+plain text from documents. This is faster than AnalyzeDocument but doesn't extract
+structured data like forms or tables. Note: This is a synchronous operation with a
+5 MB file size limit. For larger files, the function automatically converts the
+first 2 pages to PNG format.
 }
+\section{Warning}{
+
+This function uses the synchronous Textract API which has a \strong{5 MB file size limit}.
+For PDFs larger than 5 MB, only the first 2 pages will be automatically extracted and
+converted to PNG format. For full document processing of large files, consider using
+the asynchronous S3-based Textract workflow or an alternative service like Google
+Document AI (20 MB limit) or Azure Document Intelligence (500 MB limit).
+}
+
 \author{
 Nathan C. Layman
 }

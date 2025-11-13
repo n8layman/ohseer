@@ -15,7 +15,7 @@
 #'     \item{file_id}{Unique identifier for the uploaded file}
 #'   }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @importFrom httr2 request req_headers req_auth_bearer_token req_body_multipart req_perform resp_body_json
 tensorlake_upload_file <- function(file_path,

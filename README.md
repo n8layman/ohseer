@@ -161,22 +161,23 @@ Tensorlake offers the highest accuracy (91.7%) for structured data extraction:
 
 ``` r
 library(ohseer)
+library(jsonlite)
 
 # Process a PDF with high-accuracy parsing
 result <- tensorlake_ocr("paper.pdf")
 
-# Extract text from the document
-text_by_page <- tensorlake_extract_text(result)
-full_text <- paste(text_by_page, collapse = "\n\n")
+# Extract structured data from first 2 pages
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 
-# Extract tables
-tables <- tensorlake_extract_tables(result)
-cat("Found", length(tables), "tables\n")
+# Access citation info from first page
+page1 <- pages[[1]]
+citation <- page1$page_header      # Journal citation
+title <- page1$section_header      # Article title
+text <- page1$text                 # Body text (markdown format)
+tables <- page1$tables             # Tables with markdown/html/content
 
-# Get metadata
-metadata <- tensorlake_extract_metadata(result)
-cat("Processed", metadata$total_pages, "pages in",
-    round(metadata$processing_time, 2), "seconds\n")
+# Convert to JSON for LLM processing
+json_data <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ```
 
 **Benefits over AWS Textract:**
@@ -302,15 +303,7 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 ### Tensorlake OCR Functions
 
 - `tensorlake_ocr()`: Main function for high-accuracy document parsing (recommended)
-- `tensorlake_upload_file()`: Upload a file to Tensorlake
-- `tensorlake_parse_document()`: Submit a parse job using file ID
-- `tensorlake_get_parse_result()`: Retrieve parse results by parse ID
-
-### Tensorlake Helper Functions
-
-- `tensorlake_extract_text()`: Extract text content from parse results
-- `tensorlake_extract_tables()`: Extract table data from parse results
-- `tensorlake_extract_metadata()`: Extract document metadata and statistics
+- `tensorlake_extract_pages()`: Extract structured page data organized by fragment type
 
 ### Mistral AI OCR Functions
 

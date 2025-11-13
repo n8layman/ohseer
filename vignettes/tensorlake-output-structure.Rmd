@@ -102,56 +102,54 @@ Tensorlake identifies several content types:
 
 # Extracting Information
 
-## Extract All Text
+## Extract Structured Page Data
 
-Use `tensorlake_extract_text()` to get text content:
-
-```{r, eval=FALSE}
-# Get text by page (character vector)
-text_by_page <- tensorlake_extract_text(result)
-
-# Get text from specific pages
-first_two_pages <- tensorlake_extract_text(result, pages = 1:2)
-
-# Get all text as single string
-full_text <- paste(tensorlake_extract_text(result), collapse = "\n\n")
-cat(full_text)
-```
-
-## Extract Tables
-
-Use `tensorlake_extract_tables()` to get table data:
+Use `tensorlake_extract_pages()` to get organized content by fragment type:
 
 ```{r, eval=FALSE}
-# Get all tables
-tables <- tensorlake_extract_tables(result)
+# Extract first 2 pages with structured data
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 
-# Each table contains:
-table1 <- tables[[1]]
-table1$page_number     # Which page the table is on
-table1$content$content # Text content
-table1$content$html    # HTML representation (if available)
-table1$bbox            # Position on page
+# Access first page
+page1 <- pages[[1]]
 
-# Get tables from specific pages
-page1_tables <- tensorlake_extract_tables(result, pages = 1)
+# Page structure:
+page1$page_number      # Page number
+page1$page_header      # Character vector of page headers (e.g., journal citation)
+page1$section_header   # Character vector of section headers (e.g., article title)
+page1$text            # String with all text content (markdown format)
+page1$tables          # List of tables with content, markdown, html formats
+page1$other           # Other fragment types
+
+# Example: Get citation info from first page
+citation <- page1$page_header
+title <- page1$section_header
+
+# Example: Access table data
+if (length(page1$tables) > 0) {
+  table1 <- page1$tables[[1]]
+  cat(table1$markdown)  # Markdown format
+  cat(table1$html)      # HTML format
+  cat(table1$content)   # Plain text
+}
+
+# Convert to JSON for LLM processing
+library(jsonlite)
+json_for_llm <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ```
 
 ## Extract Metadata
 
-Use `tensorlake_extract_metadata()` to get document statistics:
+Access document metadata directly from the result:
 
 ```{r, eval=FALSE}
-metadata <- tensorlake_extract_metadata(result)
-
 # View processing statistics
-cat("Parse ID:", metadata$parse_id, "\n")
-cat("Pages processed:", metadata$parsed_pages_count, "of", metadata$total_pages, "\n")
-cat("Processing time:", round(metadata$processing_time, 2), "seconds\n")
-cat("Status:", metadata$status, "\n")
+cat("Parse ID:", result$parse_id, "\n")
+cat("Pages processed:", result$parsed_pages_count, "of", result$total_pages, "\n")
+cat("Status:", result$status, "\n")
 
 # View usage statistics
-str(metadata$usage)
+str(result$usage)
 ```
 
 # Working with Fragments
@@ -205,32 +203,34 @@ Here's a complete workflow for processing an academic paper:
 
 ```{r, eval=FALSE}
 library(ohseer)
+library(jsonlite)
 
 # 1. Parse the document
 result <- tensorlake_ocr("paper.pdf")
 
-# 2. Extract metadata
-metadata <- tensorlake_extract_metadata(result)
-cat("Processed", metadata$total_pages, "pages in",
-    round(metadata$processing_time, 2), "seconds\n")
+# 2. Check status
+cat("Status:", result$status, "\n")
+cat("Processed", result$parsed_pages_count, "pages\n")
 
-# 3. Extract text from first 2 pages (usually contains citation info)
-first_pages_text <- paste(
-  tensorlake_extract_text(result, pages = 1:2),
-  collapse = "\n\n"
-)
+# 3. Extract structured data from first 2 pages (for citation metadata)
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 
-# 4. Extract all tables
-tables <- tensorlake_extract_tables(result)
-cat("Found", length(tables), "tables\n")
+# 4. Access citation information
+page1 <- pages[[1]]
+cat("Journal:", page1$page_header, "\n")
+cat("Title:", page1$section_header, "\n")
 
-# 5. Get full text for further processing
-full_text <- paste(tensorlake_extract_text(result), collapse = "\n\n")
+# 5. Convert to JSON for LLM processing
+json_data <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 
-# Now you can:
-# - Use full_text for citation extraction with an LLM
-# - Parse tables for data extraction
-# - Process headers for document structure analysis
+# Send json_data to Claude or another LLM for metadata extraction
+
+# 6. Access tables if needed
+for (page in pages) {
+  if (length(page$tables) > 0) {
+    cat("Found", length(page$tables), "tables on page", page$page_number, "\n")
+  }
+}
 ```
 
 # Tips and Best Practices

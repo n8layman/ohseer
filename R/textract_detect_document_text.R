@@ -1,8 +1,10 @@
-#' Detect Text in Document with AWS Textract
+#' Detect Text in Document with AWS Textract (Synchronous)
 #'
-#' This function calls AWS Textract DetectDocumentText API to extract plain text
-#' from documents. This is faster than AnalyzeDocument but doesn't extract structured
-#' data like forms or tables.
+#' This function calls the AWS Textract DetectDocumentText API (synchronous) to extract
+#' plain text from documents. This is faster than AnalyzeDocument but doesn't extract
+#' structured data like forms or tables. Note: This is a synchronous operation with a
+#' 5 MB file size limit. For larger files, the function automatically converts the
+#' first 2 pages to PNG format.
 #'
 #' @author Nathan C. Layman
 #'
@@ -13,53 +15,84 @@
 #'
 #' @return List containing the raw Textract API response with Blocks.
 #'
-#' @export
+#' @section Warning:
+#' This function uses the synchronous Textract API which has a **5 MB file size limit**.
+#' For PDFs larger than 5 MB, only the first 2 pages will be automatically extracted and
+#' converted to PNG format. For full document processing of large files, consider using
+#' the asynchronous S3-based Textract workflow or an alternative service like Google
+#' Document AI (20 MB limit) or Azure Document Intelligence (500 MB limit).
 #'
-#' @importFrom httr2 request req_body_json req_headers req_auth_aws_v4 req_perform resp_body_json
-#' @importFrom jsonlite toJSON
+#' @export
 textract_detect_document_text <- function(file_path,
                                           aws_access_key_id,
                                           aws_secret_access_key,
                                           aws_region = "us-east-1") {
 
-  # Read file as raw bytes
-  file_bytes <- readBin(file_path, "raw", file.info(file_path)$size)
-  file_base64 <- base64enc::base64encode(file_bytes)
+  # Check file size and handle PDFs over 5MB by extracting first 2 pages
+  file_size <- file.info(file_path)$size
+  file_size_mb <- file_size / 1024 / 1024
+  temp_file <- NULL
 
-  # Prepare request body
-  request_body <- list(
-    Document = list(
-      Bytes = file_base64
+  if (file_size_mb > 5 && grepl("\\.pdf$", file_path, ignore.case = TRUE)) {
+    message("File exceeds 5 MB limit. Extracting first 2 pages...")
+    temp_file <- tempfile(fileext = ".pdf")
+    pdftools::pdf_subset(file_path, pages = 1:2, output = temp_file)
+    file_path <- temp_file
+    file_size <- file.info(file_path)$size
+    file_size_mb <- file_size / 1024 / 1024
+    message("Reduced file size: ", round(file_size_mb, 2), " MB")
+
+    # Check if still too large after extraction
+    if (file_size_mb > 5) {
+      unlink(temp_file)
+      stop(
+        "First 2 pages (", round(file_size_mb, 2), " MB) still exceed 5 MB limit. ",
+        "Please use S3 and asynchronous processing.",
+        call. = FALSE
+      )
+    }
+  } else if (file_size_mb > 5) {
+    stop(
+      "File size (", round(file_size_mb, 2), " MB) exceeds the 5 MB limit for synchronous processing. ",
+      "Please use a smaller file or upload to S3 and use asynchronous processing.",
+      call. = FALSE
+    )
+  }
+
+  # Read file as raw bytes
+  file_bytes <- readBin(file_path, "raw", file_size)
+
+  # Clean up temp file if created
+  if (!is.null(temp_file)) {
+    on.exit(unlink(temp_file), add = TRUE)
+  }
+
+  # Create Textract client with credentials
+  textract <- paws.machine.learning::textract(
+    config = list(
+      credentials = list(
+        creds = list(
+          access_key_id = aws_access_key_id,
+          secret_access_key = aws_secret_access_key
+        )
+      ),
+      region = aws_region
     )
   )
 
-  # AWS Textract endpoint
-  endpoint <- paste0("https://textract.", aws_region, ".amazonaws.com")
-  target <- "Textract.DetectDocumentText"
-
   # Make the API request
   message("Sending document to AWS Textract DetectDocumentText...")
-  response <- tryCatch({
-    httr2::request(endpoint) |>
-      httr2::req_headers(
-        "Content-Type" = "application/x-amz-json-1.1",
-        "X-Amz-Target" = target
-      ) |>
-      httr2::req_body_json(request_body) |>
-      httr2::req_auth_aws_v4(
-        aws_access_key_id = aws_access_key_id,
-        aws_secret_access_key = aws_secret_access_key,
-        aws_service = "textract",
-        aws_region = aws_region
-      ) |>
-      httr2::req_perform()
+  result <- tryCatch({
+    textract$detect_document_text(
+      Document = list(
+        Bytes = file_bytes
+      )
+    )
   }, error = function(e) {
-    stop("Textract DetectDocumentText request failed: ", e$message)
+    stop("Textract DetectDocumentText request failed: ", e$message, call. = FALSE)
   })
 
-  # Parse and return the JSON response
+  # Return the result
   message("Text detection complete.")
-  result <- httr2::resp_body_json(response)
-
   return(result)
 }

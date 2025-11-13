@@ -2,7 +2,7 @@
 % Please edit documentation in R/textract_analyze_document.R
 \name{textract_analyze_document}
 \alias{textract_analyze_document}
-\title{Analyze Document with AWS Textract (Structured Extraction)}
+\title{Analyze Document with AWS Textract (Synchronous, Structured Extraction)}
 \usage{
 textract_analyze_document(
   file_path,
@@ -27,9 +27,20 @@ textract_analyze_document(
 List containing the raw Textract API response with Blocks.
 }
 \description{
-This function calls AWS Textract AnalyzeDocument API to extract structured data
-including forms (key-value pairs), tables, and layout from documents.
+This function calls the AWS Textract AnalyzeDocument API (synchronous) to extract
+structured data including forms (key-value pairs), tables, and layout from documents.
+Note: This is a synchronous operation with a 5 MB file size limit. For larger files,
+the function automatically converts the first 2 pages to PNG format.
 }
+\section{Warning}{
+
+This function uses the synchronous Textract API which has a \strong{5 MB file size limit}.
+For PDFs larger than 5 MB, only the first 2 pages will be automatically extracted and
+converted to PNG format. For full document processing of large files, consider using
+the asynchronous S3-based Textract workflow or an alternative service like Google
+Document AI (20 MB limit) or Azure Document Intelligence (500 MB limit).
+}
+
 \author{
 Nathan C. Layman
 }

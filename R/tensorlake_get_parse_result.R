@@ -16,7 +16,7 @@
 #'     \item{metadata}{Document metadata}
 #'   }
 #'
-#' @export
+#' @keywords internal
 #'
 #' @importFrom httr2 request req_headers req_auth_bearer_token req_perform resp_body_json
 tensorlake_get_parse_result <- function(parse_id,
