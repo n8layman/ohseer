@@ -9,7 +9,7 @@
 #' @param result List. The parsed response from tensorlake_ocr().
 #' @param pages Integer vector. Page numbers to extract. If NULL (default), extracts all pages.
 #' @param exclude_types Character vector. Fragment types to exclude. Default is
-#'   c("page_number", "page_footer").
+#'   character(0) (no exclusions).
 #'
 #' @return List with one element per page, each containing:
 #'   \describe{
@@ -42,7 +42,7 @@
 #' @export
 tensorlake_extract_pages <- function(result,
                                      pages = NULL,
-                                     exclude_types = c("page_number", "page_footer")) {
+                                     exclude_types = character(0)) {
 
   # Validate result structure
   if (is.null(result$pages)) {
