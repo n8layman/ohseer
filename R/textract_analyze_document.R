@@ -36,6 +36,13 @@ textract_analyze_document <- function(file_path,
   multi_page <- FALSE
 
   if (file_size_mb > 5 && grepl("\\.pdf$", file_path, ignore.case = TRUE)) {
+    if (!requireNamespace("pdftools", quietly = TRUE)) {
+      stop(
+        "File size (", round(file_size_mb, 2), " MB) exceeds the 5 MB limit. ",
+        "Install 'pdftools' to automatically convert large PDFs: install.packages('pdftools')",
+        call. = FALSE
+      )
+    }
     message("File exceeds 5 MB limit. Converting first 2 pages to PNG...")
     # Convert first 2 pages to PNG (more compatible format)
     png_files <- pdftools::pdf_convert(file_path, pages = 1:2, format = "png", dpi = 150, verbose = FALSE)

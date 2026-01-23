@@ -18,7 +18,6 @@ Imports:
     stringr,
     base64enc,
     paws.machine.learning,
-    pdftools,
     tools,
     curl
 Suggests:

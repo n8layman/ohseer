@@ -34,6 +34,13 @@ textract_detect_document_text <- function(file_path,
   temp_file <- NULL
 
   if (file_size_mb > 5 && grepl("\\.pdf$", file_path, ignore.case = TRUE)) {
+    if (!requireNamespace("pdftools", quietly = TRUE)) {
+      stop(
+        "File size (", round(file_size_mb, 2), " MB) exceeds the 5 MB limit. ",
+        "Install 'pdftools' to automatically extract pages from large PDFs: install.packages('pdftools')",
+        call. = FALSE
+      )
+    }
     message("File exceeds 5 MB limit. Extracting first 2 pages...")
     temp_file <- tempfile(fileext = ".pdf")
     pdftools::pdf_subset(file_path, pages = 1:2, output = temp_file)
