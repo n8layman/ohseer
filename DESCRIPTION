@@ -22,5 +22,6 @@ Imports:
     curl
 Suggests:
     knitr,
+    pdftools,
     rmarkdown
 VignetteBuilder: knitr
