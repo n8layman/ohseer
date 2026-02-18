@@ -8,6 +8,7 @@ Description: Provides interfaces to multiple OCR and document parsing APIs inclu
     for document processing in R. Supports text extraction, table detection, form
     parsing, and structured data extraction. All providers return compatible output
     formats for seamless integration.
+URL: https://n8layman.github.io/ohseer/
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -48,9 +48,6 @@ reference:
     contents:
       - tensorlake_ocr
       - tensorlake_extract_pages
-      - tensorlake_upload_file
-      - tensorlake_parse_document
-      - tensorlake_get_parse_result
 
   - title: Mistral OCR
     desc: Process documents with Mistral OCR API
@@ -73,7 +70,6 @@ reference:
   - title: Claude OCR
     desc: Process documents with Claude API using structured outputs
     contents:
-      - claude_ocr_process_file
       - claude_ocr
       - claude_extract_pages
 
@@ -81,9 +77,9 @@ reference:
     desc: Process documents with AWS Textract
     contents:
       - textract_ocr
+      - textract_extract_metadata
       - textract_analyze_document
       - textract_detect_document_text
-      - textract_parse_response
 
 articles:
   - title: Getting Started
