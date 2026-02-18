@@ -110,7 +110,56 @@ Instructions:
     )
   )
 
-  # Build request body
+  # Define Tensorlake-compatible JSON schema for structured output
+  tensorlake_schema <- list(
+    type = "object",
+    properties = list(
+      pages = list(
+        type = "array",
+        items = list(
+          type = "object",
+          properties = list(
+            page_number = list(type = "integer"),
+            page_header = list(type = "array", items = list(type = "string")),
+            section_header = list(type = "array", items = list(type = "string")),
+            text = list(type = "string"),
+            tables = list(
+              type = "array",
+              items = list(
+                type = "object",
+                properties = list(
+                  content = list(type = "string"),
+                  markdown = list(type = "string"),
+                  html = list(type = "string"),
+                  summary = list(type = "string")
+                ),
+                required = list("content", "markdown", "html", "summary"),
+                additionalProperties = FALSE
+              )
+            ),
+            other = list(
+              type = "array",
+              items = list(
+                type = "object",
+                properties = list(
+                  type = list(type = "string"),
+                  content = list(type = "string")
+                ),
+                required = list("type", "content"),
+                additionalProperties = FALSE
+              )
+            )
+          ),
+          required = list("page_number", "text", "tables"),
+          additionalProperties = FALSE
+        )
+      )
+    ),
+    required = list("pages"),
+    additionalProperties = FALSE
+  )
+
+  # Build request body with structured output format
   request_body <- list(
     model = model,
     max_tokens = max_tokens,
@@ -118,6 +167,12 @@ Instructions:
       list(
         role = "user",
         content = content
+      )
+    ),
+    output_config = list(
+      format = list(
+        type = "json_schema",
+        schema = tensorlake_schema
       )
     )
   )
@@ -141,17 +196,23 @@ Instructions:
   message("OCR processing complete.")
   result <- httr2::resp_body_json(response)
 
-  # Extract the text content and parse as JSON
+  # With output_format, Claude returns structured JSON directly in content
   if (!is.null(result$content) && length(result$content) > 0) {
-    text_content <- result$content[[1]]$text
-    # Try to parse as JSON
-    tryCatch({
-      result$structured_output <- jsonlite::fromJSON(text_content, simplifyVector = FALSE)
-    }, error = function(e) {
-      warning("Could not parse Claude response as JSON. Returning raw text.", call. = FALSE)
-      result$structured_output <- NULL
-      result$raw_text <- text_content
-    })
+    # The content should already be parsed JSON when using output_format
+    if (!is.null(result$content[[1]]$type) && result$content[[1]]$type == "text") {
+      # Extract the structured output from text field
+      text_content <- result$content[[1]]$text
+      tryCatch({
+        result$structured_output <- jsonlite::fromJSON(text_content, simplifyVector = FALSE)
+      }, error = function(e) {
+        warning("Could not parse Claude response as JSON. Returning raw text.", call. = FALSE)
+        result$structured_output <- NULL
+        result$raw_text <- text_content
+      })
+    } else {
+      # Direct structured output
+      result$structured_output <- result$content[[1]]
+    }
   }
 
   return(result)
