@@ -102,19 +102,27 @@ result <- ohseer_ocr(
 
 ## API Keys
 
-Specify API key directly or use environment variables:
+API keys are read from environment variables. Set them before calling `ohseer_ocr()`:
 
 ```{r, eval=FALSE}
-# Option 1: Use environment variable (recommended)
-# Set TENSORLAKE_API_KEY, MISTRAL_API_KEY, or ANTHROPIC_API_KEY
-result <- ohseer_ocr("document.pdf")
+# Set environment variables (do this once per session or via .env file)
+Sys.setenv(TENSORLAKE_API_KEY = "your-tensorlake-key")
+Sys.setenv(MISTRAL_API_KEY = "your-mistral-key")
+Sys.setenv(ANTHROPIC_API_KEY = "your-anthropic-key")
 
-# Option 2: Provide explicitly
-result <- ohseer_ocr(
-  "document.pdf",
-  provider = "mistral",
-  api_key = "your-api-key-here"
-)
+# Or use .env file (recommended)
+# See Authentication section in README
+
+# Then use ohseer_ocr normally
+result <- ohseer_ocr("document.pdf")
+```
+
+**Provider Cascade**: When using multiple providers, only those with API keys set will be tried. Providers without keys are automatically skipped with a warning.
+
+```{r, eval=FALSE}
+# Only tries providers with API keys set
+result <- ohseer_ocr("doc.pdf", provider = c("tensorlake", "mistral", "claude"))
+# Example: If only MISTRAL_API_KEY is set, only Mistral will be tried
 ```
 
 # Provider-Specific Options

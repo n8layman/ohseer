@@ -2,7 +2,7 @@
 % Please edit documentation in R/ohseer_ocr.R
 \name{ohseer_ocr}
 \alias{ohseer_ocr}
-\title{Unified OCR Interface for Multiple Providers}
+\title{Unified OCR Interface for Multiple Providers with Automatic Fallback}
 \usage{
 ohseer_ocr(
   file_path,
@@ -10,19 +10,21 @@ ohseer_ocr(
   pages = NULL,
   timeout = 60,
   extract_pages = TRUE,
-  api_key = NULL,
   ...
 )
 }
 \arguments{
 \item{file_path}{Character string. Path to the PDF file to process.}
 
-\item{provider}{Character string. OCR provider to use. One of:
+\item{provider}{Character vector. OCR provider(s) to use. Can be a single provider
+or multiple providers for automatic fallback. Valid values:
 \describe{
-\item{"tensorlake"}{Tensorlake OCR API (default) - Returns structured fragments}
-\item{"mistral"}{Mistral OCR 3 - Returns native format with markdown}
-\item{"claude"}{Claude Opus/Sonnet with structured outputs}
-}}
+\item{"tensorlake"}{Tensorlake OCR API (default) - Highest accuracy (91.7\\%)}
+\item{"mistral"}{Mistral OCR 3 - Lower cost, native markdown format}
+\item{"claude"}{Claude Opus/Sonnet - Structured outputs with JSON schema}
+}
+When multiple providers are specified, they will be tried sequentially until
+one succeeds. Default is \code{c("tensorlake")}.}
 
 \item{pages}{Integer vector. Specific page numbers to process. If NULL (default),
 processes all pages. Page numbers are 1-based.}
@@ -33,14 +35,6 @@ Default is 60 seconds. Not used for Claude provider.}
 \item{extract_pages}{Logical. If TRUE (default), automatically extracts and
 returns page data using provider-specific extraction functions. If FALSE,
 returns raw API response.}
-
-\item{api_key}{Character string. API key for the provider. If NULL (default),
-reads from environment variables:
-\itemize{
-\item Tensorlake: \code{TENSORLAKE_API_KEY}
-\item Mistral: \code{MISTRAL_API_KEY}
-\item Claude: \code{ANTHROPIC_API_KEY}
-}}
 
 \item{...}{Additional provider-specific arguments passed to the underlying
 OCR function:
@@ -53,9 +47,10 @@ OCR function:
 \value{
 If \code{extract_pages = TRUE} (default), returns a list with:
 \describe{
-\item{provider}{Character string naming the provider used}
+\item{provider}{Character string naming the provider that succeeded}
 \item{pages}{List of extracted page data (structure varies by provider)}
 \item{raw}{Raw API response (for advanced use)}
+\item{error_log}{Character string (JSON) of failed attempts, or NA if first provider succeeded}
 }
 
 If \code{extract_pages = FALSE}, returns the raw provider API response.
@@ -93,22 +88,25 @@ Each provider returns pages in a different native format:
 }
 }
 
-\section{Provider Fallback Example}{
+\section{Provider Fallback}{
 
+
+When multiple providers are specified, they are tried sequentially until one succeeds:
 
 \preformatted{
-try_providers_with_fallback <- function(file_path, providers = c("tensorlake", "mistral", "claude")) {
-  for (provider in providers) {
-    result <- tryCatch({
-      ohseer_ocr(file_path, provider = provider)
-    }, error = function(e) NULL)
+# Try Mistral first (lower cost), fall back to Tensorlake (higher quality)
+result <- ohseer_ocr("document.pdf", provider = c("mistral", "tensorlake"))
 
-    if (!is.null(result)) {
-      message("Successfully processed with ", provider)
-      return(result)
-    }
-  }
-  stop("All OCR providers failed")
+# Try Tensorlake first (higher quality), fall back to Mistral (lower cost)
+result <- ohseer_ocr("document.pdf", provider = c("tensorlake", "mistral"))
+
+# Check which provider succeeded
+message("Used provider: ", result$provider)
+
+# Check error log if any providers failed
+if (!is.na(result$error_log)) {
+  errors <- jsonlite::fromJSON(result$error_log)
+  print(errors)
 }
 }
 }
@@ -134,18 +132,21 @@ result <- ohseer_ocr(
   model = "claude-sonnet-4-5"
 )
 
-# Get raw response without page extraction
-raw <- ohseer_ocr("document.pdf", extract_pages = FALSE)
+# Provider fallback: try Mistral first, fall back to Tensorlake
+result <- ohseer_ocr("document.pdf", provider = c("mistral", "tensorlake"))
 
-# Access extracted pages
-pages <- result$pages
-first_page <- pages[[1]]
+# Quality-first: try Tensorlake first, fall back to Mistral
+result <- ohseer_ocr("document.pdf", provider = c("tensorlake", "mistral"))
 
-# Provider fallback pattern
-result <- tryCatch(
-  ohseer_ocr("document.pdf", provider = "tensorlake"),
-  error = function(e) ohseer_ocr("document.pdf", provider = "mistral")
+# Full fallback chain
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = c("tensorlake", "mistral", "claude")
 )
+
+# Access results
+pages <- result$pages
+provider_used <- result$provider
 }
 
 }
