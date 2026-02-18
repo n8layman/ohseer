@@ -7,9 +7,18 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The goal of ohseer is to provide R interfaces to OCR (Optical Character
-Recognition) APIs. This package supports Mistral AI OCR, AWS Textract, and
-Tensorlake, allowing you to easily extract text and structured data from
-documents directly from your R environment.
+Recognition) APIs. This package supports Claude (Opus 4.6/Sonnet 4.5),
+Mistral OCR 3, Tensorlake, and AWS Textract, allowing you to easily extract
+text and structured data from documents directly from your R environment.
+
+## Documentation
+
+📚 **Full documentation**: [https://n8layman.github.io/ohseer/](https://n8layman.github.io/ohseer/)
+
+- [Getting Started with Unified Interface](https://n8layman.github.io/ohseer/articles/unified-interface.html)
+- [Tensorlake Output Structure](https://n8layman.github.io/ohseer/articles/tensorlake-output-structure.html)
+- [Mistral Output Structure](https://n8layman.github.io/ohseer/articles/mistral-output-structure.html)
+- [Claude Structured Output](https://n8layman.github.io/ohseer/articles/claude-structured-output.html)
 
 ## Part of the EcoExtract Suite
 
@@ -22,7 +31,21 @@ modular workflow from raw documents to validated, analysis-ready data.
 
 ## Features
 
-### Tensorlake (Recommended)
+### Unified Interface
+
+- **One function for all providers**: Use `ohseer_ocr()` with any provider
+- **Consistent parameters**: Same interface for Tensorlake, Mistral, Claude
+- **Easy provider switching**: Change providers with one parameter
+- **Provider fallback**: Implement robust error handling with automatic fallback
+
+### Claude OCR (Structured Outputs)
+
+- **Guaranteed JSON compliance**: Uses constrained decoding for structured outputs
+- **Custom schemas**: Define your own output structure with JSON schemas
+- **High accuracy**: Claude Opus 4.6 ranked #1 on OCR Arena leaderboards
+- **Flexible models**: Choose between Opus 4.6 (most capable) or Sonnet 4.5 (fast/cost-effective)
+
+### Tensorlake (Recommended for Batch Processing)
 
 - **Highest accuracy**: 91.7% for structured data extraction
 - Extract tables, forms, and key-value pairs from documents
@@ -31,11 +54,12 @@ modular workflow from raw documents to validated, analysis-ready data.
 - Simple API key authentication
 - Competitive pricing: $0.01 per page
 
-### Mistral AI OCR
+### Mistral OCR 3
 
-- Upload files to Mistral AI
-- Process documents via URL or uploaded files
-- Extract text and images from PDFs
+- **Native markdown output**: Returns clean markdown with tables and images
+- **Header/footer extraction**: Separate extraction of headers and footers
+- **No post-processing**: Direct access to Mistral's native format
+- Upload files or process via URL
 - Preview OCR results as HTML with embedded images
 - Embed base64 images in markdown for Shiny apps
 
@@ -72,6 +96,25 @@ remotes::install_github("n8layman/ohseer")
 ```
 
 ## Authentication
+
+### Claude (Anthropic API)
+
+To use Claude OCR with structured outputs:
+
+1.  Visit [console.anthropic.com](https://console.anthropic.com/)
+2.  Sign in or create an account
+3.  Navigate to API Keys section
+4.  Create a new API key
+5.  Set it as an environment variable in R:
+
+``` r
+Sys.setenv(ANTHROPIC_API_KEY = "your-api-key-here")
+```
+
+**Why Claude?**
+- Ranked #1 on OCR Arena leaderboards
+- Guaranteed JSON schema compliance via structured outputs
+- Flexible models: Opus 4.6 (highest accuracy) or Sonnet 4.5 (fast/cost-effective)
 
 ### Mistral AI
 
@@ -142,14 +185,46 @@ Create a `.env` file in your project directory:
 
 ``` bash
 # .env
-MISTRAL_API_KEY=your-api-key-here
+ANTHROPIC_API_KEY=your-claude-api-key-here
+MISTRAL_API_KEY=your-mistral-api-key-here
 TENSORLAKE_API_KEY=your-tensorlake-key-here
-AWS_ACCESS_KEY_ID=your-access-key-id
-AWS_SECRET_ACCESS_KEY=your-secret-access-key
+AWS_ACCESS_KEY_ID=your-aws-access-key-id
+AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
 ```
 
 ⚠️ **Security Warning**: Never commit `.env` files containing API keys
 to version control. Add `.env` to your `.gitignore` file.
+
+## Quick Start
+
+### Unified Interface (Recommended)
+
+The easiest way to use ohseer is with the unified `ohseer_ocr()` function:
+
+``` r
+library(ohseer)
+
+# Use default provider (Tensorlake)
+result <- ohseer_ocr("document.pdf")
+
+# Switch providers easily
+result <- ohseer_ocr("document.pdf", provider = "mistral")
+result <- ohseer_ocr("document.pdf", provider = "claude")
+
+# Provider-specific options still work
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = "mistral",
+  extract_header = TRUE,
+  extract_footer = TRUE
+)
+
+# Access results consistently
+pages <- result$pages
+provider_used <- result$provider
+```
+
+See the [Unified Interface Guide](https://n8layman.github.io/ohseer/articles/unified-interface.html) for more details.
 
 ## Examples
 
@@ -192,9 +267,34 @@ json_data <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 
 See the [Tensorlake Output Structure vignette](vignettes/tensorlake-output-structure.Rmd) for detailed information on working with results.
 
-### Mistral AI OCR
+### Claude OCR (Structured Outputs)
 
-#### Basic OCR Processing
+#### Guaranteed Structured Output
+
+Claude's structured output feature guarantees JSON compliance:
+
+``` r
+library(ohseer)
+
+# Process with default Tensorlake-compatible schema
+result <- claude_ocr_process_file("paper.pdf")
+
+# Access structured pages
+pages <- result$pages
+page1 <- pages[[1]]
+
+# Structured fragments
+page1$page_fragments  # List of typed fragments
+
+# Or use unified interface
+result <- ohseer_ocr("paper.pdf", provider = "claude")
+```
+
+See the [Claude Structured Output Guide](https://n8layman.github.io/ohseer/articles/claude-structured-output.html) for custom schemas and advanced usage.
+
+### Mistral OCR 3
+
+#### Native Markdown Output
 
 The simplest way to process a document is to provide a URL:
 
@@ -304,55 +404,59 @@ file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_docu
 
 ## API Functions
 
+### Unified Interface (Recommended)
+
+- `ohseer_ocr()`: Unified interface for all OCR providers with consistent parameters
+
+### Claude OCR Functions
+
+- `claude_ocr_process_file()`: Process files with Claude using structured outputs
+- `claude_ocr()`: Lower-level Claude OCR with custom prompts
+- `claude_extract_pages()`: Extract pages from Claude results
+
 ### Tensorlake OCR Functions
 
-- `tensorlake_ocr()`: Main function for high-accuracy document parsing (recommended)
+- `tensorlake_ocr()`: Main function for high-accuracy document parsing
 - `tensorlake_extract_pages()`: Extract structured page data organized by fragment type
+- `tensorlake_upload_file()`: Upload file to Tensorlake
+- `tensorlake_parse_document()`: Parse uploaded document
+- `tensorlake_get_parse_result()`: Get parsing results
 
-### Mistral AI OCR Functions
+### Mistral OCR 3 Functions
 
-- `mistral_ocr()`: Main function that auto-detects input type (URL,
-  file, or file ID)
-- `mistral_ocr_url()`: Process a document at a URL
+- `mistral_ocr()`: Main function that auto-detects input type (URL, file, or file ID)
+- `mistral_extract_pages()`: Extract pages in native Mistral format
 - `mistral_ocr_upload_file()`: Upload a file to Mistral AI
-- `mistral_ocr_retrieve_file()`: Retrieve a file from Mistral AI using
-  its ID
+- `mistral_ocr_process_url()`: Process a document at a URL
+- `mistral_ocr_process_image()`: Process image files
+- `mistral_ocr_get_file_metadata()`: Get file metadata
+- `mistral_ocr_get_file_url()`: Get temporary download URL
 
 ### Mistral Preview and Display Functions
 
-- `mistral_preview_html()`: Generate a complete HTML preview with
-  embedded images
-- `mistral_embed_images()`: Embed base64 images into markdown text (for
-  Shiny apps)
-- `mistral_preview_page()`: Simple markdown-to-HTML preview (without
-  images)
+- `mistral_preview_html()`: Generate a complete HTML preview with embedded images
+- `mistral_embed_images()`: Embed base64 images into markdown text (for Shiny apps)
+- `mistral_preview_page()`: Simple markdown-to-HTML preview (without images)
 
 ### AWS Textract OCR Functions
 
-- `textract_ocr()`: Main function for AWS Textract OCR with structured
-  data extraction
-- `textract_extract_metadata()`: Parse Textract output to extract
-  key-value pairs and tables
-- `textract_analyze_document()`: Low-level function for AnalyzeDocument
-  API
-- `textract_detect_document_text()`: Low-level function for
-  DetectDocumentText API
+- `textract_ocr()`: Main function for AWS Textract OCR with structured data extraction
+- `textract_analyze_document()`: Low-level function for AnalyzeDocument API
+- `textract_detect_document_text()`: Low-level function for DetectDocumentText API
+- `textract_parse_response()`: Parse Textract API responses
 
 ## Notes
 
 - This package is experimental and the API may change
 - Large files may take some time to process
-- **Mistral OCR**: Check [Mistral AI
-  documentation](https://docs.mistral.ai/) for the latest API
-  information
+- **See full documentation** at [https://n8layman.github.io/ohseer/](https://n8layman.github.io/ohseer/)
+- **Claude**: Check [Anthropic API documentation](https://docs.anthropic.com/) for structured outputs and pricing
+- **Mistral OCR**: Check [Mistral AI documentation](https://docs.mistral.ai/) for the latest API information
+- **Tensorlake**: See [Tensorlake documentation](https://docs.tensorlake.ai/) for advanced features
 - **AWS Textract**:
   - Supports synchronous processing for documents up to 5 MB
-  - Check [AWS Textract
-    pricing](https://aws.amazon.com/textract/pricing/) for cost
-    information
-  - See [AWS Textract
-    documentation](https://docs.aws.amazon.com/textract/) for more
-    details
+  - Check [AWS Textract pricing](https://aws.amazon.com/textract/pricing/) for cost information
+  - See [AWS Textract documentation](https://docs.aws.amazon.com/textract/) for more details
 
 ## License
 
