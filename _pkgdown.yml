@@ -1,0 +1,99 @@
+url: https://n8layman.github.io/ohseer/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  structure:
+    left: [home, getting-started, tensorlake, mistral, claude, reference]
+    right: [search, github]
+  components:
+    home:
+      icon: fa-home
+      href: index.html
+      aria-label: Home
+    getting-started:
+      text: Getting Started
+      href: articles/unified-interface.html
+    tensorlake:
+      text: Tensorlake
+      href: articles/tensorlake-output-structure.html
+    mistral:
+      text: Mistral
+      href: articles/mistral-output-structure.html
+    claude:
+      text: Claude
+      href: articles/claude-structured-output.html
+    reference:
+      text: Reference
+      href: reference/index.html
+
+footer:
+  structure:
+    left: developed_by
+    right: ohseer_footer
+  components:
+    ohseer_footer:
+      text: "ohseer - Multi-provider OCR for scientific documents"
+
+reference:
+  - title: Unified Interface
+    desc: Consistent OCR interface across all providers (recommended)
+    contents:
+      - ohseer_ocr
+
+  - title: Tensorlake OCR
+    desc: Process documents with Tensorlake OCR API
+    contents:
+      - tensorlake_ocr
+      - tensorlake_extract_pages
+      - tensorlake_upload_file
+      - tensorlake_parse_document
+      - tensorlake_get_parse_result
+
+  - title: Mistral OCR
+    desc: Process documents with Mistral OCR API
+    contents:
+      - mistral_ocr
+      - mistral_extract_pages
+      - mistral_ocr_upload_file
+      - mistral_ocr_get_file_metadata
+      - mistral_ocr_get_file_url
+      - mistral_ocr_process_url
+      - mistral_ocr_process_image
+
+  - title: Mistral Preview
+    desc: Generate HTML previews of Mistral OCR results
+    contents:
+      - mistral_preview_page
+      - mistral_preview_html
+      - mistral_embed_images
+
+  - title: Claude OCR
+    desc: Process documents with Claude API using structured outputs
+    contents:
+      - claude_ocr_process_file
+      - claude_ocr
+      - claude_extract_pages
+
+  - title: AWS Textract
+    desc: Process documents with AWS Textract
+    contents:
+      - textract_ocr
+      - textract_analyze_document
+      - textract_detect_document_text
+      - textract_parse_response
+
+articles:
+  - title: Getting Started
+    navbar: ~
+    contents:
+      - unified-interface
+
+  - title: OCR Provider Guides
+    navbar: ~
+    contents:
+      - tensorlake-output-structure
+      - mistral-output-structure
+      - claude-structured-output
