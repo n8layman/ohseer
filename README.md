@@ -396,10 +396,10 @@ upload_result <- mistral_ocr_upload_file("path/to/document.pdf")
 file_id <- upload_result$id
 
 # Process a URL directly
-url_result <- mistral_ocr_url("https://arxiv.org/pdf/2201.04234.pdf")
+url_result <- mistral_ocr_process_url("https://arxiv.org/pdf/2201.04234.pdf")
 
-# Retrieve a file by ID
-file_content <- mistral_ocr_retrieve_file(file_id, output_path = "retrieved_document.pdf")
+# Get file metadata
+metadata <- mistral_ocr_get_file_metadata(file_id)
 ```
 
 ## API Functions
