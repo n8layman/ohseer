@@ -4,11 +4,7 @@
 \alias{tensorlake_extract_pages}
 \title{Extract Page Content by Fragment Type}
 \usage{
-tensorlake_extract_pages(
-  result,
-  pages = NULL,
-  exclude_types = c("page_number", "page_footer")
-)
+tensorlake_extract_pages(result, pages = NULL, exclude_types = character(0))
 }
 \arguments{
 \item{result}{List. The parsed response from tensorlake_ocr().}
@@ -16,7 +12,7 @@ tensorlake_extract_pages(
 \item{pages}{Integer vector. Page numbers to extract. If NULL (default), extracts all pages.}
 
 \item{exclude_types}{Character vector. Fragment types to exclude. Default is
-c("page_number", "page_footer").}
+character(0) (no exclusions).}
 }
 \value{
 List with one element per page, each containing:

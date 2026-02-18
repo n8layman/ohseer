@@ -4,8 +4,10 @@ Version: 0.0.0.9000
 Authors@R:
     person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: Provides interfaces to multiple OCR and document parsing APIs including
-    Mistral AI, AWS Textract, and Tensorlake for document processing in R. Supports
-    text extraction, table detection, form parsing, and structured data extraction.
+    Claude Opus 4.5 (#1 on OCR Arena), Mistral OCR 3, AWS Textract, and Tensorlake
+    for document processing in R. Supports text extraction, table detection, form
+    parsing, and structured data extraction. All providers return compatible output
+    formats for seamless integration.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
