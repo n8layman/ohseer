@@ -1,0 +1,330 @@
+# Getting Started with ohseer
+
+## Introduction
+
+The `ohseer` package provides a unified interface to multiple OCR
+(Optical Character Recognition) APIs through a single function:
+[`ohseer_ocr()`](https://n8layman.github.io/ohseer/reference/ohseer_ocr.md).
+This means you can switch between different OCR providers without
+changing your code.
+
+**Supported providers:**
+
+- **Claude Opus 4.6/Sonnet 4.5**: \#1 on OCR Arena, structured outputs
+  with JSON schemas
+- **Tensorlake**: Highest accuracy (91.7%), best for tables and forms
+- **Mistral OCR 3**: Native markdown output, cost-effective
+- **AWS Textract**: Reliable option for structured data extraction
+
+## Installation
+
+``` r
+# Using pak (recommended)
+pak::pak("n8layman/ohseer")
+
+# Using devtools
+devtools::install_github("n8layman/ohseer")
+```
+
+## Authentication
+
+Set up API keys as environment variables:
+
+``` r
+# Option 1: Set for current session
+Sys.setenv(
+  ANTHROPIC_API_KEY = "your-claude-key",
+  TENSORLAKE_API_KEY = "your-tensorlake-key",
+  MISTRAL_API_KEY = "your-mistral-key"
+)
+```
+
+**Option 2: Create a `.env` file** (recommended):
+
+``` bash
+# .env
+ANTHROPIC_API_KEY=your-claude-key
+TENSORLAKE_API_KEY=your-tensorlake-key
+MISTRAL_API_KEY=your-mistral-key
+```
+
+### Getting API Keys
+
+- **Claude**: Visit
+  [console.anthropic.com](https://console.anthropic.com/) → API Keys
+- **Tensorlake**: Visit
+  [cloud.tensorlake.ai](https://cloud.tensorlake.ai/) → Dashboard → API
+  Key
+- **Mistral**: Visit [mistral.ai](https://mistral.ai/) → Try the API →
+  API keys
+- **AWS Textract**: Visit [aws.amazon.com](https://aws.amazon.com/) →
+  IAM → Create access key
+
+## Basic Usage
+
+### Process a Document
+
+``` r
+library(ohseer)
+
+# Process with default provider (Tensorlake)
+result <- ohseer_ocr("document.pdf")
+
+# Access the extracted pages
+pages <- result$pages
+
+# Check which provider was used
+result$provider
+```
+
+### Choose a Provider
+
+``` r
+# Use Claude for highest accuracy
+result <- ohseer_ocr("document.pdf", provider = "claude")
+
+# Use Mistral for cost-effectiveness
+result <- ohseer_ocr("document.pdf", provider = "mistral")
+
+# Use Tensorlake for best table extraction
+result <- ohseer_ocr("document.pdf", provider = "tensorlake")
+```
+
+### Select Specific Pages
+
+``` r
+# Process only first 2 pages
+result <- ohseer_ocr("document.pdf", pages = c(1, 2))
+
+# Process specific pages
+result <- ohseer_ocr("document.pdf", pages = c(1, 5, 10))
+```
+
+## Provider Fallback
+
+Automatically try multiple providers until one succeeds:
+
+``` r
+# Try providers in order: Tensorlake → Mistral → Claude
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = c("tensorlake", "mistral", "claude")
+)
+
+# Check which provider succeeded
+message("Used provider: ", result$provider)
+
+# Check error log if any providers failed
+if (!is.na(result$error_log)) {
+  errors <- jsonlite::fromJSON(result$error_log)
+  print(errors)
+}
+```
+
+**Note**: Only providers with API keys set will be tried. Providers
+without keys are automatically skipped with a warning.
+
+## Provider-Specific Options
+
+Each provider supports custom options via `...`:
+
+### Mistral Options
+
+``` r
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = "mistral",
+  extract_header = TRUE,      # Extract headers separately
+  extract_footer = TRUE,      # Extract footers separately
+  table_format = "markdown"   # Table output format
+)
+```
+
+### Claude Options
+
+``` r
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = "claude",
+  model = "claude-sonnet-4-5",  # Use Sonnet instead of Opus
+  max_tokens = 16000,           # Maximum tokens
+  schema = my_custom_schema     # Custom JSON schema
+)
+```
+
+### Tensorlake Options
+
+``` r
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = "tensorlake",
+  model = "high-quality-v1",    # Model selection
+  timeout = 120                 # Timeout in seconds
+)
+```
+
+## Understanding Results
+
+### Result Structure
+
+``` r
+result <- ohseer_ocr("document.pdf")
+
+# Structure:
+result$provider   # Character: which provider was used
+result$pages      # List: extracted page data
+result$raw        # List: raw API response
+result$error_log  # Character (JSON): errors from failed providers
+```
+
+### Accessing Pages
+
+Different providers return pages in different formats:
+
+``` r
+# Tensorlake format
+result <- ohseer_ocr("doc.pdf", provider = "tensorlake")
+page1 <- result$pages[[1]]
+page1$page_number      # Integer (1-based)
+page1$page_fragments   # List of content fragments
+
+# Mistral format
+result <- ohseer_ocr("doc.pdf", provider = "mistral")
+page1 <- result$pages[[1]]
+page1$index      # Integer (0-based)
+page1$markdown   # Full page content as markdown
+page1$tables     # Array of table objects
+
+# Claude format (Tensorlake-compatible by default)
+result <- ohseer_ocr("doc.pdf", provider = "claude")
+page1 <- result$pages[[1]]
+page1$page_number      # Integer (1-based)
+page1$page_fragments   # List of content fragments
+```
+
+For detailed information on each provider’s output format, see:
+
+- [Tensorlake Output
+  Structure](https://n8layman.github.io/ohseer/articles/tensorlake-output-structure.md)
+- [Mistral Output
+  Structure](https://n8layman.github.io/ohseer/articles/mistral-output-structure.md)
+- [Claude Structured
+  Output](https://n8layman.github.io/ohseer/articles/claude-structured-output.md)
+
+## Provider Comparison
+
+| Provider            | Accuracy   | Cost        | Best For                           |
+|---------------------|------------|-------------|------------------------------------|
+| **Claude Opus 4.6** | ⭐⭐⭐⭐⭐ | High        | Structured outputs, custom schemas |
+| **Tensorlake**      | ⭐⭐⭐⭐⭐ | \$0.01/page | Tables, forms, batch processing    |
+| **Mistral OCR 3**   | ⭐⭐⭐     | Low         | Markdown output, cost-sensitive    |
+| **AWS Textract**    | ⭐⭐⭐⭐   | Medium      | AWS ecosystem                      |
+
+## Common Patterns
+
+### Strategy 1: Quality First with Fallback
+
+``` r
+# Try highest quality first, fall back to cost-effective
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = c("tensorlake", "mistral")
+)
+```
+
+### Strategy 2: Cost-Optimized with Fallback
+
+``` r
+# Try lowest cost first, fall back to higher quality
+result <- ohseer_ocr(
+  "document.pdf",
+  provider = c("mistral", "tensorlake", "claude")
+)
+```
+
+### Strategy 3: Process Multiple Documents
+
+``` r
+files <- c("doc1.pdf", "doc2.pdf", "doc3.pdf")
+
+results <- lapply(files, function(file) {
+  tryCatch(
+    ohseer_ocr(file, provider = "mistral"),
+    error = function(e) {
+      warning("Failed to process ", file, ": ", e$message)
+      NULL
+    }
+  )
+})
+
+# Filter out failures
+successful_results <- Filter(Negate(is.null), results)
+```
+
+## Tips
+
+1.  **Start simple**: Use default provider and settings, then customize
+    as needed
+
+    ``` r
+    result <- ohseer_ocr("document.pdf")
+    ```
+
+2.  **Process fewer pages**: Reduce costs by processing only the pages
+    you need
+
+    ``` r
+    result <- ohseer_ocr("paper.pdf", pages = c(1, 2))
+    ```
+
+3.  **Use provider fallback**: Ensure reliability with automatic
+    failover
+
+    ``` r
+    result <- ohseer_ocr("doc.pdf", provider = c("tensorlake", "mistral"))
+    ```
+
+4.  **Check provider used**: Verify which provider succeeded
+
+    ``` r
+    message("Provider: ", result$provider)
+    ```
+
+5.  **Store API keys securely**: Use `.env` file and add to `.gitignore`
+
+## Advanced Topics
+
+For advanced usage, see:
+
+- [Tensorlake Output
+  Structure](https://n8layman.github.io/ohseer/articles/tensorlake-output-structure.md) -
+  Working with fragment types
+- [Mistral Output
+  Structure](https://n8layman.github.io/ohseer/articles/mistral-output-structure.md) -
+  Markdown and table formats
+- [Claude Structured
+  Output](https://n8layman.github.io/ohseer/articles/claude-structured-output.md) -
+  Custom JSON schemas
+- [Function
+  Reference](https://n8layman.github.io/ohseer/reference/index.md) -
+  Complete API documentation
+
+## Provider-Specific Functions
+
+While
+[`ohseer_ocr()`](https://n8layman.github.io/ohseer/reference/ohseer_ocr.md)
+is recommended, provider-specific functions are still available for
+advanced use:
+
+- [`tensorlake_ocr()`](https://n8layman.github.io/ohseer/reference/tensorlake_ocr.md) +
+  [`tensorlake_extract_pages()`](https://n8layman.github.io/ohseer/reference/tensorlake_extract_pages.md)
+- [`mistral_ocr()`](https://n8layman.github.io/ohseer/reference/mistral_ocr.md) +
+  [`mistral_extract_pages()`](https://n8layman.github.io/ohseer/reference/mistral_extract_pages.md)
+- [`claude_ocr()`](https://n8layman.github.io/ohseer/reference/claude_ocr.md) +
+  [`claude_extract_pages()`](https://n8layman.github.io/ohseer/reference/claude_extract_pages.md)
+- [`textract_ocr()`](https://n8layman.github.io/ohseer/reference/textract_ocr.md) +
+  [`textract_extract_metadata()`](https://n8layman.github.io/ohseer/reference/textract_extract_metadata.md)
+
+See the [Function
+Reference](https://n8layman.github.io/ohseer/reference/index.md) for
+details.

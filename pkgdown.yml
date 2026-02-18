@@ -1,0 +1,12 @@
+pandoc: 3.1.11
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  claude-structured-output: claude-structured-output.html
+  mistral-output-structure: mistral-output-structure.html
+  tensorlake-output-structure: tensorlake-output-structure.html
+  unified-interface: unified-interface.html
+last_built: 2026-02-18T07:06Z
+urls:
+  reference: https://n8layman.github.io/ohseer/reference
+  article: https://n8layman.github.io/ohseer/articles

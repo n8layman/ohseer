@@ -1,0 +1,393 @@
+# Claude OCR with Structured Outputs
+
+## Introduction
+
+This vignette explains how Claude’s structured output feature works in
+the `ohseer` package. Claude Opus 4.6 and Sonnet 4.5 support guaranteed
+JSON schema compliance through constrained decoding during inference.
+
+### Basic Usage
+
+``` r
+library(ohseer)
+
+# Process a document with Claude OCR using structured outputs
+result <- claude_ocr_process_file(
+  file_path = "document.pdf",
+  model = "claude-opus-4-6"
+)
+```
+
+## How Structured Outputs Work
+
+Claude’s structured output uses the `output_config.format` parameter
+with a JSON schema to guarantee the response matches your specified
+structure.
+
+### API Configuration
+
+``` r
+request_body <- list(
+  model = "claude-opus-4-6",
+  max_tokens = 16000,
+  messages = list(...),
+  output_config = list(
+    format = list(
+      type = "json_schema",
+      schema = your_schema
+    )
+  )
+)
+```
+
+### Key Features
+
+- **Guaranteed Compliance**: Response will always match the provided
+  JSON schema
+- **Constrained Decoding**: Uses constrained decoding during inference
+  (not post-processing)
+- **Available Models**: Claude Opus 4.6 and Claude Sonnet 4.5
+- **No Parsing Errors**: Eliminates JSON parsing failures from malformed
+  responses
+
+## Default Schema: Tensorlake-Compatible Format
+
+By default,
+[`claude_ocr_process_file()`](https://n8layman.github.io/ohseer/reference/claude_ocr_process_file.md)
+uses a Tensorlake-compatible schema for consistency across providers.
+
+### Schema Structure
+
+The default schema defines pages with these fragment types:
+
+``` r
+{
+  "pages": [
+    {
+      "page_number": 1,
+      "page_fragments": [
+        {
+          "fragment_type": "page_header",
+          "content": { "content": "..." },
+          "reading_order": 1
+        },
+        {
+          "fragment_type": "section_header",
+          "content": { "content": "..." },
+          "reading_order": 2
+        },
+        {
+          "fragment_type": "text",
+          "content": { "content": "..." },
+          "reading_order": 3
+        },
+        {
+          "fragment_type": "table",
+          "content": {
+            "content": "plain text",
+            "html": "<table>...</table>",
+            "markdown": "| col1 | col2 |..."
+          },
+          "reading_order": 4
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Fragment Types
+
+The schema supports these fragment types:
+
+- **`page_header`**: Headers at top of pages (journal name, volume,
+  etc.)
+- **`page_number`**: Page numbers
+- **`section_header`**: Section/chapter headings
+- **`text`**: Regular paragraph text
+- **`table`**: Tables with content, html, and markdown representations
+- **`table_caption`**: Table captions/titles
+- **`figure`**: Images or figures
+- **`figure_caption`**: Figure captions
+- **`list`**: Lists
+- **`footnote`**: Footnotes
+- **`equation`**: Mathematical equations
+- **`code`**: Code blocks
+- **`other`**: Any other content type
+
+## Using the Default Schema
+
+The default behavior provides structured, Tensorlake-compatible output:
+
+``` r
+library(ohseer)
+
+# Process with default Tensorlake schema
+result <- claude_ocr_process_file("paper.pdf")
+
+# Access structured pages
+pages <- result$pages
+
+# First page
+page1 <- pages[[1]]
+page1$page_number  # 1
+
+# Get all text fragments
+text_fragments <- Filter(function(f) f$fragment_type == "text", page1$page_fragments)
+
+# Get all tables
+table_fragments <- Filter(function(f) f$fragment_type == "table", page1$page_fragments)
+
+# Access table in markdown format
+if (length(table_fragments) > 0) {
+  table1_markdown <- table_fragments[[1]]$content$markdown
+  cat(table1_markdown)
+}
+```
+
+## Custom Schemas
+
+You can provide your own JSON schema for custom output structures.
+
+### Example: Simple Schema
+
+``` r
+# Define a simple schema for extracting just titles and authors
+simple_schema <- list(
+  type = "object",
+  properties = list(
+    title = list(type = "string"),
+    authors = list(
+      type = "array",
+      items = list(type = "string")
+    ),
+    abstract = list(type = "string")
+  ),
+  required = c("title", "authors", "abstract")
+)
+
+# Use with custom prompt
+result <- claude_api_call(
+  prompt = "Extract the title, authors, and abstract from this paper.",
+  image_data = list(base64_image),
+  schema = simple_schema,
+  model = "claude-opus-4-6"
+)
+
+# Access results
+cat("Title:", result$content[[1]]$text$title, "\n")
+cat("Authors:", paste(result$content[[1]]$text$authors, collapse = ", "), "\n")
+```
+
+### Example: Metadata Extraction
+
+``` r
+# Schema for scientific paper metadata
+metadata_schema <- list(
+  type = "object",
+  properties = list(
+    title = list(type = "string"),
+    authors = list(
+      type = "array",
+      items = list(
+        type = "object",
+        properties = list(
+          name = list(type = "string"),
+          affiliation = list(type = "string")
+        )
+      )
+    ),
+    journal = list(type = "string"),
+    year = list(type = "integer"),
+    doi = list(type = "string"),
+    keywords = list(
+      type = "array",
+      items = list(type = "string")
+    )
+  ),
+  required = c("title", "authors", "journal")
+)
+
+# Process first 2 pages for metadata
+result <- claude_ocr_process_file(
+  "paper.pdf",
+  pages = c(1, 2),
+  schema = metadata_schema,
+  prompt = "Extract bibliographic metadata from this scientific paper."
+)
+```
+
+## Processing Options
+
+### Page Selection
+
+Process specific pages only:
+
+``` r
+# Process first 3 pages
+result <- claude_ocr_process_file(
+  "paper.pdf",
+  pages = c(1, 2, 3),
+  model = "claude-opus-4-6"
+)
+```
+
+### Model Selection
+
+Choose between available models:
+
+``` r
+# Use Opus 4.6 (most capable, slower, more expensive)
+result_opus <- claude_ocr_process_file("paper.pdf", model = "claude-opus-4-6")
+
+# Use Sonnet 4.5 (fast, cost-effective)
+result_sonnet <- claude_ocr_process_file("paper.pdf", model = "claude-sonnet-4-5")
+```
+
+### Image Quality
+
+Adjust image processing:
+
+``` r
+result <- claude_ocr_process_file(
+  "paper.pdf",
+  dpi = 200,  # Higher DPI for better quality
+  model = "claude-opus-4-6"
+)
+```
+
+## Complete Example
+
+Here’s a complete workflow for extracting structured data from a
+scientific paper:
+
+``` r
+library(ohseer)
+library(jsonlite)
+
+# 1. Process first 2 pages with Claude for metadata extraction
+metadata_result <- claude_ocr_process_file(
+  "paper.pdf",
+  pages = c(1, 2),
+  model = "claude-sonnet-4-5"  # Fast model for metadata
+)
+
+# 2. Access structured data
+page1 <- metadata_result$pages[[1]]
+
+# 3. Extract citation information
+page_headers <- Filter(function(f) f$fragment_type == "page_header", page1$page_fragments)
+section_headers <- Filter(function(f) f$fragment_type == "section_header", page1$page_fragments)
+
+if (length(page_headers) > 0) {
+  cat("Journal:", page_headers[[1]]$content$content, "\n")
+}
+
+if (length(section_headers) > 0) {
+  cat("Title:", section_headers[[1]]$content$content, "\n")
+}
+
+# 4. Extract all tables
+all_tables <- list()
+for (page in metadata_result$pages) {
+  table_frags <- Filter(function(f) f$fragment_type == "table", page$page_fragments)
+  for (table in table_frags) {
+    all_tables[[length(all_tables) + 1]] <- list(
+      page = page$page_number,
+      markdown = table$content$markdown,
+      html = table$content$html
+    )
+  }
+}
+
+cat("Found", length(all_tables), "tables\n")
+
+# 5. Convert to JSON for further processing
+json_output <- toJSON(metadata_result$pages, auto_unbox = TRUE, pretty = TRUE)
+```
+
+## Benefits of Structured Outputs
+
+### 1. Reliability
+
+- **Guaranteed Format**: No more parsing errors from malformed JSON
+- **Type Safety**: Schema ensures correct data types
+- **Required Fields**: Can specify which fields must be present
+
+### 2. Consistency
+
+- **Tensorlake Compatible**: Default schema matches Tensorlake format
+- **Predictable Structure**: Same structure across all documents
+- **Easy Integration**: Works seamlessly with existing pipelines
+
+### 3. Efficiency
+
+- **Single Pass**: Get structured data in one API call
+- **No Post-Processing**: No need for additional parsing or validation
+- **Direct Use**: Output is immediately usable
+
+## Comparison with Other Providers
+
+### Claude vs Tensorlake
+
+- **Claude**: Uses structured outputs (guaranteed JSON schema)
+- **Tensorlake**: Returns structured fragments natively
+- **Compatible**: Both can use the same page fragment structure
+
+### Claude vs Mistral
+
+- **Claude**: Structured outputs with JSON schema
+- **Mistral**: Native format (no structured output transformation)
+- **Different Use Cases**: Claude for guaranteed structure, Mistral for
+  flexible native format
+
+## Tips and Best Practices
+
+1.  **Model Selection**: Use Sonnet 4.5 for most tasks (fast and
+    cost-effective):
+
+    ``` r
+    result <- claude_ocr_process_file("doc.pdf", model = "claude-sonnet-4-5")
+    ```
+
+2.  **Page Selection**: Process only needed pages to save costs:
+
+    ``` r
+    # Metadata usually on first 1-2 pages
+    result <- claude_ocr_process_file("doc.pdf", pages = c(1, 2))
+    ```
+
+3.  **Schema Design**: Keep schemas simple and focused:
+
+    ``` r
+    # Good: Simple, focused schema
+    simple <- list(type = "object", properties = list(title = list(type = "string")))
+
+    # Avoid: Overly complex nested structures
+    ```
+
+4.  **Error Handling**: Always validate the response:
+
+    ``` r
+    if (is.null(result$pages) || length(result$pages) == 0) {
+      stop("No pages returned from Claude OCR")
+    }
+    ```
+
+5.  **Cost Optimization**: Balance quality and cost:
+
+    - Use Sonnet 4.5 for routine processing
+    - Use Opus 4.6 for complex documents or when highest accuracy is
+      needed
+    - Process minimum pages necessary
+
+## Further Reading
+
+- [Claude Setup
+  Guide](https://n8layman.github.io/ohseer/CLAUDE_SETUP.md)
+- [Tensorlake Output
+  Structure](https://n8layman.github.io/ohseer/articles/tensorlake-output-structure.md)
+- [Mistral Output
+  Structure](https://n8layman.github.io/ohseer/articles/mistral-output-structure.md)
+- [Package README](https://n8layman.github.io/ohseer/README.md)
+- Claude API documentation: <https://docs.anthropic.com>

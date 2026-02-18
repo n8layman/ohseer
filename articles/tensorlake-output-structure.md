@@ -1,0 +1,267 @@
+# Understanding Tensorlake Output Structure
+
+## Introduction
+
+This vignette explains the structure of objects returned by Tensorlake’s
+OCR functions and shows how to extract different types of information
+from the results.
+
+### Basic Usage
+
+``` r
+library(ohseer)
+
+# Parse a document with Tensorlake
+result <- tensorlake_ocr("document.pdf")
+```
+
+## Output Structure
+
+The
+[`tensorlake_ocr()`](https://n8layman.github.io/ohseer/reference/tensorlake_ocr.md)
+function returns a list with the following top-level fields:
+
+### Top-Level Fields
+
+``` r
+str(result, max.level = 1)
+```
+
+- **`parse_id`**: Unique identifier for the parse job
+- **`status`**: Parse job status (e.g., “successful”, “failed”)
+- **`total_pages`**: Total number of pages in the document
+- **`parsed_pages_count`**: Number of pages successfully parsed
+- **`pages`**: List of parsed page data (detailed below)
+- **`chunks`**: List of text chunks extracted from the document
+- **`page_classes`**: Classification of page types (if applicable)
+- **`created_at`**: Timestamp when parse job was created (ISO 8601
+  format)
+- **`finished_at`**: Timestamp when parse job completed (ISO 8601
+  format)
+- **`usage`**: API usage statistics (tokens, pages, etc.)
+
+## Page Structure
+
+Each element in `result$pages` represents one page and contains:
+
+### Page Fields
+
+``` r
+page1 <- result$pages[[1]]
+str(page1, max.level = 1)
+```
+
+- **`page_number`**: Page number (integer)
+- **`page_fragments`**: List of content fragments found on the page
+- **`dimensions`**: Page dimensions (width, height)
+- **`page_dimensions`**: Alternative dimension measurements
+- **`classification_reason`**: Reason for page classification (if
+  applicable)
+
+### Page Fragments
+
+Each page contains multiple fragments representing different content
+types:
+
+``` r
+fragment <- page1$page_fragments[[1]]
+str(fragment, max.level = 2)
+```
+
+#### Fragment Fields
+
+- **`fragment_type`**: Type of content (see types below)
+- **`content`**: The actual content (text or structured data)
+  - `content$content`: The text content
+  - `content$html`: HTML representation (for tables)
+- **`reading_order`**: Position in reading sequence (integer)
+- **`bbox`**: Bounding box coordinates
+  - `x1`, `y1`: Top-left corner
+  - `x2`, `y2`: Bottom-right corner
+
+#### Fragment Types
+
+Tensorlake identifies several content types:
+
+| Fragment Type    | Description                 |
+|------------------|-----------------------------|
+| `page_header`    | Headers at top of pages     |
+| `page_number`    | Page numbers                |
+| `section_header` | Section/chapter headings    |
+| `text`           | Regular paragraph text      |
+| `table`          | Tables (with optional HTML) |
+| `table_caption`  | Table captions/titles       |
+| `figure`         | Images or figures           |
+| `figure_caption` | Figure captions             |
+
+## Extracting Information
+
+### Extract Structured Page Data
+
+Use
+[`tensorlake_extract_pages()`](https://n8layman.github.io/ohseer/reference/tensorlake_extract_pages.md)
+to get organized content by fragment type:
+
+``` r
+# Extract first 2 pages with structured data
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
+
+# Access first page
+page1 <- pages[[1]]
+
+# Page structure:
+page1$page_number      # Page number
+page1$page_header      # Character vector of page headers (e.g., journal citation)
+page1$section_header   # Character vector of section headers (e.g., article title)
+page1$text            # String with all text content (markdown format)
+page1$tables          # List of tables with content, markdown, html formats
+page1$other           # Other fragment types
+
+# Example: Get citation info from first page
+citation <- page1$page_header
+title <- page1$section_header
+
+# Example: Access table data
+if (length(page1$tables) > 0) {
+  table1 <- page1$tables[[1]]
+  cat(table1$markdown)  # Markdown format
+  cat(table1$html)      # HTML format
+  cat(table1$content)   # Plain text
+}
+
+# Convert to JSON for LLM processing
+library(jsonlite)
+json_for_llm <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
+```
+
+### Extract Metadata
+
+Access document metadata directly from the result:
+
+``` r
+# View processing statistics
+cat("Parse ID:", result$parse_id, "\n")
+cat("Pages processed:", result$parsed_pages_count, "of", result$total_pages, "\n")
+cat("Status:", result$status, "\n")
+
+# View usage statistics
+str(result$usage)
+```
+
+## Working with Fragments
+
+### Filter by Fragment Type
+
+Find all headers in a document:
+
+``` r
+# Get all section headers
+headers <- list()
+for (page in result$pages) {
+  for (frag in page$page_fragments) {
+    if (frag$fragment_type == "section_header") {
+      headers[[length(headers) + 1]] <- list(
+        page = page$page_number,
+        text = frag$content$content,
+        order = frag$reading_order
+      )
+    }
+  }
+}
+
+# View headers
+do.call(rbind, lapply(headers, as.data.frame))
+```
+
+### Extract Text in Reading Order
+
+Get text fragments in the order they should be read:
+
+``` r
+# For a specific page
+page_num <- 1
+page <- result$pages[[page_num]]
+
+# Sort fragments by reading order
+sorted_fragments <- page$page_fragments[order(sapply(page$page_fragments, function(f) f$reading_order))]
+
+# Extract text in order
+ordered_text <- sapply(sorted_fragments, function(frag) {
+  frag$content$content %||% ""
+})
+
+cat(paste(ordered_text, collapse = "\n"))
+```
+
+## Complete Example
+
+Here’s a complete workflow for processing an academic paper:
+
+``` r
+library(ohseer)
+library(jsonlite)
+
+# 1. Parse the document
+result <- tensorlake_ocr("paper.pdf")
+
+# 2. Check status
+cat("Status:", result$status, "\n")
+cat("Processed", result$parsed_pages_count, "pages\n")
+
+# 3. Extract structured data from first 2 pages (for citation metadata)
+pages <- tensorlake_extract_pages(result, pages = c(1, 2))
+
+# 4. Access citation information
+page1 <- pages[[1]]
+cat("Journal:", page1$page_header, "\n")
+cat("Title:", page1$section_header, "\n")
+
+# 5. Convert to JSON for LLM processing
+json_data <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
+
+# Send json_data to Claude or another LLM for metadata extraction
+
+# 6. Access tables if needed
+for (page in pages) {
+  if (length(page$tables) > 0) {
+    cat("Found", length(page$tables), "tables on page", page$page_number, "\n")
+  }
+}
+```
+
+## Tips and Best Practices
+
+1.  **Fragment Types**: Different documents may have different fragment
+    types. Always check what’s available:
+
+    ``` r
+    all_types <- unique(unlist(lapply(result$pages, function(p) {
+      sapply(p$page_fragments, function(f) f$fragment_type)
+    })))
+    table(all_types)
+    ```
+
+2.  **Reading Order**: Use `reading_order` to maintain document flow
+    when extracting text.
+
+3.  **Bounding Boxes**: Use `bbox` coordinates if you need to know where
+    content appears on the page.
+
+4.  **Page Selection**: For citation extraction, processing just the
+    first 1-2 pages is usually sufficient and faster.
+
+5.  **Error Handling**: Always check `result$status` to ensure parsing
+    succeeded:
+
+    ``` r
+    if (result$status != "successful") {
+      stop("Parsing failed or is incomplete")
+    }
+    ```
+
+## Further Reading
+
+- [Tensorlake Setup
+  Guide](https://n8layman.github.io/ohseer/TENSORLAKE_SETUP.md)
+- [Package README](https://n8layman.github.io/ohseer/README.md)
+- Tensorlake API documentation: <https://docs.tensorlake.ai>
