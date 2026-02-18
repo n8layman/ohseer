@@ -1,5 +1,5 @@
 {
-  "parse_id": "parse_DRw7RnWjdqzFpQH9TWRNm",
+  "parse_id": "parse_rkhGqbdDp9wrQndwWLQQj",
   "parsed_pages_count": 6,
   "total_pages": 6,
   "status": "successful",
@@ -15,10 +15,10 @@
           },
           "reading_order": 0,
           "bbox": {
-            "y1": 63,
             "x1": 337,
             "x2": 490,
-            "y2": 78
+            "y1": 63,
+            "y2": 77
           }
         },
         {
@@ -29,10 +29,10 @@
           },
           "reading_order": 1,
           "bbox": {
-            "y1": 93,
+            "x1": 94,
+            "x2": 322,
             "y2": 121,
-            "x2": 323,
-            "x1": 93
+            "y1": 93
           }
         },
         {
@@ -43,38 +43,38 @@
           },
           "reading_order": 2,
           "bbox": {
+            "x1": 94,
+            "x2": 490,
             "y1": 133,
-            "x2": 491,
-            "x1": 93,
             "y2": 205
           }
         },
         {
           "fragment_type": "text",
           "content": {
-            "content": "ABSTRACT: Lyme disease spirochetes were demonstrated in a wild female fox (*Vulpes vulpes schrencki*) and in *Ixodes persulcatus* ticks collected from the fox on Sapporo, Hokkaido, Japan. Spirochetes were detected in *I. persulcatus*, as well as skin lesions, brain, heart, kidney, and liver of the fox. Five of seven isolates reacted with a monoclonal antibody against *Borrelia afzelii* specific Osp B. Deoxyribonucleic acid (DNA) relatedness of a brain isolate was 89% to *B. afzelii*, and ranged from 50 to 67% to three other species. Immunoglobulin G antibodies to *B. afzelii*, *B. garinii* and *B. burgdorferi* sensu lato, when tested in an enzyme-linked immunosorbent assay (ELISA), were negative in the fox. There were no antibodies against seven serovars of *Leptospira interrogans*.",
+            "content": "**ABSTRACT:** Lyme disease spirochetes were demonstrated in a wild female fox (*Vulpes vulpes schrencki*) and in *Ixodes persulcatus* ticks collected from the fox on Sapporo, Hokkaido, Japan. Spirochetes were detected in *I. persulcatus*, as well as skin lesions, brain, heart, kidney, and liver of the fox. Five of seven isolates reacted with a monoclonal antibody against *Borrelia afzelii* specific Osp B. Deoxyribonucleic acid (DNA) relatedness of a brain isolate was 89% to *B. afzelii*, and ranged from 50 to 67% to three other species. Immunoglobulin G antibodies to *B. afzelii*, *B. garinii* and *B. burgdorferi* sensu lato, when tested in an enzyme-linked immunosorbent assay (ELISA), were negative in the fox. There were no antibodies against seven serovars of *Leptospira interrogans*.",
             "html": {}
           },
           "reading_order": 3,
           "bbox": {
             "x2": 287,
-            "y2": 391,
-            "x1": 93,
-            "y1": 221
+            "y1": 221,
+            "y2": 390,
+            "x1": 93
           }
         },
         {
           "fragment_type": "text",
           "content": {
-            "content": "Key words: Lyme borreliosis, fox, *Borrelia afzelii*, *Ixodes persulcatus*, hepatitis, pyelitis, conjunctivitis, *Vulpes vulpes schrencki*.",
+            "content": "**Key words:** Lyme borreliosis, fox, *Borrelia afzelii*, *Ixodes persulcatus*, hepatitis, pyelitis, conjunctivitis, *Vulpes vulpes schrencki*.",
             "html": {}
           },
           "reading_order": 4,
           "bbox": {
-            "x2": 286,
+            "y1": 390,
             "y2": 421,
             "x1": 93,
-            "y1": 391
+            "x2": 286
           }
         },
         {
@@ -88,7 +88,7 @@
             "x1": 93,
             "x2": 287,
             "y1": 436,
-            "y2": 542
+            "y2": 541
           }
         },
         {
@@ -99,10 +99,10 @@
           },
           "reading_order": 6,
           "bbox": {
-            "x1": 93,
-            "y1": 543,
             "x2": 287,
-            "y2": 673
+            "x1": 93,
+            "y2": 673,
+            "y1": 543
           }
         },
         {
@@ -113,10 +113,10 @@
           },
           "reading_order": 7,
           "bbox": {
-            "x2": 286,
-            "y1": 674,
             "y2": 686,
-            "x1": 104
+            "y1": 674,
+            "x2": 286,
+            "x1": 105
           }
         },
         {
@@ -127,10 +127,10 @@
           },
           "reading_order": 8,
           "bbox": {
-            "x2": 490,
-            "y1": 220,
-            "x1": 296,
-            "y2": 507
+            "x1": 297,
+            "y1": 221,
+            "y2": 506,
+            "x2": 490
           }
         },
         {
@@ -141,9 +141,9 @@
           },
           "reading_order": 9,
           "bbox": {
-            "x1": 296,
             "y1": 508,
-            "x2": 491,
+            "x1": 297,
+            "x2": 490,
             "y2": 686
           }
         },
@@ -155,10 +155,10 @@
           },
           "reading_order": 10,
           "bbox": {
-            "y1": 213,
-            "x1": 586,
+            "x1": 587,
+            "x2": 592,
             "y2": 577,
-            "x2": 593
+            "y1": 214
           }
         }
       ],
@@ -183,9 +183,9 @@
           },
           "reading_order": 0,
           "bbox": {
-            "x2": 326,
-            "y2": 70,
-            "x1": 133,
+            "y2": 69,
+            "x2": 325,
+            "x1": 134,
             "y1": 61
           }
         },
@@ -197,10 +197,10 @@
           },
           "reading_order": 1,
           "bbox": {
-            "y1": 90,
-            "x1": 107,
+            "x1": 108,
             "y2": 317,
-            "x2": 302
+            "x2": 302,
+            "y1": 91
           }
         },
         {
@@ -211,10 +211,10 @@
           },
           "reading_order": 2,
           "bbox": {
-            "x1": 107,
+            "x1": 108,
             "x2": 302,
-            "y2": 461,
-            "y1": 317
+            "y1": 318,
+            "y2": 461
           }
         },
         {
@@ -225,10 +225,10 @@
           },
           "reading_order": 3,
           "bbox": {
-            "x1": 107,
             "x2": 303,
+            "y2": 688,
             "y1": 461,
-            "y2": 688
+            "x1": 108
           }
         },
         {
@@ -239,10 +239,10 @@
           },
           "reading_order": 4,
           "bbox": {
-            "x1": 309,
-            "y1": 90,
+            "y2": 318,
             "x2": 505,
-            "y2": 318
+            "y1": 91,
+            "x1": 310
           }
         },
         {
@@ -255,7 +255,7 @@
           "bbox": {
             "y2": 449,
             "x2": 505,
-            "x1": 309,
+            "x1": 311,
             "y1": 318
           }
         },
@@ -267,10 +267,10 @@
           },
           "reading_order": 6,
           "bbox": {
-            "y1": 449,
+            "y1": 450,
+            "y2": 688,
             "x2": 505,
-            "x1": 309,
-            "y2": 688
+            "x1": 311
           }
         },
         {
@@ -281,10 +281,10 @@
           },
           "reading_order": 7,
           "bbox": {
-            "y1": 212,
-            "y2": 577,
-            "x2": 593,
-            "x1": 585
+            "y1": 213,
+            "y2": 578,
+            "x1": 586,
+            "x2": 593
           }
         }
       ],
@@ -309,10 +309,10 @@
           },
           "reading_order": 0,
           "bbox": {
-            "x2": 465,
-            "y2": 75,
-            "y1": 67,
-            "x1": 379
+            "x2": 466,
+            "y1": 66,
+            "y2": 74,
+            "x1": 380
           }
         },
         {
@@ -323,10 +323,10 @@
           },
           "reading_order": 1,
           "bbox": {
-            "x2": 287,
             "y2": 168,
-            "y1": 95,
-            "x1": 92
+            "x1": 92,
+            "x2": 287,
+            "y1": 95
           }
         },
         {
@@ -338,9 +338,9 @@
           "reading_order": 2,
           "bbox": {
             "y1": 168,
-            "x2": 287,
+            "x1": 92,
             "y2": 263,
-            "x1": 93
+            "x2": 287
           }
         },
         {
@@ -352,9 +352,9 @@
           "reading_order": 3,
           "bbox": {
             "x2": 287,
+            "x1": 93,
             "y1": 263,
-            "y2": 370,
-            "x1": 93
+            "y2": 370
           }
         },
         {
@@ -365,10 +365,10 @@
           },
           "reading_order": 4,
           "bbox": {
-            "x1": 93,
             "x2": 287,
             "y1": 371,
-            "y2": 694
+            "x1": 93,
+            "y2": 693
           }
         },
         {
@@ -380,8 +380,8 @@
           "reading_order": 5,
           "bbox": {
             "y1": 95,
-            "x2": 491,
             "y2": 123,
+            "x2": 491,
             "x1": 297
           }
         },
@@ -397,10 +397,10 @@
           },
           "reading_order": 6,
           "bbox": {
-            "y1": 128,
+            "x2": 491,
             "y2": 187,
             "x1": 297,
-            "x2": 491
+            "y1": 128
           }
         },
         {
@@ -412,9 +412,9 @@
           "reading_order": 7,
           "bbox": {
             "x1": 297,
-            "y2": 200,
+            "x2": 352,
             "y1": 192,
-            "x2": 352
+            "y2": 200
           }
         },
         {
@@ -426,9 +426,9 @@
           "reading_order": 8,
           "bbox": {
             "x2": 491,
-            "x1": 295,
             "y1": 227,
-            "y2": 359
+            "y2": 359,
+            "x1": 295
           }
         },
         {
@@ -439,8 +439,8 @@
           },
           "reading_order": 9,
           "bbox": {
-            "x2": 491,
             "x1": 297,
+            "x2": 491,
             "y1": 359,
             "y2": 501
           }
@@ -454,8 +454,8 @@
           "reading_order": 10,
           "bbox": {
             "y1": 502,
-            "x2": 491,
             "x1": 297,
+            "x2": 491,
             "y2": 646
           }
         },
@@ -467,10 +467,10 @@
           },
           "reading_order": 11,
           "bbox": {
-            "y2": 694,
+            "y2": 693,
             "x1": 297,
-            "x2": 491,
-            "y1": 646
+            "y1": 646,
+            "x2": 491
           }
         },
         {
@@ -481,10 +481,10 @@
           },
           "reading_order": 12,
           "bbox": {
+            "y1": 213,
             "x1": 586,
-            "y2": 577,
             "x2": 593,
-            "y1": 213
+            "y2": 577
           }
         }
       ],
@@ -504,30 +504,30 @@
         {
           "fragment_type": "page_header",
           "content": {
-            "content": "JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994",
+            "content": "442 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994",
             "html": {}
           },
           "reading_order": 0,
           "bbox": {
-            "x2": 327,
             "y2": 70,
-            "y1": 62,
-            "x1": 135
+            "y1": 61,
+            "x1": 135,
+            "x2": 328
           }
         },
         {
           "fragment_type": "figure",
           "content": {
-            "content": "FIGURE_TYPE: CHART\nCONTENT:\n| **Homology Value (%)** | **B31 B burgdorferi sensu stricto** | **20047 B garinii** | **VS461 B afzelii** | **HO14 B burgdorferi sensu lato** |\n|-------------------------|--------------------------------------|---------------------|--------------------|------------------------------------|\n| Homology Value          | 50                                   | 63                  | 89                 | 67                                 |",
+            "content": "FIGURE_TYPE: CHART\nCONTENT:\n| **Homology Value (%)** | **B31 *Burgdorferia sensu stricto*** | **20047 *B. garinii*** | **VS461 *B. afzelii*** | **HO14 *Burgdorferia sensu lato*** |\n|-------------------------|---------------------------------------|------------------------|------------------------|------------------------------------|\n| B31                     | 50                                    |                        |                        |                                    |\n| 20047                   |                                      | 63                     |                        |                                    |\n| VS461                   |                                      |                       | 89                     |                                    |\n| HO14                    |                                      |                       |                       | 67                                 |",
             "image_base64": {},
             "summary": {}
           },
           "reading_order": 1,
           "bbox": {
-            "y1": 90,
-            "x2": 304,
-            "x1": 109,
-            "y2": 236
+            "x2": 305,
+            "y2": 237,
+            "x1": 108,
+            "y1": 89
           }
         },
         {
@@ -538,10 +538,10 @@
           },
           "reading_order": 2,
           "bbox": {
-            "y1": 240,
             "y2": 271,
             "x1": 111,
-            "x2": 305
+            "x2": 305,
+            "y1": 240
           }
         },
         {
@@ -552,10 +552,10 @@
           },
           "reading_order": 3,
           "bbox": {
-            "x1": 110,
             "x2": 304,
-            "y1": 283,
-            "y2": 308
+            "y2": 308,
+            "x1": 110,
+            "y1": 283
           }
         },
         {
@@ -566,9 +566,9 @@
           },
           "reading_order": 4,
           "bbox": {
-            "x2": 304,
-            "y2": 332,
+            "x2": 305,
             "x1": 110,
+            "y2": 332,
             "y1": 308
           }
         },
@@ -581,10 +581,10 @@
           },
           "reading_order": 5,
           "bbox": {
+            "y2": 625,
+            "x2": 305,
             "y1": 348,
-            "x2": 304,
-            "x1": 112,
-            "y2": 625
+            "x1": 112
           }
         },
         {
@@ -595,10 +595,10 @@
           },
           "reading_order": 6,
           "bbox": {
-            "y2": 687,
+            "y1": 626,
             "x2": 305,
-            "x1": 111,
-            "y1": 626
+            "x1": 110,
+            "y2": 687
           }
         },
         {
@@ -609,10 +609,10 @@
           },
           "reading_order": 7,
           "bbox": {
-            "y1": 90,
-            "x2": 508,
             "x1": 313,
-            "y2": 175
+            "y1": 90,
+            "y2": 175,
+            "x2": 508
           }
         },
         {
@@ -623,10 +623,10 @@
           },
           "reading_order": 8,
           "bbox": {
-            "y1": 175,
             "x2": 508,
             "x1": 313,
-            "y2": 319
+            "y2": 319,
+            "y1": 175
           }
         },
         {
@@ -637,10 +637,10 @@
           },
           "reading_order": 9,
           "bbox": {
-            "y1": 319,
-            "x2": 509,
+            "y2": 449,
             "x1": 314,
-            "y2": 448
+            "x2": 509,
+            "y1": 318
           }
         },
         {
@@ -651,10 +651,10 @@
           },
           "reading_order": 10,
           "bbox": {
-            "x1": 315,
-            "x2": 509,
-            "y1": 450,
-            "y2": 605
+            "x1": 314,
+            "y2": 606,
+            "y1": 449,
+            "x2": 510
           }
         },
         {
@@ -665,9 +665,9 @@
           },
           "reading_order": 11,
           "bbox": {
-            "x1": 315,
-            "x2": 510,
+            "x1": 314,
             "y1": 605,
+            "x2": 510,
             "y2": 690
           }
         },
@@ -679,10 +679,10 @@
           },
           "reading_order": 12,
           "bbox": {
-            "x1": 586,
-            "x2": 593,
+            "y2": 578,
             "y1": 213,
-            "y2": 578
+            "x1": 585,
+            "x2": 593
           }
         }
       ],
@@ -707,9 +707,9 @@
           },
           "reading_order": 0,
           "bbox": {
-            "x2": 481,
-            "x1": 395,
             "y2": 70,
+            "x2": 480,
+            "x1": 395,
             "y1": 62
           }
         },
@@ -721,10 +721,10 @@
           },
           "reading_order": 1,
           "bbox": {
-            "x1": 109,
-            "y1": 92,
             "y2": 139,
-            "x2": 303
+            "x1": 110,
+            "x2": 303,
+            "y1": 92
           }
         },
         {
@@ -735,9 +735,9 @@
           },
           "reading_order": 2,
           "bbox": {
-            "x2": 303,
-            "x1": 109,
             "y2": 271,
+            "x1": 110,
+            "x2": 303,
             "y1": 139
           }
         },
@@ -750,9 +750,9 @@
           "reading_order": 3,
           "bbox": {
             "y1": 271,
-            "x1": 109,
             "x2": 303,
-            "y2": 305
+            "y2": 305,
+            "x1": 110
           }
         },
         {
@@ -763,10 +763,10 @@
           },
           "reading_order": 4,
           "bbox": {
-            "y2": 336,
-            "x1": 166,
-            "x2": 244,
-            "y1": 327
+            "x1": 167,
+            "y1": 327,
+            "y2": 335,
+            "x2": 244
           }
         },
         {
@@ -777,10 +777,10 @@
           },
           "reading_order": 5,
           "bbox": {
-            "x1": 108,
+            "x2": 303,
+            "x1": 109,
             "y1": 341,
-            "y2": 688,
-            "x2": 303
+            "y2": 688
           }
         },
         {
@@ -791,9 +791,9 @@
           },
           "reading_order": 6,
           "bbox": {
-            "x2": 506,
-            "x1": 312,
+            "x2": 505,
             "y1": 93,
+            "x1": 312,
             "y2": 689
           }
         },
@@ -805,10 +805,10 @@
           },
           "reading_order": 7,
           "bbox": {
-            "y2": 578,
             "x2": 593,
             "x1": 586,
-            "y1": 213
+            "y1": 213,
+            "y2": 577
           }
         }
       ],
@@ -833,10 +833,10 @@
           },
           "reading_order": 0,
           "bbox": {
-            "x1": 134,
-            "y1": 63,
             "y2": 70,
-            "x2": 325
+            "x2": 325,
+            "x1": 134,
+            "y1": 63
           }
         },
         {
@@ -847,10 +847,10 @@
           },
           "reading_order": 1,
           "bbox": {
-            "y2": 110,
-            "x2": 300,
+            "y1": 93,
             "x1": 125,
-            "y1": 93
+            "x2": 300,
+            "y2": 111
           }
         },
         {
@@ -861,10 +861,10 @@
           },
           "reading_order": 2,
           "bbox": {
-            "y2": 142,
+            "y1": 113,
             "x2": 300,
             "x1": 109,
-            "y1": 113
+            "y2": 142
           }
         },
         {
@@ -875,9 +875,9 @@
           },
           "reading_order": 3,
           "bbox": {
-            "x1": 328,
-            "x2": 504,
+            "x1": 327,
             "y2": 122,
+            "x2": 504,
             "y1": 93
           }
         },
@@ -889,10 +889,10 @@
           },
           "reading_order": 4,
           "bbox": {
-            "y2": 142,
-            "x1": 312,
             "x2": 459,
-            "y1": 133
+            "y1": 133,
+            "y2": 142,
+            "x1": 312
           }
         },
         {
@@ -903,10 +903,10 @@
           },
           "reading_order": 5,
           "bbox": {
+            "x2": 592,
             "x1": 587,
             "y1": 214,
-            "x2": 592,
-            "y2": 577
+            "y2": 576
           }
         }
       ],
@@ -923,14 +923,14 @@
   ],
   "chunks": [
     {
-      "content": "\n*Journal of Wildlife Diseases*, 30(3), 1994, pp. 439-444\n© Wildlife Disease Association 1994\n\n# Lyme Disease Spirochetes in a Wild Fox\n(Vulpes vulpes schrencki) and in Ticks\n\nEmiko Isogai,¹ Hiroshi Isogai,² Hiroki Kawabata,³ Toshiyuki Masuzawa,³ Yasutake Yanagihara,³ Koichi Kimura,⁴ Tooru Sakai,¹ Yuzo Azuma,⁵ Nobuhiro Fujii,⁴ and Shigeaki Ohno,⁶\n¹Department of Preventive Dentistry, Higashi Nippon Gakuen University, Ishikari-Tobetsu 1757, Hokkaido 061-02, Japan; ²Division of Animal Experimentation, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ³Department of Microbiology, School of Pharmaceutical Sciences, University of Shizuoka, 395 Yada, Shizuoka 422, Japan; ⁴Department of Microbiology, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ⁵Monami Animal Clinic, 3-3-4-28, Kawazoe, Minami-ku, Sapporo 005, Japan; ⁶Department of Ophthalmology, Yokohama City University School of Medicine, Fukuura 3-9, Kanazawa-ku, Yokohama 236, Japan\n\nABSTRACT: Lyme disease spirochetes were demonstrated in a wild female fox (*Vulpes vulpes schrencki*) and in *Ixodes persulcatus* ticks collected from the fox on Sapporo, Hokkaido, Japan. Spirochetes were detected in *I. persulcatus*, as well as skin lesions, brain, heart, kidney, and liver of the fox. Five of seven isolates reacted with a monoclonal antibody against *Borrelia afzelii* specific Osp B. Deoxyribonucleic acid (DNA) relatedness of a brain isolate was 89% to *B. afzelii*, and ranged from 50 to 67% to three other species. Immunoglobulin G antibodies to *B. afzelii*, *B. garinii* and *B. burgdorferi* sensu lato, when tested in an enzyme-linked immunosorbent assay (ELISA), were negative in the fox. There were no antibodies against seven serovars of *Leptospira interrogans*.\n\nKey words: Lyme borreliosis, fox, *Borrelia afzelii*, *Ixodes persulcatus*, hepatitis, pyelitis, conjunctivitis, *Vulpes vulpes schrencki*.\n\nLyme disease is a multisystemic infectious disorder caused by the spirochete, *Borrelia burgdorferi* and related species (Baranton et al., 1992). Infection occurs when *Ixodes* spp. tick vectors feed on mammalian hosts. The presence of wild animal reservoirs of infection in the environment is critical for the maintenance of disease transmission.\n\nNatural Lyme disease infection has been found in wild and domestic canine species, including wolves (*Canis lupus*) (Thieking et al., 1992) and domestic dogs (Kornblatt et al., 1985) in the U.S. As many as 19% of healthy dogs from Hokkaido, Japan, have serologic evidence of infection (Isogai et al., 1990). We report here demonstration of Lyme disease spirochetes from a wild red fox (*Vulpes vulpes schrencki*) with systemic infection and vector ticks.\n\nA female red fox weighing 4.4 kg died\n\nin a traffic accident in Sapporo, Hokkaido, Japan (43°01′N, 141°21′E) on 3 June 1992. We observed 11 ticks on the animal: four adult females, one nymph, and two larvae of *Ixodes persulcatus*; one nymph of *I. ovatus*; one adult female *I. nipponensis*, and two adult male *Haemaphysalis flava*. Only the adult and nymph stages of *I. persulcatus* and *I. nipponensis* were attached to the skin. Identification of ticks was done by the methods of Yamaguchi et al. (1971) and by comparison to holo-types in the Department of Parasitology, Asahigawa Medical College, Hokkaido, Japan. Representative ticks were deposited in the Department of Zoology, National Science Museum, Tokyo, Japan, with kind support of H. Ono. Deposition numbers were NSMT-Ac-10501 (*I. persulcatus*, adult female), NSMT-Ac-10502 (*I. persulcatus*, larva), NSMT-Ac-10503 (*I. ovatus*, nymph), NSMT-Ac-10504 (*I. nipponensis*, adult female) and NSMT-Ac-10505 (*H. flava*, adult male).\n\nIsolation of *Borrelia* spp. from tick midguts was carried out according to the methods of Nakao et al. (1992). Contents of isolated midguts were cultivated at 32 C for 4 mo in BSK medium (Barbour, 1984). Darkfield microscopy was used to screen cultures two times each month. Similarly, tissues (skin, liver, kidney, brain, heart, lung) and blood were cultured in BSK medium. Sodium dodecyl sulfate-polyacrylamide gel electrophoresis (SDS-PAGE) and immunoblot analysis of the isolates were carried out according to the method of Masuzawa et al. (1991). After SDS-PAGE, the immunologically reactive\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n440 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nbands were stained with monoclonal antibodies. We used monoclonal antibodies H9742 against flagellae (Barbour et al., 1986), H5332 against Osp A of *B. burgdorferi* sensu stricto (Barbour et al., 1983), P34f against Osp B (immunized strain IPF, isolated from midgut of *I. persulcatus* in Japan), P31c against Osp A (immunized strain NT24, isolated from the midgut of *I. persulcatus* in Japan), P3134 against Osp A and B (immunized strain NT24), I 17.3 against Osp B of *B. afzelii* (Canica et al., 1993), for a comparison of reactivities. The two monoclonal antibodies H9724 and H5332 were kindly provided by A. G. Barbour, University of Texas, San Antonio, Texas, USA. Monoclonal antibody I 17.3 was kindly provided by G. Baranton, Institut Pasteur, Paris, France.\n\nThe deoxyribonucleic acid-deoxyribonucleic acid (DNA-DNA) reassociation (Ezaki et al., 1989) was used for identification of each isolate. The DNA was extracted from the lysed cell preparation twice with phenol and once with phenol-chroroform-isoamyl alcohol (25:24:1); DNA was precipitated for 2 hr at -20 C by adding 5 M NaCl and ice-cold ethanol. Purified DNA was used for DNA-DNA homology by microplate hybridization method (Ezaki et al., 1989).\n\nThe following agar media were used for bacterial examination of liver, kidney, brain, heart, lung and blood: brain heart infusion agar (BBL, Becton Dickinson Microbiology Systems Cockeysville, Maryland, USA) with 5% horse blood for aerobic or anaerobic total, M10 agar for strict anaerobic total (Benno and Mitsuoka, 1992); trypticase yeast extract cystein agar (Kyokuto Seiyaku Ltd., Tokyo, Japan) for *Streptococcus* spp.; *Enterococcus fecalis* agar (Nissui Seiyaku Ltd., Tokyo, Japan) for *Enterococcus* spp.; mannitol-salt agar with egg yolk (Nissui Seiyaku Ltd.) for *Staphylococcus* spp.; deoxycholate-hydrogen sulfide-lactose agar (Nissui Seiyaku Ltd.) for Enterobacteriaceae; Arakawa agar (Nissui Seiyaku Ltd.) for *Corynebacterium* spp.; Nalidixic Acid, Cetrimide\n\nagar (Eiken Chemical Co., Ltd., Tokyo, Japan) for *Pseudomonas* spp.; Sabouraud agar for fungi (Nissui Seiyaku Ltd.); *Bacteroides* Selective Agar (Nissui Seiyaku Ltd.) with 5% horse blood for *Bacteroides* spp.; Modified *Fusobacterium* Agar (Nissui Seiyaku Ltd.) for *Fusobacterium* spp.; *Lactobacillus* Selective Agar (BBL, Becton Dickinson Microbiology Systems Cockeysville) for *Lactobacillus* spp.; *Veillonella* Selective Agar (BBL, Becton Dickinson Microbiology Systems) with vancomycin (7.5 mg/ml; Eli Lilly, Indianapolis, Indiana, USA) for *Veillonella* spp.; *Eubacterium* Selective Agar (Nissui Seiyaku Ltd.) for *Eubacterium* spp.; and *Leptospira* Medium (Difco Laboratories, Detroit, Michigan, USA) with 10% rabbit serum for *Leptospira* spp.\n\nThe skin, liver, kidney, brain, heart, lung, eye, lymph nodes, and spleen of the fox were examined for histopathological changes. Tissues were fixed in 10% formalin, embedded in paraffin, sectioned at 5 µm, and stained by hematoxylin and eosin. Suspect isolates were characterized by electron microscopy by the methods of Hovind-Hougen (1984), using a Hitachi HU-500 microscope (Hitachi, Tokyo, Japan).\n\nEnzyme-linked immunosorbent assay (ELISA) was done on serum collected from the fox by the method of Isogai et al. (1990). *Borrelia afzelii* BFOX, *B. garinii* HP3 (Baranton et al., 1992), *B. afzelii* BFOX and *B. burgdorferi* sensu lato HO14 (Postic et al., 1993) were used for antigen preparation. The bacterial strains were centrifuged into pellets and suspended in carbonate buffer (0.5 M, pH 9.6) and then disrupted by sonication on ice three times for 30 sec each time. After determination of protein concentration by the Bio-Rad protein assay kit (Bio-Rad Laboratories, Richmond, California, USA), it was adjusted at 10 µg/ml. After coating the antigen, diluted serum samples were added in each well. Peroxidase-conjugated antibody immunoglobulin G (1:500, Cappel Co., Ltd., Malvern, Pennsylvania, USA) was\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\nadded in each well. The colorimetric value was determined by an ELISA reader (MTP-22, Corona Electric Co., Ltd., Ibaragi, Japan) after incubation with o-phenylenediamine (4 mg/ml; Kanto Chemical Co., Inc., Tokyo, Japan).\n\nA microscopic agglutination test against seven serovars of *Leptospira interrogans* was done by the method of Isogai et al. (1986). Viable cells of *Leptospira* spp. (2 to 3 × 10⁸/ml) were incubated with serial diluted serum at 37 C for 1 hr. Agglutination was determined by darkfield microscopy.\n\nSpirochetes were detected by darkfield examination of cultures, from the midgut tissues of three of five *I. persulcatus*, the one *I. ovatus*, and three of 18 tick-bite sites after culturing in BSK medium. The culture period was <1 mo for detection of the spirochetes from *I. persulcatus* and from 1 to 2.5 mo for detection of the spirochetes from *I. ovatus* and tick-bite sites.\n\nSpirochetes were detected from one of three skin cultures without tick-bite, as well as liver, kidney, brain and heart tissues. The culture period was 1 to 3 mo. No other significant bacteria were isolated. Based on electron microscopy, spirochete isolates BFOX (brain tissue), HFOX (heart tissue), SK3 (skin without tick-bite), F63A (*I. persulcatus*), and F63B (*I. ovatus*) were similar in morphology to Lyme disease spirochetes. They had eight (seven: F63B) flagellae (F63B had seven flagellae), a length of 12 to 118 µm and a diameter of 0.23 to 0.28 µm. The two isolates, BFOX and HFOX, reacted with genus specific H9742 (Table 1). They also reacted with P34f, P31c and P3134 and were specific to Osp A and/or Osp B of Japanese *Borrelia* species associated with *I. persulcatus*; they did not react with H5332 (specific to Osp A of *B. burgdorferi* sensu stricto. Strains BFOX and HFOX have been reported to react with *B. afzelii* specific monoclonal antibody I 17.3 (Canica et al., 1993). Isolates SK1 (erythemous border of skin with tick-bite), SK3 and F63A also reacted with I 17.3, while SK2 (erythem-\n\nTABLE 1. Molecular mass (kilodaltons) of reactive bands of monoclonal antibodies to *Borrelia* spp. strains from a red fox, Sapporo, Hokkaido, Japan, June 1992.\n\n\n<table><thead><tr><th rowspan=\"2\">Strain<\/th><th rowspan=\"2\">Origin<\/th><th colspan=\"6\">Monoclonal antibodies<\/th><\/tr><tr><th>H9742<\/th><th>H5332<\/th><th>P34f<\/th><th>P31c<\/th><th>P3134<\/th><th>I 17.3<\/th><\/tr><\/thead><tbody><tr><td>BFOX<\/td><td>Brain<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><tr><td>HFOX<\/td><td>Heart<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><\/tbody><\/table>\n\n—: No reaction.\n\natous lesion of skin with tick-bite) and F63B did not. Comparing DNA homology values of BFOX DNA to *B. burgdorferi* sensu stricto B31, *B. garinii* 20047, *B. afzelii* VS461 and *B. burgdorferi* sensu lato (*B. japonica*) H014, the DNA homology value of strain BFOX DNA was 89% to VS461 DNA (Fig. 1). In contrast, DNA homology values of strain BFOX DNA to the three type strains ranged from 50 to 67%. Therefore, BFOX was identified as *B. afzelii*.\n\nAt necropsy, hemorrhagic and edematous skin lesions in the tick-bite sites were observed. The mean (±SE) diameter of the lesions was 40 ± 14 mm. Histologically, inflammatory responses of lymphocytes, plasma cells, neutrophils, and eosinophils with perivasculitis were observed in the skin lesions. Skin lesions were observed in the area without tick-bites. Infiltrated cells were mainly lymphohistiocytes and plasma cells with perivasculitis (Fig. 2a). Spirochetes were isolated from the lesion.\n\nThe liver, kidney, and eye also had cellular infiltration. Hepatitis with perivasculitis was seen in a limited area of the liver, characterized by lymphocytes, plasma cells and neutrophils (Fig. 2b). Similar cell infiltration was observed in the kidney (pyelitis: Fig. 2c) and eye (conjunctivitis: Fig. 2d). Lesions in these tissues were similar to the skin lesions without tick-bites. Lymph nodes and spleen had atrophic lymphoid follicles. No lesions were seen in the brain, heart and lung.\n\nNo immunoglobulin G antibodies were detected to *B. garinii*, *B. burgdorferi* sensu lato and *B. afzelii* in the serum (optimal density: <0.200). No antibodies were de-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nJOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\n### Figure \nFIGURE_TYPE: CHART\nCONTENT:\n| **Homology Value (%)** | **B31 B burgdorferi sensu stricto** | **20047 B garinii** | **VS461 B afzelii** | **HO14 B burgdorferi sensu lato** |\n|-------------------------|--------------------------------------|---------------------|--------------------|------------------------------------|\n| Homology Value          | 50                                   | 63                  | 89                 | 67                                 |\n\nFIGURE 1. Extent of DNA relatedness of *Borrelia* spp. strain BFOX from a red fox to other *Borrelia* spp., Sapporo, Hokkaido, Japan, June 1992.\n\ntected against seven serovars of *Leptospira interrogans* (agglutinin titer: <1:20).\n\nTicks vectors for Lyme borreliosis, such as *I. persulcatus*, are present in many areas\n\n### Figure \nFIGURE_TYPE: OTHER\nCONTENT:\na b c d\n\nThe image consists of four grayscale microscopic images labeled 'a', 'b', 'c', and 'd'. Each panel shows different cellular structures with varying densities and arrangements. Scale bars are present at the bottom of each panel.\n\nFIGURE 2. Inflammatory lesions in a red fox with *Borrelia* spp. infection, Sapporo, Hokkaido, Japan, June 1992. H&E stain. Each bar = 10 µm. a. Skin lesion without tick bite; spirochetes were isolated from the site; b. Perivascular cell infiltration and hepatitis in the liver; c. Pyelitis; d. Conjunctivitis.\n\nof Japan, especially Hokkaido (Nakao et al., 1992). In this case report, the spirochete was isolated from the midgut of *I. persulcatus* which had fed on the fox. Thus, we believe that Lyme disease can be transmitted from *I. persulcatus* to foxes in Japan.\n\nLyme disease spirochetes were isolated from the brain, heart, liver, kidney and skin of the fox. Lyme disease has been reproduced in dogs experimentally infected with *B. burgdorferi* (Wasmoen et al., 1992). Canine Lyme disease was characterized by limb and joint dysfunction in the USA (Kornblatt et al., 1985; Wasmoen et al., 1992). In contrast, limb and joint dysfunction in dogs with tick-bites and antibodies against Lyme disease spirochetes is rare in Japan (Y. Azuma, unpubl.).\n\nMost isolates were identified as *B. afzelii*. The isolation of *B. afzelii* in northern Europe is well correlated with the geographic distribution of acrodermatitis chronica atrophicans (ACA) (Canica et al., 1993). Acrodermatitis chronica atrophicans seems uncommon in the U.S., with only one case reported in 1986 from California (Lavoie et al., 1986). In Japan, Okamura (1964) reported 20 human cases of ACA.\n\nTwo isolates did not react with monoclonal antibody specific to Osp B of *B. afzelii*. Strain F63B from *I. ovatus* has been reported as a new species (Postic et al., 1993). In Japan, the species *B. burgdorferi* sensu lato appears to be restricted to *I. ovatus*. There are no known reports of Lyme disease after *I. ovatus* bite in animals, including humans. The other strain from *I. persulcatus* was different from *B. burgdorferi* sensu lato and *B. afzelii*. Thus, Japanese borrelial species varied in their antigenicity.\n\nThe fox appeared to have a systemic infection with *B. afzelii*. No other bacterial pathogens were isolated from this case. The subacute and chronic lesions in the tissues were different from those of viral infection such as distemper. Although similar lesions can be seen in dogs with leptospirosis, lep-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\ntospirosis is rare in Hokkaido (E. Isogai, unpubl.). We believe that the mild inflammatory infiltrates in liver, kidney and eye may be related to infection with *B. afzelii*.\n\nThe wood mouse (*Apodemus speciosus ainu*) may be a suitable first reservoir host for Lyme disease spirochetes transmitted by *I. persulcatus* in Hokkaido; both larvae and nymphs of *I. persulcatus* removed from *A. speciosus ainu* were highly infected with spirochetes (Nakao and Miyamoto, 1993). However, no information on the host preference of the ticks for medium or large sized mammals is available in Japan.\n\nWe extend our deep thanks to Dr. M. Nakao, Asahigawa Medical College for his fruitful discussion and advice.\n\n\n## LITERATURE CITED\n\nBARANTON, G., D. POSTIC, I. S. GIRONS, P. BOERLIN, J-C. PIFFARETTI, M. ASSOUS, AND P. A. D. GRIMONT. 1992. Delineation of *Borrelia burgdorferi sensu stricto*, *Borrelia afzelii* sp. nov., and group VS461 associated with Lyme borreliosis. International Journal of Systematic Bacteriology 42: 378-383.\n\nBARBOUR, A. G. 1984. Isolation and cultivation of Lyme disease spirochetes. The Yale Journal of Biology and Medicine 57: 521-525.\n\n—, S. L. TESSIER, AND W. J. TODD. 1983. Lyme disease spirochetes and ixodid tick spirochetes share a common surface antigenic determinant defined by a monoclonal antibody. Infection and Immunity 41: 795-804.\n\n—, S. F. HAYES, R. A. HEILAND, M. E. SCHRUMPF, AND S. L. TESSIER. 1986. A Borrelia-specific monoclonal antibody binds to a flagellar epitope. Infection and Immunity 52: 549-554.\n\nBENNO, Y., AND T. MITSUOKA. 1992. Evaluation of anaerobic method for the total bacteria from dog intestines. Journal of Veterinary Medical Science 54: 1039-1041.\n\nCANICA, M. M., F. NATO, L. DU MERLE, J. C. MAZIE, G. BARANTON, AND D. POSTIC. 1993. Monoclonal antibodies for identification of *Borrelia afzelii* sp. nov. associated with late cutaneous manifestations of Lyme borreliosis. Scandinavia Journal of Infectious Diseases 25: 441-448.\n\nEZAKI, T., Y. HASHIMOTO, AND E. YABUUCHI. 1989. Fluorometric deoxyribonucleic acid-deoxyribonucleic acid hybridization in microdilution wells as an alternative to membrane filter hybridization in which radioisotopes are used to determine genetic relatedness among bacterial strains. International Journal of Systematic Bacteriology 39: 224-229.\n\nHOVIND-HOUGEN, K. 1984. Ultrastructure of spirochetes isolated from *Ixodes ricinus* and *Ixodes dammini*. The Yale Journal of Biology and Medicine 57: 543-548.\n\nISOGAI, E., H. ISOGAI, AND N. ITO. 1986. Decreased lipopolysaccharide content and enhanced susceptibility of leptospiras to serum leptospiricidal action and phagocytosis after treatment with diphenylamine. Zentralblatt für Bakteriologie und Hygiene Series A 262: 438-447.\n\n—, N. SATO, M. YUZAWA, AND M. KAWAKAMI. 1990. Antibodies to *Borrelia burgdorferi* in dogs in Hokkaido. Microbiology and Immunology 34: 1005-1012.\n\nKORNBLATT, A. N., P. H. URBAND, AND A. C. STEERE. 1985. Arthritis caused by *Borrelia burgdorferi* in dogs. Journal of the American Veterinary Medical Association 186: 960-964.\n\nLAVOIE, P. E., A. J. WILSON, AND D. L. TUFFANELLI. 1986. Acrodermatitis chronica atrophicans with antecedent Lyme disease in California. Zentralblatt für Bakteriologie und Hygiene Series A 263: 262-265.\n\nMASUZAWA, T., Y. OKADA, Y. YANAGIHARA, AND N. SATO. 1991. Antigenic properties of *Borrelia burgdorferi* isolated from *Ixodes ovatus* and *Ixodes persulcatus* in Hokkaido, Japan. Journal of Clinical Microbiology 29: 1568-1573.\n\nNAKAO, M., AND K. MIYAMOTO. 1993. Reservoir competence of the wood mouse, *Apodemus speciosus ainu*, for the Lyme disease spirochete, *Borrelia burgdorferi*, in Hokkaido, Japan. Japanese Journal of Sanitary Zoology 44: 69-84.\n\n—, K. MIYAMOTO, K. UCHIKAWA, AND H. FUJITA. 1992. Characterization of *Borrelia burgdorferi* isolated from *Ixodes persulcatus* and *Ixodes ovatus* ticks in Japan. American Journal of Tropical Medicine and Hygiene 47: 7-13.\n\nOKAMURA, K. 1964. Japanese cases with acrodermatitis chronica atrophicans. [In Japanese.] Clinicals of Dermatology (Hifuka no Rinsho) 6: 206-214.\n\nPOSTIC, D., J. BELFAIZA, E. ISOGAI, I. S. GIRONS, P. A. D. GRIMONT, AND G. BARANTON. 1993. A new genomic species in *Borrelia burgdorferi sensu lato* isolated from Japanese ticks. Research in Microbiology 144: 467-473.\n\nTHIEKING, A., S. M. GOYAL, R. F. BEY, K. I. Loken, L. D. MECH, R. P. THIEL, AND T. P. O'CONNOR. 1992. Seroprevalence of Lyme disease in gray wolves from Minnesota and Wisconsin. Journal of Wildlife Diseases 28: 177-182.\n\nWASMOEN, T. L., R. W. SEBRING, B. M. BLUMER, L. G. CHAVEZ, JR., H-J. CHU, AND W. M. ACREE. 1992. Examination of Koch's postulates for *Borrelia burgdorferi* as the causative agent of limb/joint dysfunction in dogs with borreliosis. Journal\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n444 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nof the American Veterinary Medical Association\n201: 412-418.\n\nYAMAGUCHI, N., V. J. TIPTON, H. L. KEEGAN, AND\nS. TOSHIOKA. 1971. Ticks of Japan, Korea, and\nthe Ryukyu islands. Brigham Young University\n\nScience Bulletin, Biological series—Volume XV,\nNumber 1, Brigham Young University Publica-\ntions, Provo, Utah, 226 pp.\n\n*Received for publication 26 April 1993.*\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n",
+      "content": "\n*Journal of Wildlife Diseases*, 30(3), 1994, pp. 439-444\n© Wildlife Disease Association 1994\n\n# Lyme Disease Spirochetes in a Wild Fox\n(Vulpes vulpes schrencki) and in Ticks\n\nEmiko Isogai,¹ Hiroshi Isogai,² Hiroki Kawabata,³ Toshiyuki Masuzawa,³ Yasutake Yanagihara,³ Koichi Kimura,⁴ Tooru Sakai,¹ Yuzo Azuma,⁵ Nobuhiro Fujii,⁴ and Shigeaki Ohno,⁶\n¹Department of Preventive Dentistry, Higashi Nippon Gakuen University, Ishikari-Tobetsu 1757, Hokkaido 061-02, Japan; ²Division of Animal Experimentation, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ³Department of Microbiology, School of Pharmaceutical Sciences, University of Shizuoka, 395 Yada, Shizuoka 422, Japan; ⁴Department of Microbiology, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ⁵Monami Animal Clinic, 3-3-4-28, Kawazoe, Minami-ku, Sapporo 005, Japan; ⁶Department of Ophthalmology, Yokohama City University School of Medicine, Fukuura 3-9, Kanazawa-ku, Yokohama 236, Japan\n\n**ABSTRACT:** Lyme disease spirochetes were demonstrated in a wild female fox (*Vulpes vulpes schrencki*) and in *Ixodes persulcatus* ticks collected from the fox on Sapporo, Hokkaido, Japan. Spirochetes were detected in *I. persulcatus*, as well as skin lesions, brain, heart, kidney, and liver of the fox. Five of seven isolates reacted with a monoclonal antibody against *Borrelia afzelii* specific Osp B. Deoxyribonucleic acid (DNA) relatedness of a brain isolate was 89% to *B. afzelii*, and ranged from 50 to 67% to three other species. Immunoglobulin G antibodies to *B. afzelii*, *B. garinii* and *B. burgdorferi* sensu lato, when tested in an enzyme-linked immunosorbent assay (ELISA), were negative in the fox. There were no antibodies against seven serovars of *Leptospira interrogans*.\n\n**Key words:** Lyme borreliosis, fox, *Borrelia afzelii*, *Ixodes persulcatus*, hepatitis, pyelitis, conjunctivitis, *Vulpes vulpes schrencki*.\n\nLyme disease is a multisystemic infectious disorder caused by the spirochete, *Borrelia burgdorferi* and related species (Baranton et al., 1992). Infection occurs when *Ixodes* spp. tick vectors feed on mammalian hosts. The presence of wild animal reservoirs of infection in the environment is critical for the maintenance of disease transmission.\n\nNatural Lyme disease infection has been found in wild and domestic canine species, including wolves (*Canis lupus*) (Thieking et al., 1992) and domestic dogs (Kornblatt et al., 1985) in the U.S. As many as 19% of healthy dogs from Hokkaido, Japan, have serologic evidence of infection (Isogai et al., 1990). We report here demonstration of Lyme disease spirochetes from a wild red fox (*Vulpes vulpes schrencki*) with systemic infection and vector ticks.\n\nA female red fox weighing 4.4 kg died\n\nin a traffic accident in Sapporo, Hokkaido, Japan (43°01′N, 141°21′E) on 3 June 1992. We observed 11 ticks on the animal: four adult females, one nymph, and two larvae of *Ixodes persulcatus*; one nymph of *I. ovatus*; one adult female *I. nipponensis*, and two adult male *Haemaphysalis flava*. Only the adult and nymph stages of *I. persulcatus* and *I. nipponensis* were attached to the skin. Identification of ticks was done by the methods of Yamaguchi et al. (1971) and by comparison to holo-types in the Department of Parasitology, Asahigawa Medical College, Hokkaido, Japan. Representative ticks were deposited in the Department of Zoology, National Science Museum, Tokyo, Japan, with kind support of H. Ono. Deposition numbers were NSMT-Ac-10501 (*I. persulcatus*, adult female), NSMT-Ac-10502 (*I. persulcatus*, larva), NSMT-Ac-10503 (*I. ovatus*, nymph), NSMT-Ac-10504 (*I. nipponensis*, adult female) and NSMT-Ac-10505 (*H. flava*, adult male).\n\nIsolation of *Borrelia* spp. from tick midguts was carried out according to the methods of Nakao et al. (1992). Contents of isolated midguts were cultivated at 32 C for 4 mo in BSK medium (Barbour, 1984). Darkfield microscopy was used to screen cultures two times each month. Similarly, tissues (skin, liver, kidney, brain, heart, lung) and blood were cultured in BSK medium. Sodium dodecyl sulfate-polyacrylamide gel electrophoresis (SDS-PAGE) and immunoblot analysis of the isolates were carried out according to the method of Masuzawa et al. (1991). After SDS-PAGE, the immunologically reactive\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n440 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nbands were stained with monoclonal antibodies. We used monoclonal antibodies H9742 against flagellae (Barbour et al., 1986), H5332 against Osp A of *B. burgdorferi* sensu stricto (Barbour et al., 1983), P34f against Osp B (immunized strain IPF, isolated from midgut of *I. persulcatus* in Japan), P31c against Osp A (immunized strain NT24, isolated from the midgut of *I. persulcatus* in Japan), P3134 against Osp A and B (immunized strain NT24), I 17.3 against Osp B of *B. afzelii* (Canica et al., 1993), for a comparison of reactivities. The two monoclonal antibodies H9724 and H5332 were kindly provided by A. G. Barbour, University of Texas, San Antonio, Texas, USA. Monoclonal antibody I 17.3 was kindly provided by G. Baranton, Institut Pasteur, Paris, France.\n\nThe deoxyribonucleic acid-deoxyribonucleic acid (DNA-DNA) reassociation (Ezaki et al., 1989) was used for identification of each isolate. The DNA was extracted from the lysed cell preparation twice with phenol and once with phenol-chroroform-isoamyl alcohol (25:24:1); DNA was precipitated for 2 hr at -20 C by adding 5 M NaCl and ice-cold ethanol. Purified DNA was used for DNA-DNA homology by microplate hybridization method (Ezaki et al., 1989).\n\nThe following agar media were used for bacterial examination of liver, kidney, brain, heart, lung and blood: brain heart infusion agar (BBL, Becton Dickinson Microbiology Systems Cockeysville, Maryland, USA) with 5% horse blood for aerobic or anaerobic total, M10 agar for strict anaerobic total (Benno and Mitsuoka, 1992); trypticase yeast extract cystein agar (Kyokuto Seiyaku Ltd., Tokyo, Japan) for *Streptococcus* spp.; *Enterococcus fecalis* agar (Nissui Seiyaku Ltd., Tokyo, Japan) for *Enterococcus* spp.; mannitol-salt agar with egg yolk (Nissui Seiyaku Ltd.) for *Staphylococcus* spp.; deoxycholate-hydrogen sulfide-lactose agar (Nissui Seiyaku Ltd.) for Enterobacteriaceae; Arakawa agar (Nissui Seiyaku Ltd.) for *Corynebacterium* spp.; Nalidixic Acid, Cetrimide\n\nagar (Eiken Chemical Co., Ltd., Tokyo, Japan) for *Pseudomonas* spp.; Sabouraud agar for fungi (Nissui Seiyaku Ltd.); *Bacteroides* Selective Agar (Nissui Seiyaku Ltd.) with 5% horse blood for *Bacteroides* spp.; Modified *Fusobacterium* Agar (Nissui Seiyaku Ltd.) for *Fusobacterium* spp.; *Lactobacillus* Selective Agar (BBL, Becton Dickinson Microbiology Systems Cockeysville) for *Lactobacillus* spp.; *Veillonella* Selective Agar (BBL, Becton Dickinson Microbiology Systems) with vancomycin (7.5 mg/ml; Eli Lilly, Indianapolis, Indiana, USA) for *Veillonella* spp.; *Eubacterium* Selective Agar (Nissui Seiyaku Ltd.) for *Eubacterium* spp.; and *Leptospira* Medium (Difco Laboratories, Detroit, Michigan, USA) with 10% rabbit serum for *Leptospira* spp.\n\nThe skin, liver, kidney, brain, heart, lung, eye, lymph nodes, and spleen of the fox were examined for histopathological changes. Tissues were fixed in 10% formalin, embedded in paraffin, sectioned at 5 µm, and stained by hematoxylin and eosin. Suspect isolates were characterized by electron microscopy by the methods of Hovind-Hougen (1984), using a Hitachi HU-500 microscope (Hitachi, Tokyo, Japan).\n\nEnzyme-linked immunosorbent assay (ELISA) was done on serum collected from the fox by the method of Isogai et al. (1990). *Borrelia afzelii* BFOX, *B. garinii* HP3 (Baranton et al., 1992), *B. afzelii* BFOX and *B. burgdorferi* sensu lato HO14 (Postic et al., 1993) were used for antigen preparation. The bacterial strains were centrifuged into pellets and suspended in carbonate buffer (0.5 M, pH 9.6) and then disrupted by sonication on ice three times for 30 sec each time. After determination of protein concentration by the Bio-Rad protein assay kit (Bio-Rad Laboratories, Richmond, California, USA), it was adjusted at 10 µg/ml. After coating the antigen, diluted serum samples were added in each well. Peroxidase-conjugated antibody immunoglobulin G (1:500, Cappel Co., Ltd., Malvern, Pennsylvania, USA) was\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\nadded in each well. The colorimetric value was determined by an ELISA reader (MTP-22, Corona Electric Co., Ltd., Ibaragi, Japan) after incubation with o-phenylenediamine (4 mg/ml; Kanto Chemical Co., Inc., Tokyo, Japan).\n\nA microscopic agglutination test against seven serovars of *Leptospira interrogans* was done by the method of Isogai et al. (1986). Viable cells of *Leptospira* spp. (2 to 3 × 10⁸/ml) were incubated with serial diluted serum at 37 C for 1 hr. Agglutination was determined by darkfield microscopy.\n\nSpirochetes were detected by darkfield examination of cultures, from the midgut tissues of three of five *I. persulcatus*, the one *I. ovatus*, and three of 18 tick-bite sites after culturing in BSK medium. The culture period was <1 mo for detection of the spirochetes from *I. persulcatus* and from 1 to 2.5 mo for detection of the spirochetes from *I. ovatus* and tick-bite sites.\n\nSpirochetes were detected from one of three skin cultures without tick-bite, as well as liver, kidney, brain and heart tissues. The culture period was 1 to 3 mo. No other significant bacteria were isolated. Based on electron microscopy, spirochete isolates BFOX (brain tissue), HFOX (heart tissue), SK3 (skin without tick-bite), F63A (*I. persulcatus*), and F63B (*I. ovatus*) were similar in morphology to Lyme disease spirochetes. They had eight (seven: F63B) flagellae (F63B had seven flagellae), a length of 12 to 118 µm and a diameter of 0.23 to 0.28 µm. The two isolates, BFOX and HFOX, reacted with genus specific H9742 (Table 1). They also reacted with P34f, P31c and P3134 and were specific to Osp A and/or Osp B of Japanese *Borrelia* species associated with *I. persulcatus*; they did not react with H5332 (specific to Osp A of *B. burgdorferi* sensu stricto. Strains BFOX and HFOX have been reported to react with *B. afzelii* specific monoclonal antibody I 17.3 (Canica et al., 1993). Isolates SK1 (erythemous border of skin with tick-bite), SK3 and F63A also reacted with I 17.3, while SK2 (erythem-\n\nTABLE 1. Molecular mass (kilodaltons) of reactive bands of monoclonal antibodies to *Borrelia* spp. strains from a red fox, Sapporo, Hokkaido, Japan, June 1992.\n\n\n<table><thead><tr><th rowspan=\"2\">Strain<\/th><th rowspan=\"2\">Origin<\/th><th colspan=\"6\">Monoclonal antibodies<\/th><\/tr><tr><th>H9742<\/th><th>H5332<\/th><th>P34f<\/th><th>P31c<\/th><th>P3134<\/th><th>I 17.3<\/th><\/tr><\/thead><tbody><tr><td>BFOX<\/td><td>Brain<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><tr><td>HFOX<\/td><td>Heart<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><\/tbody><\/table>\n\n—: No reaction.\n\natous lesion of skin with tick-bite) and F63B did not. Comparing DNA homology values of BFOX DNA to *B. burgdorferi* sensu stricto B31, *B. garinii* 20047, *B. afzelii* VS461 and *B. burgdorferi* sensu lato (*B. japonica*) H014, the DNA homology value of strain BFOX DNA was 89% to VS461 DNA (Fig. 1). In contrast, DNA homology values of strain BFOX DNA to the three type strains ranged from 50 to 67%. Therefore, BFOX was identified as *B. afzelii*.\n\nAt necropsy, hemorrhagic and edematous skin lesions in the tick-bite sites were observed. The mean (±SE) diameter of the lesions was 40 ± 14 mm. Histologically, inflammatory responses of lymphocytes, plasma cells, neutrophils, and eosinophils with perivasculitis were observed in the skin lesions. Skin lesions were observed in the area without tick-bites. Infiltrated cells were mainly lymphohistiocytes and plasma cells with perivasculitis (Fig. 2a). Spirochetes were isolated from the lesion.\n\nThe liver, kidney, and eye also had cellular infiltration. Hepatitis with perivasculitis was seen in a limited area of the liver, characterized by lymphocytes, plasma cells and neutrophils (Fig. 2b). Similar cell infiltration was observed in the kidney (pyelitis: Fig. 2c) and eye (conjunctivitis: Fig. 2d). Lesions in these tissues were similar to the skin lesions without tick-bites. Lymph nodes and spleen had atrophic lymphoid follicles. No lesions were seen in the brain, heart and lung.\n\nNo immunoglobulin G antibodies were detected to *B. garinii*, *B. burgdorferi* sensu lato and *B. afzelii* in the serum (optimal density: <0.200). No antibodies were de-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n442 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\n### Figure \nFIGURE_TYPE: CHART\nCONTENT:\n| **Homology Value (%)** | **B31 *Burgdorferia sensu stricto*** | **20047 *B. garinii*** | **VS461 *B. afzelii*** | **HO14 *Burgdorferia sensu lato*** |\n|-------------------------|---------------------------------------|------------------------|------------------------|------------------------------------|\n| B31                     | 50                                    |                        |                        |                                    |\n| 20047                   |                                      | 63                     |                        |                                    |\n| VS461                   |                                      |                       | 89                     |                                    |\n| HO14                    |                                      |                       |                       | 67                                 |\n\nFIGURE 1. Extent of DNA relatedness of *Borrelia* spp. strain BFOX from a red fox to other *Borrelia* spp., Sapporo, Hokkaido, Japan, June 1992.\n\ntected against seven serovars of *Leptospira interrogans* (agglutinin titer: <1:20).\n\nTicks vectors for Lyme borreliosis, such as *I. persulcatus*, are present in many areas\n\n### Figure \nFIGURE_TYPE: OTHER\nCONTENT:\na b c d\n\nThe image consists of four grayscale microscopic images labeled 'a', 'b', 'c', and 'd'. Each panel shows different cellular structures with varying densities and arrangements. Scale bars are present at the bottom of each panel.\n\nFIGURE 2. Inflammatory lesions in a red fox with *Borrelia* spp. infection, Sapporo, Hokkaido, Japan, June 1992. H&E stain. Each bar = 10 µm. a. Skin lesion without tick bite; spirochetes were isolated from the site; b. Perivascular cell infiltration and hepatitis in the liver; c. Pyelitis; d. Conjunctivitis.\n\nof Japan, especially Hokkaido (Nakao et al., 1992). In this case report, the spirochete was isolated from the midgut of *I. persulcatus* which had fed on the fox. Thus, we believe that Lyme disease can be transmitted from *I. persulcatus* to foxes in Japan.\n\nLyme disease spirochetes were isolated from the brain, heart, liver, kidney and skin of the fox. Lyme disease has been reproduced in dogs experimentally infected with *B. burgdorferi* (Wasmoen et al., 1992). Canine Lyme disease was characterized by limb and joint dysfunction in the USA (Kornblatt et al., 1985; Wasmoen et al., 1992). In contrast, limb and joint dysfunction in dogs with tick-bites and antibodies against Lyme disease spirochetes is rare in Japan (Y. Azuma, unpubl.).\n\nMost isolates were identified as *B. afzelii*. The isolation of *B. afzelii* in northern Europe is well correlated with the geographic distribution of acrodermatitis chronica atrophicans (ACA) (Canica et al., 1993). Acrodermatitis chronica atrophicans seems uncommon in the U.S., with only one case reported in 1986 from California (Lavoie et al., 1986). In Japan, Okamura (1964) reported 20 human cases of ACA.\n\nTwo isolates did not react with monoclonal antibody specific to Osp B of *B. afzelii*. Strain F63B from *I. ovatus* has been reported as a new species (Postic et al., 1993). In Japan, the species *B. burgdorferi* sensu lato appears to be restricted to *I. ovatus*. There are no known reports of Lyme disease after *I. ovatus* bite in animals, including humans. The other strain from *I. persulcatus* was different from *B. burgdorferi* sensu lato and *B. afzelii*. Thus, Japanese borrelial species varied in their antigenicity.\n\nThe fox appeared to have a systemic infection with *B. afzelii*. No other bacterial pathogens were isolated from this case. The subacute and chronic lesions in the tissues were different from those of viral infection such as distemper. Although similar lesions can be seen in dogs with leptospirosis, lep-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\ntospirosis is rare in Hokkaido (E. Isogai, unpubl.). We believe that the mild inflammatory infiltrates in liver, kidney and eye may be related to infection with *B. afzelii*.\n\nThe wood mouse (*Apodemus speciosus ainu*) may be a suitable first reservoir host for Lyme disease spirochetes transmitted by *I. persulcatus* in Hokkaido; both larvae and nymphs of *I. persulcatus* removed from *A. speciosus ainu* were highly infected with spirochetes (Nakao and Miyamoto, 1993). However, no information on the host preference of the ticks for medium or large sized mammals is available in Japan.\n\nWe extend our deep thanks to Dr. M. Nakao, Asahigawa Medical College for his fruitful discussion and advice.\n\n\n## LITERATURE CITED\n\nBARANTON, G., D. POSTIC, I. S. GIRONS, P. BOERLIN, J-C. PIFFARETTI, M. ASSOUS, AND P. A. D. GRIMONT. 1992. Delineation of *Borrelia burgdorferi sensu stricto*, *Borrelia afzelii* sp. nov., and group VS461 associated with Lyme borreliosis. International Journal of Systematic Bacteriology 42: 378-383.\n\nBARBOUR, A. G. 1984. Isolation and cultivation of Lyme disease spirochetes. The Yale Journal of Biology and Medicine 57: 521-525.\n\n—, S. L. TESSIER, AND W. J. TODD. 1983. Lyme disease spirochetes and ixodid tick spirochetes share a common surface antigenic determinant defined by a monoclonal antibody. Infection and Immunity 41: 795-804.\n\n—, S. F. HAYES, R. A. HEILAND, M. E. SCHRUMPF, AND S. L. TESSIER. 1986. A Borrelia-specific monoclonal antibody binds to a flagellar epitope. Infection and Immunity 52: 549-554.\n\nBENNO, Y., AND T. MITSUOKA. 1992. Evaluation of anaerobic method for the total bacteria from dog intestines. Journal of Veterinary Medical Science 54: 1039-1041.\n\nCANICA, M. M., F. NATO, L. DU MERLE, J. C. MAZIE, G. BARANTON, AND D. POSTIC. 1993. Monoclonal antibodies for identification of *Borrelia afzelii* sp. nov. associated with late cutaneous manifestations of Lyme borreliosis. Scandinavia Journal of Infectious Diseases 25: 441-448.\n\nEZAKI, T., Y. HASHIMOTO, AND E. YABUUCHI. 1989. Fluorometric deoxyribonucleic acid-deoxyribonucleic acid hybridization in microdilution wells as an alternative to membrane filter hybridization in which radioisotopes are used to determine genetic relatedness among bacterial strains. International Journal of Systematic Bacteriology 39: 224-229.\n\nHOVIND-HOUGEN, K. 1984. Ultrastructure of spirochetes isolated from *Ixodes ricinus* and *Ixodes dammini*. The Yale Journal of Biology and Medicine 57: 543-548.\n\nISOGAI, E., H. ISOGAI, AND N. ITO. 1986. Decreased lipopolysaccharide content and enhanced susceptibility of leptospiras to serum leptospiricidal action and phagocytosis after treatment with diphenylamine. Zentralblatt für Bakteriologie und Hygiene Series A 262: 438-447.\n\n—, N. SATO, M. YUZAWA, AND M. KAWAKAMI. 1990. Antibodies to *Borrelia burgdorferi* in dogs in Hokkaido. Microbiology and Immunology 34: 1005-1012.\n\nKORNBLATT, A. N., P. H. URBAND, AND A. C. STEERE. 1985. Arthritis caused by *Borrelia burgdorferi* in dogs. Journal of the American Veterinary Medical Association 186: 960-964.\n\nLAVOIE, P. E., A. J. WILSON, AND D. L. TUFFANELLI. 1986. Acrodermatitis chronica atrophicans with antecedent Lyme disease in California. Zentralblatt für Bakteriologie und Hygiene Series A 263: 262-265.\n\nMASUZAWA, T., Y. OKADA, Y. YANAGIHARA, AND N. SATO. 1991. Antigenic properties of *Borrelia burgdorferi* isolated from *Ixodes ovatus* and *Ixodes persulcatus* in Hokkaido, Japan. Journal of Clinical Microbiology 29: 1568-1573.\n\nNAKAO, M., AND K. MIYAMOTO. 1993. Reservoir competence of the wood mouse, *Apodemus speciosus ainu*, for the Lyme disease spirochete, *Borrelia burgdorferi*, in Hokkaido, Japan. Japanese Journal of Sanitary Zoology 44: 69-84.\n\n—, K. MIYAMOTO, K. UCHIKAWA, AND H. FUJITA. 1992. Characterization of *Borrelia burgdorferi* isolated from *Ixodes persulcatus* and *Ixodes ovatus* ticks in Japan. American Journal of Tropical Medicine and Hygiene 47: 7-13.\n\nOKAMURA, K. 1964. Japanese cases with acrodermatitis chronica atrophicans. [In Japanese.] Clinicals of Dermatology (Hifuka no Rinsho) 6: 206-214.\n\nPOSTIC, D., J. BELFAIZA, E. ISOGAI, I. S. GIRONS, P. A. D. GRIMONT, AND G. BARANTON. 1993. A new genomic species in *Borrelia burgdorferi sensu lato* isolated from Japanese ticks. Research in Microbiology 144: 467-473.\n\nTHIEKING, A., S. M. GOYAL, R. F. BEY, K. I. Loken, L. D. MECH, R. P. THIEL, AND T. P. O'CONNOR. 1992. Seroprevalence of Lyme disease in gray wolves from Minnesota and Wisconsin. Journal of Wildlife Diseases 28: 177-182.\n\nWASMOEN, T. L., R. W. SEBRING, B. M. BLUMER, L. G. CHAVEZ, JR., H-J. CHU, AND W. M. ACREE. 1992. Examination of Koch's postulates for *Borrelia burgdorferi* as the causative agent of limb/joint dysfunction in dogs with borreliosis. Journal\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n444 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nof the American Veterinary Medical Association\n201: 412-418.\n\nYAMAGUCHI, N., V. J. TIPTON, H. L. KEEGAN, AND\nS. TOSHIOKA. 1971. Ticks of Japan, Korea, and\nthe Ryukyu islands. Brigham Young University\n\nScience Bulletin, Biological series—Volume XV,\nNumber 1, Brigham Young University Publica-\ntions, Provo, Utah, 226 pp.\n\n*Received for publication 26 April 1993.*\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n",
       "page_number": 0
     }
   ],
   "page_classes": [],
-  "document_markdown": "\n*Journal of Wildlife Diseases*, 30(3), 1994, pp. 439-444\n© Wildlife Disease Association 1994\n\n# Lyme Disease Spirochetes in a Wild Fox\n(Vulpes vulpes schrencki) and in Ticks\n\nEmiko Isogai,¹ Hiroshi Isogai,² Hiroki Kawabata,³ Toshiyuki Masuzawa,³ Yasutake Yanagihara,³ Koichi Kimura,⁴ Tooru Sakai,¹ Yuzo Azuma,⁵ Nobuhiro Fujii,⁴ and Shigeaki Ohno,⁶\n¹Department of Preventive Dentistry, Higashi Nippon Gakuen University, Ishikari-Tobetsu 1757, Hokkaido 061-02, Japan; ²Division of Animal Experimentation, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ³Department of Microbiology, School of Pharmaceutical Sciences, University of Shizuoka, 395 Yada, Shizuoka 422, Japan; ⁴Department of Microbiology, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ⁵Monami Animal Clinic, 3-3-4-28, Kawazoe, Minami-ku, Sapporo 005, Japan; ⁶Department of Ophthalmology, Yokohama City University School of Medicine, Fukuura 3-9, Kanazawa-ku, Yokohama 236, Japan\n\nABSTRACT: Lyme disease spirochetes were demonstrated in a wild female fox (*Vulpes vulpes schrencki*) and in *Ixodes persulcatus* ticks collected from the fox on Sapporo, Hokkaido, Japan. Spirochetes were detected in *I. persulcatus*, as well as skin lesions, brain, heart, kidney, and liver of the fox. Five of seven isolates reacted with a monoclonal antibody against *Borrelia afzelii* specific Osp B. Deoxyribonucleic acid (DNA) relatedness of a brain isolate was 89% to *B. afzelii*, and ranged from 50 to 67% to three other species. Immunoglobulin G antibodies to *B. afzelii*, *B. garinii* and *B. burgdorferi* sensu lato, when tested in an enzyme-linked immunosorbent assay (ELISA), were negative in the fox. There were no antibodies against seven serovars of *Leptospira interrogans*.\n\nKey words: Lyme borreliosis, fox, *Borrelia afzelii*, *Ixodes persulcatus*, hepatitis, pyelitis, conjunctivitis, *Vulpes vulpes schrencki*.\n\nLyme disease is a multisystemic infectious disorder caused by the spirochete, *Borrelia burgdorferi* and related species (Baranton et al., 1992). Infection occurs when *Ixodes* spp. tick vectors feed on mammalian hosts. The presence of wild animal reservoirs of infection in the environment is critical for the maintenance of disease transmission.\n\nNatural Lyme disease infection has been found in wild and domestic canine species, including wolves (*Canis lupus*) (Thieking et al., 1992) and domestic dogs (Kornblatt et al., 1985) in the U.S. As many as 19% of healthy dogs from Hokkaido, Japan, have serologic evidence of infection (Isogai et al., 1990). We report here demonstration of Lyme disease spirochetes from a wild red fox (*Vulpes vulpes schrencki*) with systemic infection and vector ticks.\n\nA female red fox weighing 4.4 kg died\n\nin a traffic accident in Sapporo, Hokkaido, Japan (43°01′N, 141°21′E) on 3 June 1992. We observed 11 ticks on the animal: four adult females, one nymph, and two larvae of *Ixodes persulcatus*; one nymph of *I. ovatus*; one adult female *I. nipponensis*, and two adult male *Haemaphysalis flava*. Only the adult and nymph stages of *I. persulcatus* and *I. nipponensis* were attached to the skin. Identification of ticks was done by the methods of Yamaguchi et al. (1971) and by comparison to holo-types in the Department of Parasitology, Asahigawa Medical College, Hokkaido, Japan. Representative ticks were deposited in the Department of Zoology, National Science Museum, Tokyo, Japan, with kind support of H. Ono. Deposition numbers were NSMT-Ac-10501 (*I. persulcatus*, adult female), NSMT-Ac-10502 (*I. persulcatus*, larva), NSMT-Ac-10503 (*I. ovatus*, nymph), NSMT-Ac-10504 (*I. nipponensis*, adult female) and NSMT-Ac-10505 (*H. flava*, adult male).\n\nIsolation of *Borrelia* spp. from tick midguts was carried out according to the methods of Nakao et al. (1992). Contents of isolated midguts were cultivated at 32 C for 4 mo in BSK medium (Barbour, 1984). Darkfield microscopy was used to screen cultures two times each month. Similarly, tissues (skin, liver, kidney, brain, heart, lung) and blood were cultured in BSK medium. Sodium dodecyl sulfate-polyacrylamide gel electrophoresis (SDS-PAGE) and immunoblot analysis of the isolates were carried out according to the method of Masuzawa et al. (1991). After SDS-PAGE, the immunologically reactive\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n440 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nbands were stained with monoclonal antibodies. We used monoclonal antibodies H9742 against flagellae (Barbour et al., 1986), H5332 against Osp A of *B. burgdorferi* sensu stricto (Barbour et al., 1983), P34f against Osp B (immunized strain IPF, isolated from midgut of *I. persulcatus* in Japan), P31c against Osp A (immunized strain NT24, isolated from the midgut of *I. persulcatus* in Japan), P3134 against Osp A and B (immunized strain NT24), I 17.3 against Osp B of *B. afzelii* (Canica et al., 1993), for a comparison of reactivities. The two monoclonal antibodies H9724 and H5332 were kindly provided by A. G. Barbour, University of Texas, San Antonio, Texas, USA. Monoclonal antibody I 17.3 was kindly provided by G. Baranton, Institut Pasteur, Paris, France.\n\nThe deoxyribonucleic acid-deoxyribonucleic acid (DNA-DNA) reassociation (Ezaki et al., 1989) was used for identification of each isolate. The DNA was extracted from the lysed cell preparation twice with phenol and once with phenol-chroroform-isoamyl alcohol (25:24:1); DNA was precipitated for 2 hr at -20 C by adding 5 M NaCl and ice-cold ethanol. Purified DNA was used for DNA-DNA homology by microplate hybridization method (Ezaki et al., 1989).\n\nThe following agar media were used for bacterial examination of liver, kidney, brain, heart, lung and blood: brain heart infusion agar (BBL, Becton Dickinson Microbiology Systems Cockeysville, Maryland, USA) with 5% horse blood for aerobic or anaerobic total, M10 agar for strict anaerobic total (Benno and Mitsuoka, 1992); trypticase yeast extract cystein agar (Kyokuto Seiyaku Ltd., Tokyo, Japan) for *Streptococcus* spp.; *Enterococcus fecalis* agar (Nissui Seiyaku Ltd., Tokyo, Japan) for *Enterococcus* spp.; mannitol-salt agar with egg yolk (Nissui Seiyaku Ltd.) for *Staphylococcus* spp.; deoxycholate-hydrogen sulfide-lactose agar (Nissui Seiyaku Ltd.) for Enterobacteriaceae; Arakawa agar (Nissui Seiyaku Ltd.) for *Corynebacterium* spp.; Nalidixic Acid, Cetrimide\n\nagar (Eiken Chemical Co., Ltd., Tokyo, Japan) for *Pseudomonas* spp.; Sabouraud agar for fungi (Nissui Seiyaku Ltd.); *Bacteroides* Selective Agar (Nissui Seiyaku Ltd.) with 5% horse blood for *Bacteroides* spp.; Modified *Fusobacterium* Agar (Nissui Seiyaku Ltd.) for *Fusobacterium* spp.; *Lactobacillus* Selective Agar (BBL, Becton Dickinson Microbiology Systems Cockeysville) for *Lactobacillus* spp.; *Veillonella* Selective Agar (BBL, Becton Dickinson Microbiology Systems) with vancomycin (7.5 mg/ml; Eli Lilly, Indianapolis, Indiana, USA) for *Veillonella* spp.; *Eubacterium* Selective Agar (Nissui Seiyaku Ltd.) for *Eubacterium* spp.; and *Leptospira* Medium (Difco Laboratories, Detroit, Michigan, USA) with 10% rabbit serum for *Leptospira* spp.\n\nThe skin, liver, kidney, brain, heart, lung, eye, lymph nodes, and spleen of the fox were examined for histopathological changes. Tissues were fixed in 10% formalin, embedded in paraffin, sectioned at 5 µm, and stained by hematoxylin and eosin. Suspect isolates were characterized by electron microscopy by the methods of Hovind-Hougen (1984), using a Hitachi HU-500 microscope (Hitachi, Tokyo, Japan).\n\nEnzyme-linked immunosorbent assay (ELISA) was done on serum collected from the fox by the method of Isogai et al. (1990). *Borrelia afzelii* BFOX, *B. garinii* HP3 (Baranton et al., 1992), *B. afzelii* BFOX and *B. burgdorferi* sensu lato HO14 (Postic et al., 1993) were used for antigen preparation. The bacterial strains were centrifuged into pellets and suspended in carbonate buffer (0.5 M, pH 9.6) and then disrupted by sonication on ice three times for 30 sec each time. After determination of protein concentration by the Bio-Rad protein assay kit (Bio-Rad Laboratories, Richmond, California, USA), it was adjusted at 10 µg/ml. After coating the antigen, diluted serum samples were added in each well. Peroxidase-conjugated antibody immunoglobulin G (1:500, Cappel Co., Ltd., Malvern, Pennsylvania, USA) was\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\nadded in each well. The colorimetric value was determined by an ELISA reader (MTP-22, Corona Electric Co., Ltd., Ibaragi, Japan) after incubation with o-phenylenediamine (4 mg/ml; Kanto Chemical Co., Inc., Tokyo, Japan).\n\nA microscopic agglutination test against seven serovars of *Leptospira interrogans* was done by the method of Isogai et al. (1986). Viable cells of *Leptospira* spp. (2 to 3 × 10⁸/ml) were incubated with serial diluted serum at 37 C for 1 hr. Agglutination was determined by darkfield microscopy.\n\nSpirochetes were detected by darkfield examination of cultures, from the midgut tissues of three of five *I. persulcatus*, the one *I. ovatus*, and three of 18 tick-bite sites after culturing in BSK medium. The culture period was <1 mo for detection of the spirochetes from *I. persulcatus* and from 1 to 2.5 mo for detection of the spirochetes from *I. ovatus* and tick-bite sites.\n\nSpirochetes were detected from one of three skin cultures without tick-bite, as well as liver, kidney, brain and heart tissues. The culture period was 1 to 3 mo. No other significant bacteria were isolated. Based on electron microscopy, spirochete isolates BFOX (brain tissue), HFOX (heart tissue), SK3 (skin without tick-bite), F63A (*I. persulcatus*), and F63B (*I. ovatus*) were similar in morphology to Lyme disease spirochetes. They had eight (seven: F63B) flagellae (F63B had seven flagellae), a length of 12 to 118 µm and a diameter of 0.23 to 0.28 µm. The two isolates, BFOX and HFOX, reacted with genus specific H9742 (Table 1). They also reacted with P34f, P31c and P3134 and were specific to Osp A and/or Osp B of Japanese *Borrelia* species associated with *I. persulcatus*; they did not react with H5332 (specific to Osp A of *B. burgdorferi* sensu stricto. Strains BFOX and HFOX have been reported to react with *B. afzelii* specific monoclonal antibody I 17.3 (Canica et al., 1993). Isolates SK1 (erythemous border of skin with tick-bite), SK3 and F63A also reacted with I 17.3, while SK2 (erythem-\n\nTABLE 1. Molecular mass (kilodaltons) of reactive bands of monoclonal antibodies to *Borrelia* spp. strains from a red fox, Sapporo, Hokkaido, Japan, June 1992.\n\n\n<table><thead><tr><th rowspan=\"2\">Strain<\/th><th rowspan=\"2\">Origin<\/th><th colspan=\"6\">Monoclonal antibodies<\/th><\/tr><tr><th>H9742<\/th><th>H5332<\/th><th>P34f<\/th><th>P31c<\/th><th>P3134<\/th><th>I 17.3<\/th><\/tr><\/thead><tbody><tr><td>BFOX<\/td><td>Brain<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><tr><td>HFOX<\/td><td>Heart<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><\/tbody><\/table>\n\n—: No reaction.\n\natous lesion of skin with tick-bite) and F63B did not. Comparing DNA homology values of BFOX DNA to *B. burgdorferi* sensu stricto B31, *B. garinii* 20047, *B. afzelii* VS461 and *B. burgdorferi* sensu lato (*B. japonica*) H014, the DNA homology value of strain BFOX DNA was 89% to VS461 DNA (Fig. 1). In contrast, DNA homology values of strain BFOX DNA to the three type strains ranged from 50 to 67%. Therefore, BFOX was identified as *B. afzelii*.\n\nAt necropsy, hemorrhagic and edematous skin lesions in the tick-bite sites were observed. The mean (±SE) diameter of the lesions was 40 ± 14 mm. Histologically, inflammatory responses of lymphocytes, plasma cells, neutrophils, and eosinophils with perivasculitis were observed in the skin lesions. Skin lesions were observed in the area without tick-bites. Infiltrated cells were mainly lymphohistiocytes and plasma cells with perivasculitis (Fig. 2a). Spirochetes were isolated from the lesion.\n\nThe liver, kidney, and eye also had cellular infiltration. Hepatitis with perivasculitis was seen in a limited area of the liver, characterized by lymphocytes, plasma cells and neutrophils (Fig. 2b). Similar cell infiltration was observed in the kidney (pyelitis: Fig. 2c) and eye (conjunctivitis: Fig. 2d). Lesions in these tissues were similar to the skin lesions without tick-bites. Lymph nodes and spleen had atrophic lymphoid follicles. No lesions were seen in the brain, heart and lung.\n\nNo immunoglobulin G antibodies were detected to *B. garinii*, *B. burgdorferi* sensu lato and *B. afzelii* in the serum (optimal density: <0.200). No antibodies were de-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nJOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\n### Figure \nFIGURE_TYPE: CHART\nCONTENT:\n| **Homology Value (%)** | **B31 B burgdorferi sensu stricto** | **20047 B garinii** | **VS461 B afzelii** | **HO14 B burgdorferi sensu lato** |\n|-------------------------|--------------------------------------|---------------------|--------------------|------------------------------------|\n| Homology Value          | 50                                   | 63                  | 89                 | 67                                 |\n\nFIGURE 1. Extent of DNA relatedness of *Borrelia* spp. strain BFOX from a red fox to other *Borrelia* spp., Sapporo, Hokkaido, Japan, June 1992.\n\ntected against seven serovars of *Leptospira interrogans* (agglutinin titer: <1:20).\n\nTicks vectors for Lyme borreliosis, such as *I. persulcatus*, are present in many areas\n\n### Figure \nFIGURE_TYPE: OTHER\nCONTENT:\na b c d\n\nThe image consists of four grayscale microscopic images labeled 'a', 'b', 'c', and 'd'. Each panel shows different cellular structures with varying densities and arrangements. Scale bars are present at the bottom of each panel.\n\nFIGURE 2. Inflammatory lesions in a red fox with *Borrelia* spp. infection, Sapporo, Hokkaido, Japan, June 1992. H&E stain. Each bar = 10 µm. a. Skin lesion without tick bite; spirochetes were isolated from the site; b. Perivascular cell infiltration and hepatitis in the liver; c. Pyelitis; d. Conjunctivitis.\n\nof Japan, especially Hokkaido (Nakao et al., 1992). In this case report, the spirochete was isolated from the midgut of *I. persulcatus* which had fed on the fox. Thus, we believe that Lyme disease can be transmitted from *I. persulcatus* to foxes in Japan.\n\nLyme disease spirochetes were isolated from the brain, heart, liver, kidney and skin of the fox. Lyme disease has been reproduced in dogs experimentally infected with *B. burgdorferi* (Wasmoen et al., 1992). Canine Lyme disease was characterized by limb and joint dysfunction in the USA (Kornblatt et al., 1985; Wasmoen et al., 1992). In contrast, limb and joint dysfunction in dogs with tick-bites and antibodies against Lyme disease spirochetes is rare in Japan (Y. Azuma, unpubl.).\n\nMost isolates were identified as *B. afzelii*. The isolation of *B. afzelii* in northern Europe is well correlated with the geographic distribution of acrodermatitis chronica atrophicans (ACA) (Canica et al., 1993). Acrodermatitis chronica atrophicans seems uncommon in the U.S., with only one case reported in 1986 from California (Lavoie et al., 1986). In Japan, Okamura (1964) reported 20 human cases of ACA.\n\nTwo isolates did not react with monoclonal antibody specific to Osp B of *B. afzelii*. Strain F63B from *I. ovatus* has been reported as a new species (Postic et al., 1993). In Japan, the species *B. burgdorferi* sensu lato appears to be restricted to *I. ovatus*. There are no known reports of Lyme disease after *I. ovatus* bite in animals, including humans. The other strain from *I. persulcatus* was different from *B. burgdorferi* sensu lato and *B. afzelii*. Thus, Japanese borrelial species varied in their antigenicity.\n\nThe fox appeared to have a systemic infection with *B. afzelii*. No other bacterial pathogens were isolated from this case. The subacute and chronic lesions in the tissues were different from those of viral infection such as distemper. Although similar lesions can be seen in dogs with leptospirosis, lep-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\ntospirosis is rare in Hokkaido (E. Isogai, unpubl.). We believe that the mild inflammatory infiltrates in liver, kidney and eye may be related to infection with *B. afzelii*.\n\nThe wood mouse (*Apodemus speciosus ainu*) may be a suitable first reservoir host for Lyme disease spirochetes transmitted by *I. persulcatus* in Hokkaido; both larvae and nymphs of *I. persulcatus* removed from *A. speciosus ainu* were highly infected with spirochetes (Nakao and Miyamoto, 1993). However, no information on the host preference of the ticks for medium or large sized mammals is available in Japan.\n\nWe extend our deep thanks to Dr. M. Nakao, Asahigawa Medical College for his fruitful discussion and advice.\n\n\n## LITERATURE CITED\n\nBARANTON, G., D. POSTIC, I. S. GIRONS, P. BOERLIN, J-C. PIFFARETTI, M. ASSOUS, AND P. A. D. GRIMONT. 1992. Delineation of *Borrelia burgdorferi sensu stricto*, *Borrelia afzelii* sp. nov., and group VS461 associated with Lyme borreliosis. International Journal of Systematic Bacteriology 42: 378-383.\n\nBARBOUR, A. G. 1984. Isolation and cultivation of Lyme disease spirochetes. The Yale Journal of Biology and Medicine 57: 521-525.\n\n—, S. L. TESSIER, AND W. J. TODD. 1983. Lyme disease spirochetes and ixodid tick spirochetes share a common surface antigenic determinant defined by a monoclonal antibody. Infection and Immunity 41: 795-804.\n\n—, S. F. HAYES, R. A. HEILAND, M. E. SCHRUMPF, AND S. L. TESSIER. 1986. A Borrelia-specific monoclonal antibody binds to a flagellar epitope. Infection and Immunity 52: 549-554.\n\nBENNO, Y., AND T. MITSUOKA. 1992. Evaluation of anaerobic method for the total bacteria from dog intestines. Journal of Veterinary Medical Science 54: 1039-1041.\n\nCANICA, M. M., F. NATO, L. DU MERLE, J. C. MAZIE, G. BARANTON, AND D. POSTIC. 1993. Monoclonal antibodies for identification of *Borrelia afzelii* sp. nov. associated with late cutaneous manifestations of Lyme borreliosis. Scandinavia Journal of Infectious Diseases 25: 441-448.\n\nEZAKI, T., Y. HASHIMOTO, AND E. YABUUCHI. 1989. Fluorometric deoxyribonucleic acid-deoxyribonucleic acid hybridization in microdilution wells as an alternative to membrane filter hybridization in which radioisotopes are used to determine genetic relatedness among bacterial strains. International Journal of Systematic Bacteriology 39: 224-229.\n\nHOVIND-HOUGEN, K. 1984. Ultrastructure of spirochetes isolated from *Ixodes ricinus* and *Ixodes dammini*. The Yale Journal of Biology and Medicine 57: 543-548.\n\nISOGAI, E., H. ISOGAI, AND N. ITO. 1986. Decreased lipopolysaccharide content and enhanced susceptibility of leptospiras to serum leptospiricidal action and phagocytosis after treatment with diphenylamine. Zentralblatt für Bakteriologie und Hygiene Series A 262: 438-447.\n\n—, N. SATO, M. YUZAWA, AND M. KAWAKAMI. 1990. Antibodies to *Borrelia burgdorferi* in dogs in Hokkaido. Microbiology and Immunology 34: 1005-1012.\n\nKORNBLATT, A. N., P. H. URBAND, AND A. C. STEERE. 1985. Arthritis caused by *Borrelia burgdorferi* in dogs. Journal of the American Veterinary Medical Association 186: 960-964.\n\nLAVOIE, P. E., A. J. WILSON, AND D. L. TUFFANELLI. 1986. Acrodermatitis chronica atrophicans with antecedent Lyme disease in California. Zentralblatt für Bakteriologie und Hygiene Series A 263: 262-265.\n\nMASUZAWA, T., Y. OKADA, Y. YANAGIHARA, AND N. SATO. 1991. Antigenic properties of *Borrelia burgdorferi* isolated from *Ixodes ovatus* and *Ixodes persulcatus* in Hokkaido, Japan. Journal of Clinical Microbiology 29: 1568-1573.\n\nNAKAO, M., AND K. MIYAMOTO. 1993. Reservoir competence of the wood mouse, *Apodemus speciosus ainu*, for the Lyme disease spirochete, *Borrelia burgdorferi*, in Hokkaido, Japan. Japanese Journal of Sanitary Zoology 44: 69-84.\n\n—, K. MIYAMOTO, K. UCHIKAWA, AND H. FUJITA. 1992. Characterization of *Borrelia burgdorferi* isolated from *Ixodes persulcatus* and *Ixodes ovatus* ticks in Japan. American Journal of Tropical Medicine and Hygiene 47: 7-13.\n\nOKAMURA, K. 1964. Japanese cases with acrodermatitis chronica atrophicans. [In Japanese.] Clinicals of Dermatology (Hifuka no Rinsho) 6: 206-214.\n\nPOSTIC, D., J. BELFAIZA, E. ISOGAI, I. S. GIRONS, P. A. D. GRIMONT, AND G. BARANTON. 1993. A new genomic species in *Borrelia burgdorferi sensu lato* isolated from Japanese ticks. Research in Microbiology 144: 467-473.\n\nTHIEKING, A., S. M. GOYAL, R. F. BEY, K. I. Loken, L. D. MECH, R. P. THIEL, AND T. P. O'CONNOR. 1992. Seroprevalence of Lyme disease in gray wolves from Minnesota and Wisconsin. Journal of Wildlife Diseases 28: 177-182.\n\nWASMOEN, T. L., R. W. SEBRING, B. M. BLUMER, L. G. CHAVEZ, JR., H-J. CHU, AND W. M. ACREE. 1992. Examination of Koch's postulates for *Borrelia burgdorferi* as the causative agent of limb/joint dysfunction in dogs with borreliosis. Journal\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n444 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nof the American Veterinary Medical Association\n201: 412-418.\n\nYAMAGUCHI, N., V. J. TIPTON, H. L. KEEGAN, AND\nS. TOSHIOKA. 1971. Ticks of Japan, Korea, and\nthe Ryukyu islands. Brigham Young University\n\nScience Bulletin, Biological series—Volume XV,\nNumber 1, Brigham Young University Publica-\ntions, Provo, Utah, 226 pp.\n\n*Received for publication 26 April 1993.*\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n",
-  "created_at": "2026-02-18T00:42:51.984905+00:00",
-  "finished_at": "2026-02-18T00:43:06.631322+00:00",
+  "document_markdown": "\n*Journal of Wildlife Diseases*, 30(3), 1994, pp. 439-444\n© Wildlife Disease Association 1994\n\n# Lyme Disease Spirochetes in a Wild Fox\n(Vulpes vulpes schrencki) and in Ticks\n\nEmiko Isogai,¹ Hiroshi Isogai,² Hiroki Kawabata,³ Toshiyuki Masuzawa,³ Yasutake Yanagihara,³ Koichi Kimura,⁴ Tooru Sakai,¹ Yuzo Azuma,⁵ Nobuhiro Fujii,⁴ and Shigeaki Ohno,⁶\n¹Department of Preventive Dentistry, Higashi Nippon Gakuen University, Ishikari-Tobetsu 1757, Hokkaido 061-02, Japan; ²Division of Animal Experimentation, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ³Department of Microbiology, School of Pharmaceutical Sciences, University of Shizuoka, 395 Yada, Shizuoka 422, Japan; ⁴Department of Microbiology, Sapporo Medical University, Minami-1 Nishi-18, Sapporo 060, Japan; ⁵Monami Animal Clinic, 3-3-4-28, Kawazoe, Minami-ku, Sapporo 005, Japan; ⁶Department of Ophthalmology, Yokohama City University School of Medicine, Fukuura 3-9, Kanazawa-ku, Yokohama 236, Japan\n\n**ABSTRACT:** Lyme disease spirochetes were demonstrated in a wild female fox (*Vulpes vulpes schrencki*) and in *Ixodes persulcatus* ticks collected from the fox on Sapporo, Hokkaido, Japan. Spirochetes were detected in *I. persulcatus*, as well as skin lesions, brain, heart, kidney, and liver of the fox. Five of seven isolates reacted with a monoclonal antibody against *Borrelia afzelii* specific Osp B. Deoxyribonucleic acid (DNA) relatedness of a brain isolate was 89% to *B. afzelii*, and ranged from 50 to 67% to three other species. Immunoglobulin G antibodies to *B. afzelii*, *B. garinii* and *B. burgdorferi* sensu lato, when tested in an enzyme-linked immunosorbent assay (ELISA), were negative in the fox. There were no antibodies against seven serovars of *Leptospira interrogans*.\n\n**Key words:** Lyme borreliosis, fox, *Borrelia afzelii*, *Ixodes persulcatus*, hepatitis, pyelitis, conjunctivitis, *Vulpes vulpes schrencki*.\n\nLyme disease is a multisystemic infectious disorder caused by the spirochete, *Borrelia burgdorferi* and related species (Baranton et al., 1992). Infection occurs when *Ixodes* spp. tick vectors feed on mammalian hosts. The presence of wild animal reservoirs of infection in the environment is critical for the maintenance of disease transmission.\n\nNatural Lyme disease infection has been found in wild and domestic canine species, including wolves (*Canis lupus*) (Thieking et al., 1992) and domestic dogs (Kornblatt et al., 1985) in the U.S. As many as 19% of healthy dogs from Hokkaido, Japan, have serologic evidence of infection (Isogai et al., 1990). We report here demonstration of Lyme disease spirochetes from a wild red fox (*Vulpes vulpes schrencki*) with systemic infection and vector ticks.\n\nA female red fox weighing 4.4 kg died\n\nin a traffic accident in Sapporo, Hokkaido, Japan (43°01′N, 141°21′E) on 3 June 1992. We observed 11 ticks on the animal: four adult females, one nymph, and two larvae of *Ixodes persulcatus*; one nymph of *I. ovatus*; one adult female *I. nipponensis*, and two adult male *Haemaphysalis flava*. Only the adult and nymph stages of *I. persulcatus* and *I. nipponensis* were attached to the skin. Identification of ticks was done by the methods of Yamaguchi et al. (1971) and by comparison to holo-types in the Department of Parasitology, Asahigawa Medical College, Hokkaido, Japan. Representative ticks were deposited in the Department of Zoology, National Science Museum, Tokyo, Japan, with kind support of H. Ono. Deposition numbers were NSMT-Ac-10501 (*I. persulcatus*, adult female), NSMT-Ac-10502 (*I. persulcatus*, larva), NSMT-Ac-10503 (*I. ovatus*, nymph), NSMT-Ac-10504 (*I. nipponensis*, adult female) and NSMT-Ac-10505 (*H. flava*, adult male).\n\nIsolation of *Borrelia* spp. from tick midguts was carried out according to the methods of Nakao et al. (1992). Contents of isolated midguts were cultivated at 32 C for 4 mo in BSK medium (Barbour, 1984). Darkfield microscopy was used to screen cultures two times each month. Similarly, tissues (skin, liver, kidney, brain, heart, lung) and blood were cultured in BSK medium. Sodium dodecyl sulfate-polyacrylamide gel electrophoresis (SDS-PAGE) and immunoblot analysis of the isolates were carried out according to the method of Masuzawa et al. (1991). After SDS-PAGE, the immunologically reactive\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n440 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nbands were stained with monoclonal antibodies. We used monoclonal antibodies H9742 against flagellae (Barbour et al., 1986), H5332 against Osp A of *B. burgdorferi* sensu stricto (Barbour et al., 1983), P34f against Osp B (immunized strain IPF, isolated from midgut of *I. persulcatus* in Japan), P31c against Osp A (immunized strain NT24, isolated from the midgut of *I. persulcatus* in Japan), P3134 against Osp A and B (immunized strain NT24), I 17.3 against Osp B of *B. afzelii* (Canica et al., 1993), for a comparison of reactivities. The two monoclonal antibodies H9724 and H5332 were kindly provided by A. G. Barbour, University of Texas, San Antonio, Texas, USA. Monoclonal antibody I 17.3 was kindly provided by G. Baranton, Institut Pasteur, Paris, France.\n\nThe deoxyribonucleic acid-deoxyribonucleic acid (DNA-DNA) reassociation (Ezaki et al., 1989) was used for identification of each isolate. The DNA was extracted from the lysed cell preparation twice with phenol and once with phenol-chroroform-isoamyl alcohol (25:24:1); DNA was precipitated for 2 hr at -20 C by adding 5 M NaCl and ice-cold ethanol. Purified DNA was used for DNA-DNA homology by microplate hybridization method (Ezaki et al., 1989).\n\nThe following agar media were used for bacterial examination of liver, kidney, brain, heart, lung and blood: brain heart infusion agar (BBL, Becton Dickinson Microbiology Systems Cockeysville, Maryland, USA) with 5% horse blood for aerobic or anaerobic total, M10 agar for strict anaerobic total (Benno and Mitsuoka, 1992); trypticase yeast extract cystein agar (Kyokuto Seiyaku Ltd., Tokyo, Japan) for *Streptococcus* spp.; *Enterococcus fecalis* agar (Nissui Seiyaku Ltd., Tokyo, Japan) for *Enterococcus* spp.; mannitol-salt agar with egg yolk (Nissui Seiyaku Ltd.) for *Staphylococcus* spp.; deoxycholate-hydrogen sulfide-lactose agar (Nissui Seiyaku Ltd.) for Enterobacteriaceae; Arakawa agar (Nissui Seiyaku Ltd.) for *Corynebacterium* spp.; Nalidixic Acid, Cetrimide\n\nagar (Eiken Chemical Co., Ltd., Tokyo, Japan) for *Pseudomonas* spp.; Sabouraud agar for fungi (Nissui Seiyaku Ltd.); *Bacteroides* Selective Agar (Nissui Seiyaku Ltd.) with 5% horse blood for *Bacteroides* spp.; Modified *Fusobacterium* Agar (Nissui Seiyaku Ltd.) for *Fusobacterium* spp.; *Lactobacillus* Selective Agar (BBL, Becton Dickinson Microbiology Systems Cockeysville) for *Lactobacillus* spp.; *Veillonella* Selective Agar (BBL, Becton Dickinson Microbiology Systems) with vancomycin (7.5 mg/ml; Eli Lilly, Indianapolis, Indiana, USA) for *Veillonella* spp.; *Eubacterium* Selective Agar (Nissui Seiyaku Ltd.) for *Eubacterium* spp.; and *Leptospira* Medium (Difco Laboratories, Detroit, Michigan, USA) with 10% rabbit serum for *Leptospira* spp.\n\nThe skin, liver, kidney, brain, heart, lung, eye, lymph nodes, and spleen of the fox were examined for histopathological changes. Tissues were fixed in 10% formalin, embedded in paraffin, sectioned at 5 µm, and stained by hematoxylin and eosin. Suspect isolates were characterized by electron microscopy by the methods of Hovind-Hougen (1984), using a Hitachi HU-500 microscope (Hitachi, Tokyo, Japan).\n\nEnzyme-linked immunosorbent assay (ELISA) was done on serum collected from the fox by the method of Isogai et al. (1990). *Borrelia afzelii* BFOX, *B. garinii* HP3 (Baranton et al., 1992), *B. afzelii* BFOX and *B. burgdorferi* sensu lato HO14 (Postic et al., 1993) were used for antigen preparation. The bacterial strains were centrifuged into pellets and suspended in carbonate buffer (0.5 M, pH 9.6) and then disrupted by sonication on ice three times for 30 sec each time. After determination of protein concentration by the Bio-Rad protein assay kit (Bio-Rad Laboratories, Richmond, California, USA), it was adjusted at 10 µg/ml. After coating the antigen, diluted serum samples were added in each well. Peroxidase-conjugated antibody immunoglobulin G (1:500, Cappel Co., Ltd., Malvern, Pennsylvania, USA) was\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\nadded in each well. The colorimetric value was determined by an ELISA reader (MTP-22, Corona Electric Co., Ltd., Ibaragi, Japan) after incubation with o-phenylenediamine (4 mg/ml; Kanto Chemical Co., Inc., Tokyo, Japan).\n\nA microscopic agglutination test against seven serovars of *Leptospira interrogans* was done by the method of Isogai et al. (1986). Viable cells of *Leptospira* spp. (2 to 3 × 10⁸/ml) were incubated with serial diluted serum at 37 C for 1 hr. Agglutination was determined by darkfield microscopy.\n\nSpirochetes were detected by darkfield examination of cultures, from the midgut tissues of three of five *I. persulcatus*, the one *I. ovatus*, and three of 18 tick-bite sites after culturing in BSK medium. The culture period was <1 mo for detection of the spirochetes from *I. persulcatus* and from 1 to 2.5 mo for detection of the spirochetes from *I. ovatus* and tick-bite sites.\n\nSpirochetes were detected from one of three skin cultures without tick-bite, as well as liver, kidney, brain and heart tissues. The culture period was 1 to 3 mo. No other significant bacteria were isolated. Based on electron microscopy, spirochete isolates BFOX (brain tissue), HFOX (heart tissue), SK3 (skin without tick-bite), F63A (*I. persulcatus*), and F63B (*I. ovatus*) were similar in morphology to Lyme disease spirochetes. They had eight (seven: F63B) flagellae (F63B had seven flagellae), a length of 12 to 118 µm and a diameter of 0.23 to 0.28 µm. The two isolates, BFOX and HFOX, reacted with genus specific H9742 (Table 1). They also reacted with P34f, P31c and P3134 and were specific to Osp A and/or Osp B of Japanese *Borrelia* species associated with *I. persulcatus*; they did not react with H5332 (specific to Osp A of *B. burgdorferi* sensu stricto. Strains BFOX and HFOX have been reported to react with *B. afzelii* specific monoclonal antibody I 17.3 (Canica et al., 1993). Isolates SK1 (erythemous border of skin with tick-bite), SK3 and F63A also reacted with I 17.3, while SK2 (erythem-\n\nTABLE 1. Molecular mass (kilodaltons) of reactive bands of monoclonal antibodies to *Borrelia* spp. strains from a red fox, Sapporo, Hokkaido, Japan, June 1992.\n\n\n<table><thead><tr><th rowspan=\"2\">Strain<\/th><th rowspan=\"2\">Origin<\/th><th colspan=\"6\">Monoclonal antibodies<\/th><\/tr><tr><th>H9742<\/th><th>H5332<\/th><th>P34f<\/th><th>P31c<\/th><th>P3134<\/th><th>I 17.3<\/th><\/tr><\/thead><tbody><tr><td>BFOX<\/td><td>Brain<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><tr><td>HFOX<\/td><td>Heart<\/td><td>41<\/td><td>—<\/td><td>35<\/td><td>32<\/td><td>35<\/td><td>35<\/td><\/tr><\/tbody><\/table>\n\n—: No reaction.\n\natous lesion of skin with tick-bite) and F63B did not. Comparing DNA homology values of BFOX DNA to *B. burgdorferi* sensu stricto B31, *B. garinii* 20047, *B. afzelii* VS461 and *B. burgdorferi* sensu lato (*B. japonica*) H014, the DNA homology value of strain BFOX DNA was 89% to VS461 DNA (Fig. 1). In contrast, DNA homology values of strain BFOX DNA to the three type strains ranged from 50 to 67%. Therefore, BFOX was identified as *B. afzelii*.\n\nAt necropsy, hemorrhagic and edematous skin lesions in the tick-bite sites were observed. The mean (±SE) diameter of the lesions was 40 ± 14 mm. Histologically, inflammatory responses of lymphocytes, plasma cells, neutrophils, and eosinophils with perivasculitis were observed in the skin lesions. Skin lesions were observed in the area without tick-bites. Infiltrated cells were mainly lymphohistiocytes and plasma cells with perivasculitis (Fig. 2a). Spirochetes were isolated from the lesion.\n\nThe liver, kidney, and eye also had cellular infiltration. Hepatitis with perivasculitis was seen in a limited area of the liver, characterized by lymphocytes, plasma cells and neutrophils (Fig. 2b). Similar cell infiltration was observed in the kidney (pyelitis: Fig. 2c) and eye (conjunctivitis: Fig. 2d). Lesions in these tissues were similar to the skin lesions without tick-bites. Lymph nodes and spleen had atrophic lymphoid follicles. No lesions were seen in the brain, heart and lung.\n\nNo immunoglobulin G antibodies were detected to *B. garinii*, *B. burgdorferi* sensu lato and *B. afzelii* in the serum (optimal density: <0.200). No antibodies were de-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n442 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\n### Figure \nFIGURE_TYPE: CHART\nCONTENT:\n| **Homology Value (%)** | **B31 *Burgdorferia sensu stricto*** | **20047 *B. garinii*** | **VS461 *B. afzelii*** | **HO14 *Burgdorferia sensu lato*** |\n|-------------------------|---------------------------------------|------------------------|------------------------|------------------------------------|\n| B31                     | 50                                    |                        |                        |                                    |\n| 20047                   |                                      | 63                     |                        |                                    |\n| VS461                   |                                      |                       | 89                     |                                    |\n| HO14                    |                                      |                       |                       | 67                                 |\n\nFIGURE 1. Extent of DNA relatedness of *Borrelia* spp. strain BFOX from a red fox to other *Borrelia* spp., Sapporo, Hokkaido, Japan, June 1992.\n\ntected against seven serovars of *Leptospira interrogans* (agglutinin titer: <1:20).\n\nTicks vectors for Lyme borreliosis, such as *I. persulcatus*, are present in many areas\n\n### Figure \nFIGURE_TYPE: OTHER\nCONTENT:\na b c d\n\nThe image consists of four grayscale microscopic images labeled 'a', 'b', 'c', and 'd'. Each panel shows different cellular structures with varying densities and arrangements. Scale bars are present at the bottom of each panel.\n\nFIGURE 2. Inflammatory lesions in a red fox with *Borrelia* spp. infection, Sapporo, Hokkaido, Japan, June 1992. H&E stain. Each bar = 10 µm. a. Skin lesion without tick bite; spirochetes were isolated from the site; b. Perivascular cell infiltration and hepatitis in the liver; c. Pyelitis; d. Conjunctivitis.\n\nof Japan, especially Hokkaido (Nakao et al., 1992). In this case report, the spirochete was isolated from the midgut of *I. persulcatus* which had fed on the fox. Thus, we believe that Lyme disease can be transmitted from *I. persulcatus* to foxes in Japan.\n\nLyme disease spirochetes were isolated from the brain, heart, liver, kidney and skin of the fox. Lyme disease has been reproduced in dogs experimentally infected with *B. burgdorferi* (Wasmoen et al., 1992). Canine Lyme disease was characterized by limb and joint dysfunction in the USA (Kornblatt et al., 1985; Wasmoen et al., 1992). In contrast, limb and joint dysfunction in dogs with tick-bites and antibodies against Lyme disease spirochetes is rare in Japan (Y. Azuma, unpubl.).\n\nMost isolates were identified as *B. afzelii*. The isolation of *B. afzelii* in northern Europe is well correlated with the geographic distribution of acrodermatitis chronica atrophicans (ACA) (Canica et al., 1993). Acrodermatitis chronica atrophicans seems uncommon in the U.S., with only one case reported in 1986 from California (Lavoie et al., 1986). In Japan, Okamura (1964) reported 20 human cases of ACA.\n\nTwo isolates did not react with monoclonal antibody specific to Osp B of *B. afzelii*. Strain F63B from *I. ovatus* has been reported as a new species (Postic et al., 1993). In Japan, the species *B. burgdorferi* sensu lato appears to be restricted to *I. ovatus*. There are no known reports of Lyme disease after *I. ovatus* bite in animals, including humans. The other strain from *I. persulcatus* was different from *B. burgdorferi* sensu lato and *B. afzelii*. Thus, Japanese borrelial species varied in their antigenicity.\n\nThe fox appeared to have a systemic infection with *B. afzelii*. No other bacterial pathogens were isolated from this case. The subacute and chronic lesions in the tissues were different from those of viral infection such as distemper. Although similar lesions can be seen in dogs with leptospirosis, lep-\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\nSHORT COMMUNICATIONS\ntospirosis is rare in Hokkaido (E. Isogai, unpubl.). We believe that the mild inflammatory infiltrates in liver, kidney and eye may be related to infection with *B. afzelii*.\n\nThe wood mouse (*Apodemus speciosus ainu*) may be a suitable first reservoir host for Lyme disease spirochetes transmitted by *I. persulcatus* in Hokkaido; both larvae and nymphs of *I. persulcatus* removed from *A. speciosus ainu* were highly infected with spirochetes (Nakao and Miyamoto, 1993). However, no information on the host preference of the ticks for medium or large sized mammals is available in Japan.\n\nWe extend our deep thanks to Dr. M. Nakao, Asahigawa Medical College for his fruitful discussion and advice.\n\n\n## LITERATURE CITED\n\nBARANTON, G., D. POSTIC, I. S. GIRONS, P. BOERLIN, J-C. PIFFARETTI, M. ASSOUS, AND P. A. D. GRIMONT. 1992. Delineation of *Borrelia burgdorferi sensu stricto*, *Borrelia afzelii* sp. nov., and group VS461 associated with Lyme borreliosis. International Journal of Systematic Bacteriology 42: 378-383.\n\nBARBOUR, A. G. 1984. Isolation and cultivation of Lyme disease spirochetes. The Yale Journal of Biology and Medicine 57: 521-525.\n\n—, S. L. TESSIER, AND W. J. TODD. 1983. Lyme disease spirochetes and ixodid tick spirochetes share a common surface antigenic determinant defined by a monoclonal antibody. Infection and Immunity 41: 795-804.\n\n—, S. F. HAYES, R. A. HEILAND, M. E. SCHRUMPF, AND S. L. TESSIER. 1986. A Borrelia-specific monoclonal antibody binds to a flagellar epitope. Infection and Immunity 52: 549-554.\n\nBENNO, Y., AND T. MITSUOKA. 1992. Evaluation of anaerobic method for the total bacteria from dog intestines. Journal of Veterinary Medical Science 54: 1039-1041.\n\nCANICA, M. M., F. NATO, L. DU MERLE, J. C. MAZIE, G. BARANTON, AND D. POSTIC. 1993. Monoclonal antibodies for identification of *Borrelia afzelii* sp. nov. associated with late cutaneous manifestations of Lyme borreliosis. Scandinavia Journal of Infectious Diseases 25: 441-448.\n\nEZAKI, T., Y. HASHIMOTO, AND E. YABUUCHI. 1989. Fluorometric deoxyribonucleic acid-deoxyribonucleic acid hybridization in microdilution wells as an alternative to membrane filter hybridization in which radioisotopes are used to determine genetic relatedness among bacterial strains. International Journal of Systematic Bacteriology 39: 224-229.\n\nHOVIND-HOUGEN, K. 1984. Ultrastructure of spirochetes isolated from *Ixodes ricinus* and *Ixodes dammini*. The Yale Journal of Biology and Medicine 57: 543-548.\n\nISOGAI, E., H. ISOGAI, AND N. ITO. 1986. Decreased lipopolysaccharide content and enhanced susceptibility of leptospiras to serum leptospiricidal action and phagocytosis after treatment with diphenylamine. Zentralblatt für Bakteriologie und Hygiene Series A 262: 438-447.\n\n—, N. SATO, M. YUZAWA, AND M. KAWAKAMI. 1990. Antibodies to *Borrelia burgdorferi* in dogs in Hokkaido. Microbiology and Immunology 34: 1005-1012.\n\nKORNBLATT, A. N., P. H. URBAND, AND A. C. STEERE. 1985. Arthritis caused by *Borrelia burgdorferi* in dogs. Journal of the American Veterinary Medical Association 186: 960-964.\n\nLAVOIE, P. E., A. J. WILSON, AND D. L. TUFFANELLI. 1986. Acrodermatitis chronica atrophicans with antecedent Lyme disease in California. Zentralblatt für Bakteriologie und Hygiene Series A 263: 262-265.\n\nMASUZAWA, T., Y. OKADA, Y. YANAGIHARA, AND N. SATO. 1991. Antigenic properties of *Borrelia burgdorferi* isolated from *Ixodes ovatus* and *Ixodes persulcatus* in Hokkaido, Japan. Journal of Clinical Microbiology 29: 1568-1573.\n\nNAKAO, M., AND K. MIYAMOTO. 1993. Reservoir competence of the wood mouse, *Apodemus speciosus ainu*, for the Lyme disease spirochete, *Borrelia burgdorferi*, in Hokkaido, Japan. Japanese Journal of Sanitary Zoology 44: 69-84.\n\n—, K. MIYAMOTO, K. UCHIKAWA, AND H. FUJITA. 1992. Characterization of *Borrelia burgdorferi* isolated from *Ixodes persulcatus* and *Ixodes ovatus* ticks in Japan. American Journal of Tropical Medicine and Hygiene 47: 7-13.\n\nOKAMURA, K. 1964. Japanese cases with acrodermatitis chronica atrophicans. [In Japanese.] Clinicals of Dermatology (Hifuka no Rinsho) 6: 206-214.\n\nPOSTIC, D., J. BELFAIZA, E. ISOGAI, I. S. GIRONS, P. A. D. GRIMONT, AND G. BARANTON. 1993. A new genomic species in *Borrelia burgdorferi sensu lato* isolated from Japanese ticks. Research in Microbiology 144: 467-473.\n\nTHIEKING, A., S. M. GOYAL, R. F. BEY, K. I. Loken, L. D. MECH, R. P. THIEL, AND T. P. O'CONNOR. 1992. Seroprevalence of Lyme disease in gray wolves from Minnesota and Wisconsin. Journal of Wildlife Diseases 28: 177-182.\n\nWASMOEN, T. L., R. W. SEBRING, B. M. BLUMER, L. G. CHAVEZ, JR., H-J. CHU, AND W. M. ACREE. 1992. Examination of Koch's postulates for *Borrelia burgdorferi* as the causative agent of limb/joint dysfunction in dogs with borreliosis. Journal\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n\n444 JOURNAL OF WILDLIFE DISEASES, VOL. 30, NO. 3, JULY 1994\nof the American Veterinary Medical Association\n201: 412-418.\n\nYAMAGUCHI, N., V. J. TIPTON, H. L. KEEGAN, AND\nS. TOSHIOKA. 1971. Ticks of Japan, Korea, and\nthe Ryukyu islands. Brigham Young University\n\nScience Bulletin, Biological series—Volume XV,\nNumber 1, Brigham Young University Publica-\ntions, Provo, Utah, 226 pp.\n\n*Received for publication 26 April 1993.*\n\n\nDownloaded from http://meridian.allenpress.com/jwd/article-pdf/30/3/439/2234922/0090-3558-30_3_439.pdf by guest on 20 August 2025\n\n\n",
+  "created_at": "2026-02-18T01:13:19.338982+00:00",
+  "finished_at": "2026-02-18T01:13:34.037069+00:00",
   "usage": {
     "pages_parsed": 6,
     "signature_detected_pages": 0,

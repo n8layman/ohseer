@@ -200,76 +200,16 @@ if (nchar(api_keys$TENSORLAKE_API_KEY) > 0) {
 
 if (nchar(api_keys$MISTRAL_API_KEY) > 0) {
   cat("\n\n", strrep("█", 60), "\n", sep = "")
-  cat("TEST 2: Mistral OCR 3\n")
+  cat("TEST 2: Mistral OCR 3 (with Header/Footer Extraction)\n")
   cat(strrep("█", 60), "\n")
 
   tryCatch({
     start_time <- Sys.time()
 
-    # Define Tensorlake-compatible schema
-    tensorlake_schema <- list(
-      type = "object",
-      properties = list(
-        pages = list(
-          type = "array",
-          items = list(
-            type = "object",
-            required = c("page_number", "text", "tables"),
-            properties = list(
-              page_number = list(type = "integer"),
-              page_header = list(
-                type = "array",
-                items = list(type = "string"),
-                description = "Running headers like journal name, page numbers"
-              ),
-              section_header = list(
-                type = "array",
-                items = list(type = "string"),
-                description = "Section headings like Introduction, Methods"
-              ),
-              text = list(
-                type = "string",
-                description = "All body text with paragraphs separated by double newlines"
-              ),
-              tables = list(
-                type = "array",
-                items = list(
-                  type = "object",
-                  properties = list(
-                    content = list(type = "string", description = "Plain text table"),
-                    markdown = list(type = "string", description = "Markdown formatted table"),
-                    html = list(type = "string", description = "HTML table"),
-                    summary = list(type = "string", description = "Description of table")
-                  ),
-                  required = c("content", "markdown", "html", "summary")
-                )
-              ),
-              other = list(
-                type = "array",
-                items = list(
-                  type = "object",
-                  properties = list(
-                    type = list(type = "string"),
-                    content = list(type = "string")
-                  ),
-                  required = c("type", "content")
-                )
-              )
-            )
-          )
-        )
-      ),
-      required = list("pages")
-    )
-
-    cat("\nProcessing with Mistral OCR 3 (with structured output)...\n")
+    cat("\nProcessing with Mistral OCR 3...\n")
+    cat("(Using standard OCR with header/footer extraction)\n")
     result_mistral <- mistral_ocr(
       test_file,
-      document_annotation_format = list(
-        type = "json_schema",
-        json_schema = tensorlake_schema
-      ),
-      document_annotation_prompt = "Extract all document structure including page headers, section headers, body text, tables, and other elements. Preserve all formatting and structure.",
       extract_header = TRUE,
       extract_footer = TRUE,
       table_format = "markdown",
@@ -296,9 +236,9 @@ if (nchar(api_keys$MISTRAL_API_KEY) > 0) {
     # Validate structure
     errors <- validate_tensorlake_format(pages_mistral, "Mistral OCR 3")
 
-    # Estimate cost (with annotations)
+    # Estimate cost (basic OCR with header/footer extraction)
     pages_processed <- length(pages_mistral)
-    cost_estimate <- pages_processed * 0.003  # $0.003/page with annotations
+    cost_estimate <- pages_processed * 0.002  # $0.002/page for basic OCR
 
     # Store results
     results$mistral <- list(
@@ -327,13 +267,13 @@ if (nchar(api_keys$MISTRAL_API_KEY) > 0) {
 
 if (nchar(api_keys$ANTHROPIC_API_KEY) > 0) {
   cat("\n\n", strrep("█", 60), "\n", sep = "")
-  cat("TEST 3: Claude Opus 4.5 (#1 OCR Arena)\n")
+  cat("TEST 3: Claude Opus 4.6 (#1 OCR Arena)\n")
   cat(strrep("█", 60), "\n")
 
   tryCatch({
     start_time <- Sys.time()
 
-    cat("\nProcessing with Claude Opus 4.5...\n")
+    cat("\nProcessing with Claude Opus 4.6...\n")
     cat("(This may take longer due to detailed extraction)\n")
 
     result_claude <- claude_ocr(
@@ -358,17 +298,17 @@ if (nchar(api_keys$ANTHROPIC_API_KEY) > 0) {
     )
 
     # Print summary
-    print_structure_summary(pages_claude, "Claude Opus 4.5")
+    print_structure_summary(pages_claude, "Claude Opus 4.6")
 
     # Validate structure
-    errors <- validate_tensorlake_format(pages_claude, "Claude Opus 4.5")
+    errors <- validate_tensorlake_format(pages_claude, "Claude Opus 4.6")
 
     # Estimate cost based on token usage
     if (!is.null(result_claude$usage)) {
       input_tokens <- result_claude$usage$input_tokens %||% 0
       output_tokens <- result_claude$usage$output_tokens %||% 0
 
-      # Claude Opus 4.5 pricing: $5/MTok input, $25/MTok output
+      # Claude Opus 4.6 pricing: $5/MTok input, $25/MTok output
       cost_estimate <- (input_tokens / 1e6 * 5) + (output_tokens / 1e6 * 25)
 
       cat("\nToken usage:\n")
@@ -394,11 +334,11 @@ if (nchar(api_keys$ANTHROPIC_API_KEY) > 0) {
     cat("Estimated cost: $", sprintf("%.4f", cost_estimate), "\n")
 
   }, error = function(e) {
-    cat("\n✗ Claude Opus 4.5 test FAILED:", e$message, "\n")
+    cat("\n✗ Claude Opus 4.6 test FAILED:", e$message, "\n")
     results$claude <<- list(success = FALSE, error = e$message)
   })
 } else {
-  cat("\n⊘ Skipping Claude Opus 4.5 (no API key)\n")
+  cat("\n⊘ Skipping Claude Opus 4.6 (no API key)\n")
 }
 
 # ============================================================================

@@ -4,85 +4,49 @@
 \alias{mistral_extract_pages}
 \title{Extract Page Content from Mistral OCR Results}
 \usage{
-mistral_extract_pages(result, pages = NULL, exclude_types = character(0))
+mistral_extract_pages(result, pages = NULL)
 }
 \arguments{
 \item{result}{List. The parsed response from mistral_ocr().}
 
 \item{pages}{Integer vector. Page numbers to extract. If NULL (default), extracts all pages.}
-
-\item{exclude_types}{Character vector. Fragment types to exclude. Default is
-character(0) (no exclusions).}
 }
 \value{
-List with one element per page, each containing:
+List with one element per page. Each page contains Mistral's native format:
 \describe{
-\item{page_number}{Integer page number}
-\item{page_header}{Character vector of page_header contents}
-\item{section_header}{Character vector of section_header contents}
-\item{text}{Character string with all text in markdown format}
-\item{tables}{List of tables, each with markdown, html, content, and summary fields}
-\item{other}{List of other elements with type and content}
+\item{index}{Integer page index (0-based)}
+\item{markdown}{Character string with page content in markdown format}
+\item{header}{Character string with page header (if extract_header=TRUE)}
+\item{footer}{Character string with page footer (if extract_footer=TRUE)}
+\item{tables}{List of tables with id, content, and format fields}
+\item{images}{List of images extracted from page}
+\item{hyperlinks}{List of hyperlinks detected}
+\item{dimensions}{Page dimensions (width, height)}
 }
 }
 \description{
-Transforms Mistral OCR structured output to match Tensorlake's page format.
-Returns a list structure compatible with ecoextract and other downstream tools.
+Returns Mistral's native page output. Each page includes markdown text, tables,
+images, headers, footers, and dimensional information.
 }
 \examples{
 \dontrun{
-# Get structured output from Mistral OCR 3
-schema <- list(
-  type = "object",
-  properties = list(
-    pages = list(
-      type = "array",
-      items = list(
-        type = "object",
-        properties = list(
-          page_number = list(type = "integer"),
-          page_header = list(type = "array", items = list(type = "string")),
-          section_header = list(type = "array", items = list(type = "string")),
-          text = list(type = "string"),
-          tables = list(
-            type = "array",
-            items = list(
-              type = "object",
-              properties = list(
-                content = list(type = "string"),
-                markdown = list(type = "string"),
-                html = list(type = "string"),
-                summary = list(type = "string")
-              )
-            )
-          ),
-          other = list(
-            type = "array",
-            items = list(
-              type = "object",
-              properties = list(
-                type = list(type = "string"),
-                content = list(type = "string")
-              )
-            )
-          )
-        )
-      )
-    )
-  )
-)
-
+# Process document with Mistral OCR 3
 result <- mistral_ocr(
   "document.pdf",
-  document_annotation_format = list(type = "json_schema", json_schema = schema),
-  document_annotation_prompt = "Extract document structure"
+  extract_header = TRUE,
+  extract_footer = TRUE,
+  table_format = "markdown"
 )
 
-# Extract pages in Tensorlake-compatible format
+# Extract all pages
 pages <- mistral_extract_pages(result)
 
 # Extract specific pages
 first_two <- mistral_extract_pages(result, pages = c(1, 2))
+
+# Access page content
+page1_text <- pages[[1]]$markdown
+page1_tables <- pages[[1]]$tables
 }
 
 }

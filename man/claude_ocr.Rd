@@ -7,7 +7,7 @@
 claude_ocr(
   file_path,
   api_key = Sys.getenv("ANTHROPIC_API_KEY"),
-  model = "claude-opus-4.5-20250514",
+  model = "claude-opus-4-6",
   max_tokens = 16000,
   extraction_prompt = NULL,
   output_file = NULL
@@ -19,8 +19,8 @@ claude_ocr(
 \item{api_key}{Character string. Anthropic API key. Default retrieves from
 environment variable "ANTHROPIC_API_KEY".}
 
-\item{model}{Character string. Claude model to use. Default is "claude-opus-4.5-20250514".
-Alternative: "claude-sonnet-4.5-20250929" for faster/cheaper processing.}
+\item{model}{Character string. Claude model to use. Default is "claude-opus-4-6".
+Alternative: "claude-sonnet-4-5" for faster/cheaper processing.}
 
 \item{max_tokens}{Integer. Maximum tokens in response. Default is 16000.}
 
