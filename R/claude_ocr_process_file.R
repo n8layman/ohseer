@@ -20,7 +20,7 @@
 #' @importFrom base64enc base64encode
 claude_ocr_process_file <- function(file_path,
                                      api_key = Sys.getenv("ANTHROPIC_API_KEY"),
-                                     model = "claude-opus-4.5-20250514",
+                                     model = "claude-opus-4-6",
                                      max_tokens = 16000,
                                      extraction_prompt = NULL,
                                      endpoint = "https://api.anthropic.com/v1/messages") {

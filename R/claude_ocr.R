@@ -9,8 +9,8 @@
 #' @param file_path Character string. Path to a local PDF, PNG, JPEG, or image file.
 #' @param api_key Character string. Anthropic API key. Default retrieves from
 #'   environment variable "ANTHROPIC_API_KEY".
-#' @param model Character string. Claude model to use. Default is "claude-opus-4.5-20250514".
-#'   Alternative: "claude-sonnet-4.5-20250929" for faster/cheaper processing.
+#' @param model Character string. Claude model to use. Default is "claude-opus-4-6".
+#'   Alternative: "claude-sonnet-4-5" for faster/cheaper processing.
 #' @param max_tokens Integer. Maximum tokens in response. Default is 16000.
 #' @param extraction_prompt Character string. Custom extraction prompt. If NULL, uses default
 #'   prompt that generates Tensorlake-compatible JSON structure.
@@ -60,7 +60,7 @@
 #' @importFrom jsonlite write_json
 claude_ocr <- function(file_path,
                        api_key = Sys.getenv("ANTHROPIC_API_KEY"),
-                       model = "claude-opus-4.5-20250514",
+                       model = "claude-opus-4-6",
                        max_tokens = 16000,
                        extraction_prompt = NULL,
                        output_file = NULL) {

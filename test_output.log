@@ -1,0 +1,102 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+Loading environment from: /Users/nathanlayman/Documents/Work/Consulting/Consulting Repos/ohseer/.env
+
+╔════════════════════════════════════════════════════════════╗
+║  OCR Provider Comparison Test                              ║
+╚════════════════════════════════════════════════════════════╝
+
+Test file: data/articles/0090-3558-30_3_439.pdf 
+Output directory: test_results 
+
+API Key Status:
+   ANTHROPIC_API_KEY : ✓ Set 
+   MISTRAL_API_KEY : ✓ Set 
+   TENSORLAKE_API_KEY : ✓ Set 
+
+
+████████████████████████████████████████████████████████████
+TEST 1: Tensorlake (Baseline)
+████████████████████████████████████████████████████████████ 
+
+Processing with Tensorlake...
+Uploading file to Tensorlake...
+File uploaded. File ID: file_TMKdwdG8zLFhKnjHRbQwK
+Sending document to Tensorlake for parsing...
+Document parsing initiated. Parse ID: parse_DRw7RnWjdqzFpQH9TWRNm
+Waiting for parse job to complete...
+Status: pending (0s elapsed)
+Status: processing (2.1s elapsed)
+Status: processing (4.2s elapsed)
+Status: processing (6.3s elapsed)
+Status: processing (8.4s elapsed)
+Status: processing (10.5s elapsed)
+Status: processing (12.7s elapsed)
+Parsing complete!
+Output saved to: test_results/tensorlake_raw.json
+Extracting pages...
+
+============================================================
+PROVIDER: Tensorlake 
+============================================================ 
+Total pages: 6 
+
+Page 1 Structure:
+  - page_number: 1 
+  - page_header: 2 items
+     *Journal of Wildlife Diseases*, 30(3), 1994, pp. 439-444
+© Wildlife Disease Asso ...
+  - section_header: 0 items
+  - text length: 4139 characters
+    Preview: Emiko Isogai,¹ Hiroshi Isogai,² Hiroki Kawabata,³ Toshiyuki Masuzawa,³ Yasutake Yanagihara,³ Koichi  ...
+  - tables: 0 items
+  - other: 1 items
+
+Validating Tensorlake output structure...
+  ✓ Structure is valid and compatible with Tensorlake format
+
+Processing time: 16.42 seconds
+Estimated cost: $ 0.0600 
+
+
+████████████████████████████████████████████████████████████
+TEST 2: Mistral OCR 3
+████████████████████████████████████████████████████████████ 
+
+Processing with Mistral OCR 3 (with structured output)...
+Auto-detected input type: local file
+Uploading file to Mistral AI...
+Retrieving file metadata from Mistral AI...
+Getting temporary download URL from Mistral AI...
+Request body: {"model":"mistral-ocr-2512","document":{"type":"document_url","document_url":"https://mistralaifilesapiprodswe.blob.core.windows.net/fine-tune/66f05e6e-e9e2-4841-ad51-d41fb9fd0bc3/2252e82e-f2e6-463a-bb52-7b85c3e0e7be/b3d331eb-e7b4-4c40-b5c3-36a519bafae5.pdf?se=2026-02-19T00%3A43%3A10Z&sp=r&sv=2026-02-06&sr=b&sig=xaZ1C%2Bo5SZNNrZbWN9Y6uO8JUY08qE03MB09nk7e7V0%3D"},"include_image_base64":true,"table_format":"markdown","extract_header":true,"extract_footer":true,"document_annotation_format":{"type":"json_schema","json_schema":{"type":"object","properties":{"pages":{"type":"array","items":{"type":"object","required":["page_number","text","tables"],"properties":{"page_number":{"type":"integer"},"page_header":{"type":"array","items":{"type":"string"},"description":"Running headers like journal name, page numbers"},"section_header":{"type":"array","items":{"type":"string"},"description":"Section headings like Introduction, Methods"},"text":{"type":"string","description":"All body text with paragraphs separated by double newlines"},"tables":{"type":"array","items":{"type":"object","properties":{"content":{"type":"string","description":"Plain text table"},"markdown":{"type":"string","description":"Markdown formatted table"},"html":{"type":"string","description":"HTML table"},"summary":{"type":"string","description":"Description of table"}},"required":["content","markdown","html","summary"]}},"other":{"type":"array","items":{"type":"object","properties":{"type":{"type":"string"},"content":{"type":"string"}},"required":["type","content"]}}}}}},"required":["pages"]}},"document_annotation_prompt":"Extract all document structure including page headers, section headers, body text, tables, and other elements. Preserve all formatting and structure."}
+Sending document for OCR processing...
+
+✗ Mistral OCR 3 test FAILED: OCR processing request failed: HTTP 422 Unprocessable Entity. 
+
+
+████████████████████████████████████████████████████████████
+TEST 3: Claude Opus 4.5 (#1 OCR Arena)
+████████████████████████████████████████████████████████████ 
+
+Processing with Claude Opus 4.5...
+(This may take longer due to detailed extraction)
+Reading and encoding file...
+Sending document to Claude for OCR processing...
+
+✗ Claude Opus 4.5 test FAILED: Claude OCR request failed: HTTP 404 Not Found. 
+
+
+╔════════════════════════════════════════════════════════════╗
+║  COMPARISON SUMMARY                                        ║
+╚════════════════════════════════════════════════════════════╝
+   Provider Pages Time_Sec Cost_USD Valid
+ Tensorlake     6    16.42  $0.0600     ✓
+
+All results saved to: test_results 
+  - *_raw.json: Full API responses
+  - *_pages.json: Tensorlake-compatible extracted pages
+
+Overall Verdict:
+  ✓ All providers return valid Tensorlake-compatible format
+  ✓ Ready for use with ecoextract package
+
+Test complete!
