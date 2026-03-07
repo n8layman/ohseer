@@ -51,6 +51,9 @@ a parse job, polls for completion, and returns the final result.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tensorlake_ocr</span><span class="op">(</span></span>
 <span>  <span class="va">file_path</span>,</span>
 <span>  pages <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  figure_summarization <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  chart_extraction <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  figure_summarization_prompt <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tensorlake_api_key <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"TENSORLAKE_API_KEY"</span><span class="op">)</span>,</span>
 <span>  max_wait_seconds <span class="op">=</span> <span class="fl">60</span>,</span>
 <span>  poll_interval <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -70,6 +73,21 @@ a parse job, polls for completion, and returns the final result.</p>
 <dd><p>Integer vector or character string. Optional page range to parse.
 Can be a vector like c(1, 2) or 1:5, or a string like "1-5" or "1,3,5".
 If NULL (default), parses entire document.</p></dd>
+
+
+<dt id="arg-figure-summarization">figure_summarization<a class="anchor" aria-label="anchor" href="#arg-figure-summarization"></a></dt>
+<dd><p>Logical. Enable figure summarization enrichment,
+returning text descriptions of figures. Default TRUE.</p></dd>
+
+
+<dt id="arg-chart-extraction">chart_extraction<a class="anchor" aria-label="anchor" href="#arg-chart-extraction"></a></dt>
+<dd><p>Logical. Enable chart extraction enrichment,
+returning structured data from charts/graphs. Default TRUE.</p></dd>
+
+
+<dt id="arg-figure-summarization-prompt">figure_summarization_prompt<a class="anchor" aria-label="anchor" href="#arg-figure-summarization-prompt"></a></dt>
+<dd><p>Character string. Optional custom prompt to guide
+figure summarization. Default NULL uses Tensorlake's default prompt.</p></dd>
 
 
 <dt id="arg-tensorlake-api-key">tensorlake_api_key<a class="anchor" aria-label="anchor" href="#arg-tensorlake-api-key"></a></dt>

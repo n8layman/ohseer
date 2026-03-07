@@ -52,6 +52,9 @@ accuracy) with support for tables, forms, and structured data extraction.</p>
 <span>  <span class="va">file_id</span>,</span>
 <span>  <span class="va">tensorlake_api_key</span>,</span>
 <span>  pages <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  figure_summarization <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  chart_extraction <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  figure_summarization_prompt <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  base_url <span class="op">=</span> <span class="st">"https://api.tensorlake.ai"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -70,6 +73,19 @@ accuracy) with support for tables, forms, and structured data extraction.</p>
 
 <dt id="arg-pages">pages<a class="anchor" aria-label="anchor" href="#arg-pages"></a></dt>
 <dd><p>Character string. Optional page range to parse (e.g., "1-5" or "1,3,5").</p></dd>
+
+
+<dt id="arg-figure-summarization">figure_summarization<a class="anchor" aria-label="anchor" href="#arg-figure-summarization"></a></dt>
+<dd><p>Logical. Enable figure summarization enrichment. Default TRUE.</p></dd>
+
+
+<dt id="arg-chart-extraction">chart_extraction<a class="anchor" aria-label="anchor" href="#arg-chart-extraction"></a></dt>
+<dd><p>Logical. Enable chart extraction enrichment. Default TRUE.</p></dd>
+
+
+<dt id="arg-figure-summarization-prompt">figure_summarization_prompt<a class="anchor" aria-label="anchor" href="#arg-figure-summarization-prompt"></a></dt>
+<dd><p>Character string. Optional custom prompt to guide
+figure summarization. Default NULL uses Tensorlake's default prompt.</p></dd>
 
 
 <dt id="arg-base-url">base_url<a class="anchor" aria-label="anchor" href="#arg-base-url"></a></dt>

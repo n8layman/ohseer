@@ -51,6 +51,14 @@ List with one element per page, each containing:
 
   List of tables, each with markdown, html, and content fields
 
+- figures:
+
+  List of figures, each with content and summary fields
+
+- charts:
+
+  List of charts, each with content, chart_type, and data fields
+
 - other:
 
   List of other fragment types with type and content
