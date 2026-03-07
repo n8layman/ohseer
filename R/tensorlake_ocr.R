@@ -10,6 +10,12 @@
 #' @param pages Integer vector or character string. Optional page range to parse.
 #'   Can be a vector like c(1, 2) or 1:5, or a string like "1-5" or "1,3,5".
 #'   If NULL (default), parses entire document.
+#' @param figure_summarization Logical. Enable figure summarization enrichment,
+#'   returning text descriptions of figures. Default TRUE.
+#' @param chart_extraction Logical. Enable chart extraction enrichment,
+#'   returning structured data from charts/graphs. Default TRUE.
+#' @param figure_summarization_prompt Character string. Optional custom prompt to guide
+#'   figure summarization. Default NULL uses Tensorlake's default prompt.
 #' @param tensorlake_api_key Character string. Tensorlake API key. Default retrieves from
 #'   environment variable "TENSORLAKE_API_KEY".
 #' @param max_wait_seconds Numeric. Maximum seconds to wait for parsing to complete. Default is 60.
@@ -49,6 +55,9 @@
 #' @importFrom jsonlite write_json
 tensorlake_ocr <- function(file_path,
                            pages = NULL,
+                           figure_summarization = TRUE,
+                           chart_extraction = TRUE,
+                           figure_summarization_prompt = NULL,
                            tensorlake_api_key = Sys.getenv("TENSORLAKE_API_KEY"),
                            max_wait_seconds = 60,
                            poll_interval = 2,
@@ -96,7 +105,10 @@ tensorlake_ocr <- function(file_path,
   parse_response <- tensorlake_parse_document(
     file_id = file_id,
     tensorlake_api_key = tensorlake_api_key,
-    pages = page_range
+    pages = page_range,
+    figure_summarization = figure_summarization,
+    chart_extraction = chart_extraction,
+    figure_summarization_prompt = figure_summarization_prompt
   )
 
   parse_id <- parse_response$parse_id %||% parse_response$id

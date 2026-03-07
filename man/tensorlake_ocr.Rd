@@ -7,6 +7,9 @@
 tensorlake_ocr(
   file_path,
   pages = NULL,
+  figure_summarization = TRUE,
+  chart_extraction = TRUE,
+  figure_summarization_prompt = NULL,
   tensorlake_api_key = Sys.getenv("TENSORLAKE_API_KEY"),
   max_wait_seconds = 60,
   poll_interval = 2,
@@ -19,6 +22,15 @@ tensorlake_ocr(
 \item{pages}{Integer vector or character string. Optional page range to parse.
 Can be a vector like c(1, 2) or 1:5, or a string like "1-5" or "1,3,5".
 If NULL (default), parses entire document.}
+
+\item{figure_summarization}{Logical. Enable figure summarization enrichment,
+returning text descriptions of figures. Default TRUE.}
+
+\item{chart_extraction}{Logical. Enable chart extraction enrichment,
+returning structured data from charts/graphs. Default TRUE.}
+
+\item{figure_summarization_prompt}{Character string. Optional custom prompt to guide
+figure summarization. Default NULL uses Tensorlake's default prompt.}
 
 \item{tensorlake_api_key}{Character string. Tensorlake API key. Default retrieves from
 environment variable "TENSORLAKE_API_KEY".}

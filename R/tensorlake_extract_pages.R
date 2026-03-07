@@ -18,6 +18,8 @@
 #'     \item{section_header}{Character vector of section_header fragment contents}
 #'     \item{text}{Character string with all text fragments in markdown format}
 #'     \item{tables}{List of tables, each with markdown, html, and content fields}
+#'     \item{figures}{List of figures, each with content and summary fields}
+#'     \item{charts}{List of charts, each with content, chart_type, and data fields}
 #'     \item{other}{List of other fragment types with type and content}
 #'   }
 #'
@@ -77,6 +79,8 @@ tensorlake_extract_pages <- function(result,
       section_header = character(0),
       text = character(0),
       tables = list(),
+      figures = list(),
+      charts = list(),
       other = list()
     )
 
@@ -105,6 +109,17 @@ tensorlake_extract_pages <- function(result,
           summary = frag$content$summary %||% ""
         )
         page_data$tables[[length(page_data$tables) + 1]] <- table_data
+      } else if (frag_type == "figure") {
+        page_data$figures[[length(page_data$figures) + 1]] <- list(
+          content = content,
+          summary = frag$content$summary %||% ""
+        )
+      } else if (frag_type == "chart") {
+        page_data$charts[[length(page_data$charts) + 1]] <- list(
+          content = content,
+          chart_type = frag$content$chart_type %||% "",
+          data = frag$content$data %||% list()
+        )
       } else {
         # Other fragment types
         page_data$other[[length(page_data$other) + 1]] <- list(

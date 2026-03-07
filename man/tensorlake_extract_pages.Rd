@@ -22,6 +22,8 @@ List with one element per page, each containing:
 \item{section_header}{Character vector of section_header fragment contents}
 \item{text}{Character string with all text fragments in markdown format}
 \item{tables}{List of tables, each with markdown, html, and content fields}
+\item{figures}{List of figures, each with content and summary fields}
+\item{charts}{List of charts, each with content, chart_type, and data fields}
 \item{other}{List of other fragment types with type and content}
 }
 }

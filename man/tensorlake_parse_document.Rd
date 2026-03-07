@@ -8,6 +8,9 @@ tensorlake_parse_document(
   file_id,
   tensorlake_api_key,
   pages = NULL,
+  figure_summarization = TRUE,
+  chart_extraction = TRUE,
+  figure_summarization_prompt = NULL,
   base_url = "https://api.tensorlake.ai"
 )
 }
@@ -17,6 +20,13 @@ tensorlake_parse_document(
 \item{tensorlake_api_key}{Character string. Tensorlake API key.}
 
 \item{pages}{Character string. Optional page range to parse (e.g., "1-5" or "1,3,5").}
+
+\item{figure_summarization}{Logical. Enable figure summarization enrichment. Default TRUE.}
+
+\item{chart_extraction}{Logical. Enable chart extraction enrichment. Default TRUE.}
+
+\item{figure_summarization_prompt}{Character string. Optional custom prompt to guide
+figure summarization. Default NULL uses Tensorlake's default prompt.}
 
 \item{base_url}{Character string. Base URL for Tensorlake API. Default is "https://api.tensorlake.ai".}
 }

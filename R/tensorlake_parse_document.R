@@ -9,6 +9,10 @@
 #' @param file_id Character string. Tensorlake file ID from tensorlake_upload_file().
 #' @param tensorlake_api_key Character string. Tensorlake API key.
 #' @param pages Character string. Optional page range to parse (e.g., "1-5" or "1,3,5").
+#' @param figure_summarization Logical. Enable figure summarization enrichment. Default TRUE.
+#' @param chart_extraction Logical. Enable chart extraction enrichment. Default TRUE.
+#' @param figure_summarization_prompt Character string. Optional custom prompt to guide
+#'   figure summarization. Default NULL uses Tensorlake's default prompt.
 #' @param base_url Character string. Base URL for Tensorlake API. Default is "https://api.tensorlake.ai".
 #'
 #' @return List containing the parse job details including:
@@ -24,6 +28,9 @@
 tensorlake_parse_document <- function(file_id,
                                        tensorlake_api_key,
                                        pages = NULL,
+                                       figure_summarization = TRUE,
+                                       chart_extraction = TRUE,
+                                       figure_summarization_prompt = NULL,
                                        base_url = "https://api.tensorlake.ai") {
 
   # Validate inputs
@@ -44,6 +51,16 @@ tensorlake_parse_document <- function(file_id,
   if (!is.null(pages)) {
     request_body$page_range <- pages
   }
+
+  # Add enrichment options
+  enrichment_options <- list(
+    figure_summarization = figure_summarization,
+    chart_extraction = chart_extraction
+  )
+  if (!is.null(figure_summarization_prompt)) {
+    enrichment_options$figure_summarization_prompt <- figure_summarization_prompt
+  }
+  request_body$enrichment_options <- enrichment_options
 
   # Make the API request
   message("Sending document to Tensorlake for parsing...")
