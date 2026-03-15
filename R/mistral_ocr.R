@@ -40,7 +40,7 @@
 mistral_ocr <- function(input,
                         input_type = "auto",
                         api_key = Sys.getenv("MISTRAL_API_KEY"),
-                        model = "mistral-ocr-2512",
+                        model = "mistral-ocr-latest",
                         include_image_base64 = TRUE,
                         document_annotation_format = NULL,
                         document_annotation_prompt = NULL,

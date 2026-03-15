@@ -6,7 +6,7 @@
 \usage{
 mistral_ocr_process_url(
   document_url,
-  model = "mistral-ocr-2512",
+  model = "mistral-ocr-latest",
   include_image_base64 = TRUE,
   document_annotation_format = NULL,
   document_annotation_prompt = NULL,

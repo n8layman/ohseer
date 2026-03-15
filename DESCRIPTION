@@ -1,6 +1,6 @@
 Package: ohseer
 Title: Multi-Provider OCR API Interface for R
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R:
     person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: Provides interfaces to multiple OCR and document parsing APIs including
