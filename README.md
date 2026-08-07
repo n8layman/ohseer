@@ -29,9 +29,11 @@ A unified R interface to multiple OCR (Optical Character Recognition) APIs. Proc
   - **Claude Opus 4.6**: #1 on OCR Arena leaderboards, structured outputs with JSON schemas
   - **Tensorlake**: Highest accuracy (91.7%), best for tables and forms
   - **Mistral OCR 3**: Native markdown output, cost-effective
+  - **olmOCR (AI2)**: Open-weights VLM, markdown output, runs on your own GPU or a hosted provider (DeepInfra, Parasail, Cirrascale)
+  - **Chandra (Datalab)**: Academic-document OCR via Datalab's hosted API; strong tables/equations and extracts figures as images
   - **AWS Textract**: Reliable option for structured data extraction
 - **Consistent output**: Same interface across all providers
-- **Lightweight**: No heavy dependencies, uses httr2 for all API calls
+- **Standing on solid ground**: Chat-based providers (Claude, olmOCR, dots.mocr) use [ellmer](https://ellmer.tidyverse.org) for LLM plumbing; bespoke OCR APIs (Mistral, Tensorlake, Chandra, Textract) use httr2 directly
 
 ## Installation
 
@@ -56,6 +58,9 @@ Sys.setenv(
   ANTHROPIC_API_KEY = "your-claude-key",        # For Claude
   TENSORLAKE_API_KEY = "your-tensorlake-key",   # For Tensorlake
   MISTRAL_API_KEY = "your-mistral-key",         # For Mistral
+  OLMOCR_API_KEY = "your-provider-key",         # For olmOCR (DeepInfra/Parasail/etc.)
+  OLMOCR_SERVER = "https://api.parasail.io/v1", # olmOCR endpoint (optional; defaults to DeepInfra)
+  DATALAB_API_KEY = "your-datalab-key",         # For Chandra (Datalab)
   AWS_ACCESS_KEY_ID = "your-aws-key",           # For AWS Textract
   AWS_SECRET_ACCESS_KEY = "your-aws-secret"     # For AWS Textract
 )
@@ -79,6 +84,8 @@ AWS_SECRET_ACCESS_KEY=your-aws-secret
 - **Claude**: [console.anthropic.com](https://console.anthropic.com/) → API Keys
 - **Tensorlake**: [cloud.tensorlake.ai](https://cloud.tensorlake.ai/) → Dashboard → API Key
 - **Mistral**: [mistral.ai](https://mistral.ai/) → Try the API → API keys
+- **olmOCR**: Any provider serving `allenai/olmOCR-2-7B-1025` over an OpenAI-compatible API — e.g. [Parasail](https://parasail.io/), [DeepInfra](https://deepinfra.com/), [Cirrascale](https://cirrascale.com/), or your own `vllm serve`. Set `OLMOCR_API_KEY` and `OLMOCR_SERVER`.
+- **Chandra (Datalab)**: [datalab.to](https://www.datalab.to/) → sign up → API key. Set `DATALAB_API_KEY`.
 - **AWS Textract**: [aws.amazon.com](https://aws.amazon.com/) → IAM → Create access key with `AmazonTextractFullAccess`
 
 ## Quick Start

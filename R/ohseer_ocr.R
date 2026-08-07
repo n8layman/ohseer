@@ -14,6 +14,12 @@
 #'     \item{"tensorlake"}{Tensorlake OCR API (default) - Highest accuracy (91.7\%)}
 #'     \item{"mistral"}{Mistral OCR 3 - Lower cost, native markdown format}
 #'     \item{"claude"}{Claude Opus/Sonnet - Structured outputs with JSON schema}
+#'     \item{"olmocr"}{olmOCR (AI2) - Open-weights VLM served via an
+#'       OpenAI-compatible endpoint (DeepInfra, Parasail, Cirrascale, or local vLLM)}
+#'     \item{"chandra"}{Chandra (Datalab) - Academic-document OCR via Datalab's
+#'       hosted API; extracts tables, equations, and figures}
+#'     \item{"dotsmocr"}{dots.mocr (rednote-hilab) - Local multilingual layout
+#'       VLM served by your own vLLM server (OpenAI-compatible)}
 #'   }
 #'   When multiple providers are specified, they will be tried sequentially until
 #'   one succeeds. Default is \code{c("tensorlake")}.
@@ -153,7 +159,7 @@ ohseer_ocr <- function(file_path,
   }
 
   # Validate all providers
-  valid_providers <- c("tensorlake", "mistral", "claude")
+  valid_providers <- c("tensorlake", "mistral", "claude", "olmocr", "chandra", "dotsmocr")
   invalid <- provider[!provider %in% valid_providers]
   if (length(invalid) > 0) {
     stop("Invalid provider(s): ", paste(invalid, collapse = ", "),
@@ -168,7 +174,9 @@ ohseer_ocr <- function(file_path,
     stop("No providers with valid API keys. Set environment variables:\n",
          "  - TENSORLAKE_API_KEY\n",
          "  - MISTRAL_API_KEY\n",
-         "  - ANTHROPIC_API_KEY",
+         "  - ANTHROPIC_API_KEY\n",
+         "  - OLMOCR_API_KEY\n",
+         "  - DATALAB_API_KEY",
          call. = FALSE)
   }
 
@@ -208,6 +216,32 @@ ohseer_ocr <- function(file_path,
           )
         },
 
+        "olmocr" = {
+          olmocr_ocr_process_file(
+            file_path = file_path,
+            pages = pages,
+            timeout = timeout,
+            ...
+          )
+        },
+
+        "chandra" = {
+          chandra_ocr_process_file(
+            file_path = file_path,
+            timeout = timeout,
+            ...
+          )
+        },
+
+        "dotsmocr" = {
+          dotsmocr_ocr_process_file(
+            file_path = file_path,
+            pages = pages,
+            timeout = timeout,
+            ...
+          )
+        },
+
         stop("Unknown provider: ", prov, call. = FALSE)
       )
 
@@ -218,6 +252,9 @@ ohseer_ocr <- function(file_path,
           "tensorlake" = tensorlake_extract_pages(raw_result, pages = pages),
           "mistral" = mistral_extract_pages(raw_result, pages = pages),
           "claude" = claude_extract_pages(raw_result, pages = pages),
+          "olmocr" = olmocr_extract_pages(raw_result, pages = pages),
+          "chandra" = chandra_extract_pages(raw_result, pages = pages),
+          "dotsmocr" = dotsmocr_extract_pages(raw_result, pages = pages),
           stop("Unknown provider: ", prov, call. = FALSE)
         )
 
@@ -296,10 +333,23 @@ check_api_keys_for_providers <- function(providers) {
       "tensorlake" = "TENSORLAKE_API_KEY",
       "mistral" = "MISTRAL_API_KEY",
       "claude" = "ANTHROPIC_API_KEY",
+      "olmocr" = "OLMOCR_API_KEY",
+      "chandra" = "DATALAB_API_KEY",
+      "dotsmocr" = "DOTSMOCR_API_KEY",
       stop("Unknown provider: ", prov)
     )
 
-    if (Sys.getenv(env_var) != "") {
+    # A local vLLM server needs no key; treat olmocr/dotsmocr as available
+    # whenever a server URL is configured, even without an API key.
+    has_key <- Sys.getenv(env_var) != ""
+    if (prov == "olmocr" && !has_key && Sys.getenv("OLMOCR_SERVER") != "") {
+      has_key <- TRUE
+    }
+    if (prov == "dotsmocr" && !has_key && Sys.getenv("DOTSMOCR_SERVER") != "") {
+      has_key <- TRUE
+    }
+
+    if (has_key) {
       available <- c(available, prov)
     } else {
       skipped <- c(skipped, paste0(prov, " (", env_var, " not set)"))

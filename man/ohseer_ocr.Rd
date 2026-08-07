@@ -22,6 +22,12 @@ or multiple providers for automatic fallback. Valid values:
 \item{"tensorlake"}{Tensorlake OCR API (default) - Highest accuracy (91.7\\%)}
 \item{"mistral"}{Mistral OCR 3 - Lower cost, native markdown format}
 \item{"claude"}{Claude Opus/Sonnet - Structured outputs with JSON schema}
+\item{"olmocr"}{olmOCR (AI2) - Open-weights VLM served via an
+OpenAI-compatible endpoint (DeepInfra, Parasail, Cirrascale, or local vLLM)}
+\item{"chandra"}{Chandra (Datalab) - Academic-document OCR via Datalab's
+hosted API; extracts tables, equations, and figures}
+\item{"dotsmocr"}{dots.mocr (rednote-hilab) - Local multilingual layout
+VLM served by your own vLLM server (OpenAI-compatible)}
 }
 When multiple providers are specified, they will be tried sequentially until
 one succeeds. Default is \code{c("tensorlake")}.}
