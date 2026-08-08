@@ -7,3 +7,10 @@
 ^docs$
 ^pkgdown$
 ^\.env$
+^data$
+^test.*\.R$
+^test.*\.log$
+^test_claude_models\.sh$
+^test_results$
+^quick_test\.R$
+^mistral_sample\.json$

@@ -44,6 +44,10 @@ vignettes/*.pdf
 data/articles/*.pdf
 test*.html
 test*.md
+test_results/
+
+# Log files
+*.log
 
 # pkgdown site
 docs/
