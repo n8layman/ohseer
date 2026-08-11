@@ -73,6 +73,24 @@ reference:
       - claude_ocr
       - claude_extract_pages
 
+  - title: olmOCR
+    desc: Process documents with olmOCR via an OpenAI-compatible endpoint
+    contents:
+      - olmocr_ocr
+      - olmocr_extract_pages
+
+  - title: Chandra OCR (Datalab)
+    desc: Process academic documents with Datalab's Chandra API
+    contents:
+      - chandra_ocr
+      - chandra_extract_pages
+
+  - title: dots.mocr
+    desc: Process documents with a local dots.mocr vLLM server
+    contents:
+      - dotsmocr_ocr
+      - dotsmocr_extract_pages
+
   - title: AWS Textract
     desc: Process documents with AWS Textract
     contents:
