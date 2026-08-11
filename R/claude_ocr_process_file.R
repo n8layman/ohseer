@@ -1,29 +1,37 @@
-#' Process Document with Claude OCR
+#' Process Document with Claude OCR (via ellmer)
 #'
-#' This function processes a local PDF or image file using Claude's document understanding
-#' capabilities and returns structured OCR results.
+#' Processes a local PDF or image with Claude's document understanding using
+#' \pkg{ellmer} for structured output, returning Tensorlake-compatible page data.
+#' The output schema is enforced with an \code{ellmer} type specification, so the
+#' model reliably returns pages, tables, and other elements.
 #'
 #' @author Nathan C. Layman
 #'
-#' @param file_path Character string. Path to a local PDF, PNG, JPEG, or other supported image file.
-#' @param api_key Character string. The Anthropic API key. Default is to retrieve from environment variable "ANTHROPIC_API_KEY".
-#' @param model Character string. The Claude model to use. Default is "claude-opus-4.5-20250514".
-#' @param max_tokens Integer. Maximum tokens in response. Default is 16000.
-#' @param extraction_prompt Character string. Custom prompt for extraction. If NULL, uses default Tensorlake-compatible prompt.
-#' @param endpoint Character string. The Claude Messages API endpoint. Default is "https://api.anthropic.com/v1/messages".
+#' @param file_path Character string. Path to a local PDF, PNG, JPEG, GIF, or WEBP file.
+#' @param api_key Character string. The Anthropic API key. Default retrieves from
+#'   environment variable "ANTHROPIC_API_KEY".
+#' @param model Character string. The Claude model to use. Default is "claude-opus-4-6".
+#' @param max_tokens Integer. Maximum tokens in the response. Default is 16000.
+#' @param extraction_prompt Character string. Custom task prompt. If NULL, uses a
+#'   default prompt (the output structure itself is enforced by the type schema).
+#' @param pages Integer vector. Accepted for interface parity; Claude reads the
+#'   whole document, so page selection is applied later in
+#'   \code{\link{claude_extract_pages}}. Default NULL.
 #'
-#' @return A list containing the Claude API response with structured OCR data.
+#' @return A list with \code{structured_output$pages}: a list with one entry per
+#'   page (\code{page_number}, \code{page_header}, \code{section_header},
+#'   \code{text}, \code{tables}, \code{other}).
 #'
 #' @keywords internal
 #'
-#' @importFrom httr2 request req_headers req_body_json req_perform resp_body_json
-#' @importFrom base64enc base64encode
+#' @importFrom ellmer chat_anthropic content_pdf_file content_image_file params
+#'   type_object type_array type_string type_integer
 claude_ocr_process_file <- function(file_path,
                                      api_key = Sys.getenv("ANTHROPIC_API_KEY"),
                                      model = "claude-opus-4-6",
                                      max_tokens = 16000,
                                      extraction_prompt = NULL,
-                                     endpoint = "https://api.anthropic.com/v1/messages") {
+                                     pages = NULL) {
 
   # Validate inputs
   if (is.null(api_key) || api_key == "") {
@@ -35,185 +43,74 @@ claude_ocr_process_file <- function(file_path,
     stop("File not found: ", file_path, call. = FALSE)
   }
 
-  # Detect media type
+  # Attach the document as PDF or image content
   ext <- tolower(tools::file_ext(file_path))
-  media_type <- switch(ext,
-    "pdf" = "application/pdf",
-    "png" = "image/png",
-    "jpg" = "image/jpeg",
-    "jpeg" = "image/jpeg",
-    "gif" = "image/gif",
-    "webp" = "image/webp",
+  doc_content <- switch(
+    ext,
+    "pdf" = ellmer::content_pdf_file(file_path),
+    "png" = ,
+    "jpg" = ,
+    "jpeg" = ,
+    "gif" = ,
+    "webp" = ellmer::content_image_file(file_path, resize = "none"),
     stop("Unsupported file type: ", ext, ". Supported: PDF, PNG, JPG, JPEG, GIF, WEBP", call. = FALSE)
   )
 
-  # Determine content type (document vs image)
-  content_type <- if (ext == "pdf") "document" else "image"
-
-  # Read file and encode to base64
-  message("Reading and encoding file...")
-  file_data <- readBin(file_path, "raw", file.info(file_path)$size)
-  base64_data <- base64enc::base64encode(file_data)
-
-  # Default extraction prompt for Tensorlake-compatible output
   if (is.null(extraction_prompt)) {
-    extraction_prompt <- 'Extract all content from this document and return it as JSON with this structure:
-
-{
-  "pages": [
-    {
-      "page_number": 1,
-      "page_header": ["Running header text if present"],
-      "section_header": ["Section title if present"],
-      "text": "All body text content with paragraphs separated by \\n\\n",
-      "tables": [
-        {
-          "content": "Plain text representation of table",
-          "markdown": "Markdown formatted table using | separators",
-          "html": "<table>HTML representation</table>",
-          "summary": "Brief description of what the table contains"
-        }
-      ],
-      "other": [
-        {
-          "type": "figure_caption",
-          "content": "Figure 1. Caption text..."
-        }
-      ]
-    }
-  ]
-}
-
-Instructions:
-- Identify page boundaries (for multi-page PDFs, increment page_number)
-- Extract running headers (journal name, article title, page numbers in margins)
-- Identify section headings (Introduction, Methods, etc.)
-- Preserve all body text with paragraph breaks
-- For tables: provide plain text, markdown, and HTML representations, plus a summary
-- Capture figure captions, footnotes, etc. in the "other" array with appropriate type labels
-- Return ONLY the JSON, no additional text'
+    extraction_prompt <- paste0(
+      "Extract all content from this document in natural reading order. ",
+      "For each page capture: running headers (journal name, article title, ",
+      "margin page numbers), section headings, all body text with paragraphs ",
+      "separated by blank lines, every table (as plain text, markdown, and HTML ",
+      "with a short summary), and any other elements such as figure captions or ",
+      "footnotes labelled with a type. Increment page_number for each page."
+    )
   }
 
-  # Build request content
-  content <- list(
-    list(
-      type = content_type,
-      source = list(
-        type = "base64",
-        media_type = media_type,
-        data = base64_data
-      )
-    ),
-    list(
-      type = "text",
-      text = extraction_prompt
-    )
+  # Tensorlake-compatible output schema, enforced by ellmer
+  type_table <- ellmer::type_object(
+    content = ellmer::type_string("Plain text representation of the table"),
+    markdown = ellmer::type_string("Markdown table using | separators"),
+    html = ellmer::type_string("HTML <table> representation"),
+    summary = ellmer::type_string("Brief description of the table")
+  )
+  type_other <- ellmer::type_object(
+    type = ellmer::type_string("Element type, e.g. figure_caption or footnote"),
+    content = ellmer::type_string("Element text content")
+  )
+  type_page <- ellmer::type_object(
+    page_number = ellmer::type_integer("1-based page number"),
+    page_header = ellmer::type_array(ellmer::type_string(), "Running header text, if present"),
+    section_header = ellmer::type_array(ellmer::type_string(), "Section titles on the page"),
+    text = ellmer::type_string("All body text, paragraphs separated by blank lines"),
+    tables = ellmer::type_array(type_table, "Tables found on the page"),
+    other = ellmer::type_array(type_other, "Other elements, e.g. captions or footnotes")
+  )
+  type_doc <- ellmer::type_object(
+    pages = ellmer::type_array(type_page, "One entry per page in reading order")
   )
 
-  # Define Tensorlake-compatible JSON schema for structured output
-  tensorlake_schema <- list(
-    type = "object",
-    properties = list(
-      pages = list(
-        type = "array",
-        items = list(
-          type = "object",
-          properties = list(
-            page_number = list(type = "integer"),
-            page_header = list(type = "array", items = list(type = "string")),
-            section_header = list(type = "array", items = list(type = "string")),
-            text = list(type = "string"),
-            tables = list(
-              type = "array",
-              items = list(
-                type = "object",
-                properties = list(
-                  content = list(type = "string"),
-                  markdown = list(type = "string"),
-                  html = list(type = "string"),
-                  summary = list(type = "string")
-                ),
-                required = list("content", "markdown", "html", "summary"),
-                additionalProperties = FALSE
-              )
-            ),
-            other = list(
-              type = "array",
-              items = list(
-                type = "object",
-                properties = list(
-                  type = list(type = "string"),
-                  content = list(type = "string")
-                ),
-                required = list("type", "content"),
-                additionalProperties = FALSE
-              )
-            )
-          ),
-          required = list("page_number", "text", "tables"),
-          additionalProperties = FALSE
-        )
-      )
-    ),
-    required = list("pages"),
-    additionalProperties = FALSE
-  )
-
-  # Build request body with structured output format
-  request_body <- list(
-    model = model,
-    max_tokens = max_tokens,
-    messages = list(
-      list(
-        role = "user",
-        content = content
-      )
-    ),
-    output_config = list(
-      format = list(
-        type = "json_schema",
-        schema = tensorlake_schema
-      )
-    )
-  )
-
-  # Make the API request
   message("Sending document to Claude for OCR processing...")
-  response <- tryCatch({
-    httr2::request(endpoint) |>
-      httr2::req_headers(
-        "Content-Type" = "application/json",
-        "x-api-key" = api_key,
-        "anthropic-version" = "2023-06-01"
-      ) |>
-      httr2::req_body_json(request_body) |>
-      httr2::req_perform()
-  }, error = function(e) {
-    stop("Claude OCR request failed: ", e$message, call. = FALSE)
-  })
+  chat <- ellmer::chat_anthropic(
+    model = model,
+    credentials = function() api_key,
+    params = ellmer::params(max_tokens = max_tokens),
+    echo = "none"
+  )
 
-  # Parse and return the JSON response
+  result <- tryCatch(
+    chat$chat_structured(doc_content, extraction_prompt, type = type_doc, convert = FALSE),
+    error = function(e) stop("Claude OCR request failed: ", conditionMessage(e), call. = FALSE)
+  )
+
   message("OCR processing complete.")
-  result <- httr2::resp_body_json(response)
 
-  # With output_format, Claude returns structured JSON directly in content
-  if (!is.null(result$content) && length(result$content) > 0) {
-    # The content should already be parsed JSON when using output_format
-    if (!is.null(result$content[[1]]$type) && result$content[[1]]$type == "text") {
-      # Extract the structured output from text field
-      text_content <- result$content[[1]]$text
-      tryCatch({
-        result$structured_output <- jsonlite::fromJSON(text_content, simplifyVector = FALSE)
-      }, error = function(e) {
-        warning("Could not parse Claude response as JSON. Returning raw text.", call. = FALSE)
-        result$structured_output <- NULL
-        result$raw_text <- text_content
-      })
-    } else {
-      # Direct structured output
-      result$structured_output <- result$content[[1]]
-    }
+  if (is.null(result$pages)) {
+    stop("Claude returned no pages. The response may not have matched the schema.", call. = FALSE)
   }
 
-  return(result)
+  list(
+    model = model,
+    structured_output = list(pages = result$pages)
+  )
 }

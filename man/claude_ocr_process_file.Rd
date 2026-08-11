@@ -2,7 +2,7 @@
 % Please edit documentation in R/claude_ocr_process_file.R
 \name{claude_ocr_process_file}
 \alias{claude_ocr_process_file}
-\title{Process Document with Claude OCR}
+\title{Process Document with Claude OCR (via ellmer)}
 \usage{
 claude_ocr_process_file(
   file_path,
@@ -10,28 +10,36 @@ claude_ocr_process_file(
   model = "claude-opus-4-6",
   max_tokens = 16000,
   extraction_prompt = NULL,
-  endpoint = "https://api.anthropic.com/v1/messages"
+  pages = NULL
 )
 }
 \arguments{
-\item{file_path}{Character string. Path to a local PDF, PNG, JPEG, or other supported image file.}
+\item{file_path}{Character string. Path to a local PDF, PNG, JPEG, GIF, or WEBP file.}
 
-\item{api_key}{Character string. The Anthropic API key. Default is to retrieve from environment variable "ANTHROPIC_API_KEY".}
+\item{api_key}{Character string. The Anthropic API key. Default retrieves from
+environment variable "ANTHROPIC_API_KEY".}
 
-\item{model}{Character string. The Claude model to use. Default is "claude-opus-4.5-20250514".}
+\item{model}{Character string. The Claude model to use. Default is "claude-opus-4-6".}
 
-\item{max_tokens}{Integer. Maximum tokens in response. Default is 16000.}
+\item{max_tokens}{Integer. Maximum tokens in the response. Default is 16000.}
 
-\item{extraction_prompt}{Character string. Custom prompt for extraction. If NULL, uses default Tensorlake-compatible prompt.}
+\item{extraction_prompt}{Character string. Custom task prompt. If NULL, uses a
+default prompt (the output structure itself is enforced by the type schema).}
 
-\item{endpoint}{Character string. The Claude Messages API endpoint. Default is "https://api.anthropic.com/v1/messages".}
+\item{pages}{Integer vector. Accepted for interface parity; Claude reads the
+whole document, so page selection is applied later in
+\code{\link{claude_extract_pages}}. Default NULL.}
 }
 \value{
-A list containing the Claude API response with structured OCR data.
+A list with \code{structured_output$pages}: a list with one entry per
+page (\code{page_number}, \code{page_header}, \code{section_header},
+\code{text}, \code{tables}, \code{other}).
 }
 \description{
-This function processes a local PDF or image file using Claude's document understanding
-capabilities and returns structured OCR results.
+Processes a local PDF or image with Claude's document understanding using
+\pkg{ellmer} for structured output, returning Tensorlake-compatible page data.
+The output schema is enforced with an \code{ellmer} type specification, so the
+model reliably returns pages, tables, and other elements.
 }
 \author{
 Nathan C. Layman
