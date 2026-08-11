@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Multi-Provider OCR API Interface for R • ohseer</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Multi-Provider OCR API Interface for R">
 <meta name="description" content="Provides interfaces to multiple OCR and document parsing APIs including Claude Opus 4.5 (#1 on OCR Arena), Mistral OCR 3, AWS Textract, and Tensorlake for document processing in R. Supports text extraction, table detection, form parsing, and structured data extraction. All providers return compatible output formats for seamless integration.">
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">ohseer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,13 +88,17 @@
 <li>
 <strong>Mistral OCR 3</strong>: Native markdown output, cost-effective</li>
 <li>
+<strong>olmOCR (AI2)</strong>: Open-weights VLM, markdown output, runs on your own GPU or a hosted provider (DeepInfra, Parasail, Cirrascale)</li>
+<li>
+<strong>Chandra (Datalab)</strong>: Academic-document OCR via Datalab’s hosted API; strong tables/equations and extracts figures as images</li>
+<li>
 <strong>AWS Textract</strong>: Reliable option for structured data extraction</li>
 </ul>
 </li>
 <li>
 <strong>Consistent output</strong>: Same interface across all providers</li>
 <li>
-<strong>Lightweight</strong>: No heavy dependencies, uses httr2 for all API calls</li>
+<strong>Standing on solid ground</strong>: Chat-based providers (Claude, olmOCR, dots.mocr) use <a href="https://ellmer.tidyverse.org" class="external-link">ellmer</a> for LLM plumbing; bespoke OCR APIs (Mistral, Tensorlake, Chandra, Textract) use httr2 directly</li>
 </ul>
 </div>
 <div class="section level2">
@@ -120,6 +124,9 @@
 <span>  ANTHROPIC_API_KEY <span class="op">=</span> <span class="st">"your-claude-key"</span>,        <span class="co"># For Claude</span></span>
 <span>  TENSORLAKE_API_KEY <span class="op">=</span> <span class="st">"your-tensorlake-key"</span>,   <span class="co"># For Tensorlake</span></span>
 <span>  MISTRAL_API_KEY <span class="op">=</span> <span class="st">"your-mistral-key"</span>,         <span class="co"># For Mistral</span></span>
+<span>  OLMOCR_API_KEY <span class="op">=</span> <span class="st">"your-provider-key"</span>,         <span class="co"># For olmOCR (DeepInfra/Parasail/etc.)</span></span>
+<span>  OLMOCR_SERVER <span class="op">=</span> <span class="st">"https://api.parasail.io/v1"</span>, <span class="co"># olmOCR endpoint (optional; defaults to DeepInfra)</span></span>
+<span>  DATALAB_API_KEY <span class="op">=</span> <span class="st">"your-datalab-key"</span>,         <span class="co"># For Chandra (Datalab)</span></span>
 <span>  AWS_ACCESS_KEY_ID <span class="op">=</span> <span class="st">"your-aws-key"</span>,           <span class="co"># For AWS Textract</span></span>
 <span>  AWS_SECRET_ACCESS_KEY <span class="op">=</span> <span class="st">"your-aws-secret"</span>     <span class="co"># For AWS Textract</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -141,6 +148,10 @@
 <strong>Tensorlake</strong>: <a href="https://cloud.tensorlake.ai/" class="external-link">cloud.tensorlake.ai</a> → Dashboard → API Key</li>
 <li>
 <strong>Mistral</strong>: <a href="https://mistral.ai/" class="external-link">mistral.ai</a> → Try the API → API keys</li>
+<li>
+<strong>olmOCR</strong>: Any provider serving <code>allenai/olmOCR-2-7B-1025</code> over an OpenAI-compatible API — e.g. <a href="https://parasail.io/" class="external-link">Parasail</a>, <a href="https://deepinfra.com/" class="external-link">DeepInfra</a>, <a href="https://cirrascale.com/" class="external-link">Cirrascale</a>, or your own <code>vllm serve</code>. Set <code>OLMOCR_API_KEY</code> and <code>OLMOCR_SERVER</code>.</li>
+<li>
+<strong>Chandra (Datalab)</strong>: <a href="https://www.datalab.to/" class="external-link">datalab.to</a> → sign up → API key. Set <code>DATALAB_API_KEY</code>.</li>
 <li>
 <strong>AWS Textract</strong>: <a href="https://aws.amazon.com/" class="external-link">aws.amazon.com</a> → IAM → Create access key with <code>AmazonTextractFullAccess</code>
 </li>
@@ -265,7 +276,7 @@
 <col width="13%">
 <col width="23%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Provider</th>
 <th>Accuracy</th>
 <th>Speed</th>
@@ -273,28 +284,28 @@
 <th>Best For</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><strong>Claude Opus 4.6</strong></td>
 <td>⭐⭐⭐⭐⭐ (#1 OCR Arena)</td>
 <td>Medium</td>
 <td>High</td>
 <td>Structured outputs, custom schemas</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>Tensorlake</strong></td>
 <td>⭐⭐⭐⭐⭐ (91.7%)</td>
 <td>Fast</td>
 <td>$0.01/page</td>
 <td>Tables, forms, batch processing</td>
 </tr>
-<tr class="odd">
+<tr>
 <td><strong>Mistral OCR 3</strong></td>
 <td>⭐⭐⭐</td>
 <td>Very Fast</td>
 <td>Low</td>
 <td>Markdown output, cost-sensitive</td>
 </tr>
-<tr class="even">
+<tr>
 <td><strong>AWS Textract</strong></td>
 <td>⭐⭐⭐⭐ (88.4%)</td>
 <td>Fast</td>
@@ -356,7 +367,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>First Last <br><small class="roles"> Author, maintainer </small>   </li>
+<li>Nathan Layman <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2238-6584" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -372,7 +383,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by First Last.</p>
+  <p>Developed by Nathan Layman.</p>
 </div>
 
 <div class="pkgdown-footer-right">

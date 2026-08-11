@@ -29,6 +29,12 @@ ohseer_ocr(
   :   Tensorlake OCR API (default) - Highest accuracy (91.7\\
       "mistral"Mistral OCR 3 - Lower cost, native markdown format
       "claude"Claude Opus/Sonnet - Structured outputs with JSON schema
+      "olmocr"olmOCR (AI2) - Open-weights VLM served via an
+      OpenAI-compatible endpoint (DeepInfra, Parasail, Cirrascale, or
+      local vLLM) "chandra"Chandra (Datalab) - Academic-document OCR via
+      Datalab's hosted API; extracts tables, equations, and figures
+      "dotsmocr"dots.mocr (rednote-hilab) - Local multilingual layout
+      VLM served by your own vLLM server (OpenAI-compatible)
 
   pagesInteger vector. Specific page numbers to process. If NULL
   (default), processes all pages. Page numbers are 1-based.
@@ -107,6 +113,7 @@ different native format:**Tensorlake** - Structured fragments:
 
 Provider FallbackWhen multiple providers are specified, they are tried
 sequentially until one succeeds:
+
 
     # Try Mistral first (lower cost), fall back to Tensorlake (higher quality)
     result <- ohseer_ocr("document.pdf", provider = c("mistral", "tensorlake"))# Try Tensorlake first (higher quality), fall back to Mistral (lower cost)

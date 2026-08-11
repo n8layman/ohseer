@@ -55,6 +55,33 @@ Process documents with Claude API using structured outputs
 - [`claude_extract_pages()`](https://n8layman.github.io/ohseer/reference/claude_extract_pages.md)
   : Extract Page Content from Claude OCR Results
 
+## olmOCR
+
+Process documents with olmOCR via an OpenAI-compatible endpoint
+
+- [`olmocr_ocr()`](https://n8layman.github.io/ohseer/reference/olmocr_ocr.md)
+  : Process Document with olmOCR
+- [`olmocr_extract_pages()`](https://n8layman.github.io/ohseer/reference/olmocr_extract_pages.md)
+  : Extract Page Content from olmOCR Results
+
+## Chandra OCR (Datalab)
+
+Process academic documents with Datalab’s Chandra API
+
+- [`chandra_ocr()`](https://n8layman.github.io/ohseer/reference/chandra_ocr.md)
+  : Process Document with Chandra OCR (Datalab)
+- [`chandra_extract_pages()`](https://n8layman.github.io/ohseer/reference/chandra_extract_pages.md)
+  : Extract Page Content from Chandra (Datalab) OCR Results
+
+## dots.mocr
+
+Process documents with a local dots.mocr vLLM server
+
+- [`dotsmocr_ocr()`](https://n8layman.github.io/ohseer/reference/dotsmocr_ocr.md)
+  : Process Document with a Local dots.mocr Model
+- [`dotsmocr_extract_pages()`](https://n8layman.github.io/ohseer/reference/dotsmocr_extract_pages.md)
+  : Extract Page Content from dots.mocr Results
+
 ## AWS Textract
 
 Process documents with AWS Textract

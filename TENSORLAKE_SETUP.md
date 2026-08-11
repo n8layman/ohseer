@@ -37,6 +37,7 @@ Visit <https://cloud.tensorlake.ai> and create an account.
 **Option 1: In R Session**
 
 ``` r
+
 Sys.setenv(TENSORLAKE_API_KEY = "your-api-key-here")
 ```
 
@@ -54,6 +55,7 @@ TENSORLAKE_API_KEY=your-api-key-here
 ### 4. Test Your Setup
 
 ``` r
+
 library(ohseer)
 
 # Process a document
@@ -68,6 +70,7 @@ str(result, max.level = 2)
 ### Basic Document Parsing
 
 ``` r
+
 # Parse entire document
 result <- tensorlake_ocr("document.pdf")
 
@@ -81,6 +84,7 @@ result <- tensorlake_ocr("document.pdf", output_file = "result.json")
 ### Working with Results
 
 ``` r
+
 # Access parsed content
 text <- result$result$content
 
@@ -100,6 +104,7 @@ By default,
 waits up to 60 seconds for parsing to complete:
 
 ``` r
+
 # Wait up to 120 seconds
 result <- tensorlake_ocr("large-document.pdf", max_wait_seconds = 120)
 ```
@@ -109,6 +114,7 @@ result <- tensorlake_ocr("large-document.pdf", max_wait_seconds = 120)
 Adjust how frequently to check parse status:
 
 ``` r
+
 # Check every 5 seconds instead of default 2
 result <- tensorlake_ocr("document.pdf", poll_interval = 5)
 ```
@@ -118,6 +124,7 @@ result <- tensorlake_ocr("document.pdf", poll_interval = 5)
 For more control, use the low-level functions:
 
 ``` r
+
 # Submit parse job
 parse_response <- tensorlake_parse_document(
   file_path = "document.pdf",
@@ -160,6 +167,7 @@ For enterprise or on-premises deployments, contact Tensorlake support.
 **Solution**: Set the `TENSORLAKE_API_KEY` environment variable:
 
 ``` r
+
 Sys.setenv(TENSORLAKE_API_KEY = "your-key")
 ```
 
@@ -170,6 +178,7 @@ Sys.setenv(TENSORLAKE_API_KEY = "your-key")
 **Solution**: Increase `max_wait_seconds`:
 
 ``` r
+
 result <- tensorlake_ocr("document.pdf", max_wait_seconds = 120)
 ```
 
@@ -180,6 +189,7 @@ result <- tensorlake_ocr("document.pdf", max_wait_seconds = 120)
 **Solution**: Check the error details in the result:
 
 ``` r
+
 result$error
 ```
 

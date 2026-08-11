@@ -9,11 +9,11 @@ terms of cost, accuracy (OCR Arena ranking), and key features.
 
 ## Pricing Summary
 
-| Provider            | Standard Cost       | Batch/Discount Cost                   | Structured Output               | Notes                                    |
-|---------------------|---------------------|---------------------------------------|---------------------------------|------------------------------------------|
-| **Claude Opus 4.5** | ~\$0.15-0.25/page\* | ~\$0.075-0.125/page\* (50% Batch API) | Yes (native)                    | \#1 OCR Arena, token-based pricing       |
-| **Mistral OCR 3**   | \$0.002/page        | \$0.001/page (50% Batch API)          | \$0.003/page (with annotations) | \#19 OCR Arena, page-based pricing       |
-| **Tensorlake**      | \$0.01/page         | N/A                                   | Yes (native)                    | Not on OCR Arena, 91.7% accuracy claimed |
+| Provider | Standard Cost | Batch/Discount Cost | Structured Output | Notes |
+|----|----|----|----|----|
+| **Claude Opus 4.5** | ~\$0.15-0.25/page\* | ~\$0.075-0.125/page\* (50% Batch API) | Yes (native) | \#1 OCR Arena, token-based pricing |
+| **Mistral OCR 3** | \$0.002/page | \$0.001/page (50% Batch API) | \$0.003/page (with annotations) | \#19 OCR Arena, page-based pricing |
+| **Tensorlake** | \$0.01/page | N/A | Yes (native) | Not on OCR Arena, 91.7% accuracy claimed |
 
 \* *Claude pricing is token-based, not page-based. Estimates assume
 ~3,000 input tokens + ~3,000 output tokens per average page with
@@ -140,11 +140,11 @@ Acceptable accuracy for many use cases - Structured output available
 
 ## Example: Processing 10,000 Pages
 
-| Provider        | Standard Cost | Batch/Optimized Cost       | Accuracy Rank              |
-|-----------------|---------------|----------------------------|----------------------------|
-| Claude Opus 4.5 | \$900-2,500\* | \$450-1,250\*              | \#1 (ELO 1696)             |
-| Mistral OCR 3   | \$20          | \$10 (\$30 w/ annotations) | \#19 (ELO 1434)            |
-| Tensorlake      | \$100         | \$100                      | Not ranked (91.7% claimed) |
+| Provider | Standard Cost | Batch/Optimized Cost | Accuracy Rank |
+|----|----|----|----|
+| Claude Opus 4.5 | \$900-2,500\* | \$450-1,250\* | \#1 (ELO 1696) |
+| Mistral OCR 3 | \$20 | \$10 (\$30 w/ annotations) | \#19 (ELO 1434) |
+| Tensorlake | \$100 | \$100 | Not ranked (91.7% claimed) |
 
 \* *Costs vary based on document complexity. Lower end for simple text,
 higher end for complex multi-table documents.*

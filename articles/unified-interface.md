@@ -19,6 +19,7 @@ changing your code.
 ## Installation
 
 ``` r
+
 # Using pak (recommended)
 pak::pak("n8layman/ohseer")
 
@@ -31,6 +32,7 @@ devtools::install_github("n8layman/ohseer")
 Set up API keys as environment variables:
 
 ``` r
+
 # Option 1: Set for current session
 Sys.setenv(
   ANTHROPIC_API_KEY = "your-claude-key",
@@ -65,6 +67,7 @@ MISTRAL_API_KEY=your-mistral-key
 ### Process a Document
 
 ``` r
+
 library(ohseer)
 
 # Process with default provider (Tensorlake)
@@ -80,6 +83,7 @@ result$provider
 ### Choose a Provider
 
 ``` r
+
 # Use Claude for highest accuracy
 result <- ohseer_ocr("document.pdf", provider = "claude")
 
@@ -93,6 +97,7 @@ result <- ohseer_ocr("document.pdf", provider = "tensorlake")
 ### Select Specific Pages
 
 ``` r
+
 # Process only first 2 pages
 result <- ohseer_ocr("document.pdf", pages = c(1, 2))
 
@@ -105,6 +110,7 @@ result <- ohseer_ocr("document.pdf", pages = c(1, 5, 10))
 Automatically try multiple providers until one succeeds:
 
 ``` r
+
 # Try providers in order: Tensorlake → Mistral → Claude
 result <- ohseer_ocr(
   "document.pdf",
@@ -131,6 +137,7 @@ Each provider supports custom options via `...`:
 ### Mistral Options
 
 ``` r
+
 result <- ohseer_ocr(
   "document.pdf",
   provider = "mistral",
@@ -143,6 +150,7 @@ result <- ohseer_ocr(
 ### Claude Options
 
 ``` r
+
 result <- ohseer_ocr(
   "document.pdf",
   provider = "claude",
@@ -155,6 +163,7 @@ result <- ohseer_ocr(
 ### Tensorlake Options
 
 ``` r
+
 result <- ohseer_ocr(
   "document.pdf",
   provider = "tensorlake",
@@ -168,6 +177,7 @@ result <- ohseer_ocr(
 ### Result Structure
 
 ``` r
+
 result <- ohseer_ocr("document.pdf")
 
 # Structure:
@@ -182,6 +192,7 @@ result$error_log  # Character (JSON): errors from failed providers
 Different providers return pages in different formats:
 
 ``` r
+
 # Tensorlake format
 result <- ohseer_ocr("doc.pdf", provider = "tensorlake")
 page1 <- result$pages[[1]]
@@ -213,18 +224,19 @@ For detailed information on each provider’s output format, see:
 
 ## Provider Comparison
 
-| Provider            | Accuracy   | Cost        | Best For                           |
-|---------------------|------------|-------------|------------------------------------|
-| **Claude Opus 4.6** | ⭐⭐⭐⭐⭐ | High        | Structured outputs, custom schemas |
-| **Tensorlake**      | ⭐⭐⭐⭐⭐ | \$0.01/page | Tables, forms, batch processing    |
-| **Mistral OCR 3**   | ⭐⭐⭐     | Low         | Markdown output, cost-sensitive    |
-| **AWS Textract**    | ⭐⭐⭐⭐   | Medium      | AWS ecosystem                      |
+| Provider | Accuracy | Cost | Best For |
+|----|----|----|----|
+| **Claude Opus 4.6** | ⭐⭐⭐⭐⭐ | High | Structured outputs, custom schemas |
+| **Tensorlake** | ⭐⭐⭐⭐⭐ | \$0.01/page | Tables, forms, batch processing |
+| **Mistral OCR 3** | ⭐⭐⭐ | Low | Markdown output, cost-sensitive |
+| **AWS Textract** | ⭐⭐⭐⭐ | Medium | AWS ecosystem |
 
 ## Common Patterns
 
 ### Strategy 1: Quality First with Fallback
 
 ``` r
+
 # Try highest quality first, fall back to cost-effective
 result <- ohseer_ocr(
   "document.pdf",
@@ -235,6 +247,7 @@ result <- ohseer_ocr(
 ### Strategy 2: Cost-Optimized with Fallback
 
 ``` r
+
 # Try lowest cost first, fall back to higher quality
 result <- ohseer_ocr(
   "document.pdf",
@@ -245,6 +258,7 @@ result <- ohseer_ocr(
 ### Strategy 3: Process Multiple Documents
 
 ``` r
+
 files <- c("doc1.pdf", "doc2.pdf", "doc3.pdf")
 
 results <- lapply(files, function(file) {
@@ -267,6 +281,7 @@ successful_results <- Filter(Negate(is.null), results)
     as needed
 
     ``` r
+
     result <- ohseer_ocr("document.pdf")
     ```
 
@@ -274,6 +289,7 @@ successful_results <- Filter(Negate(is.null), results)
     you need
 
     ``` r
+
     result <- ohseer_ocr("paper.pdf", pages = c(1, 2))
     ```
 
@@ -281,12 +297,14 @@ successful_results <- Filter(Negate(is.null), results)
     failover
 
     ``` r
+
     result <- ohseer_ocr("doc.pdf", provider = c("tensorlake", "mistral"))
     ```
 
 4.  **Check provider used**: Verify which provider succeeded
 
     ``` r
+
     message("Provider: ", result$provider)
     ```
 

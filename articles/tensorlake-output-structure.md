@@ -9,6 +9,7 @@ from the results.
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Parse a document with Tensorlake
@@ -24,6 +25,7 @@ function returns a list with the following top-level fields:
 ### Top-Level Fields
 
 ``` r
+
 str(result, max.level = 1)
 ```
 
@@ -47,6 +49,7 @@ Each element in `result$pages` represents one page and contains:
 ### Page Fields
 
 ``` r
+
 page1 <- result$pages[[1]]
 str(page1, max.level = 1)
 ```
@@ -64,6 +67,7 @@ Each page contains multiple fragments representing different content
 types:
 
 ``` r
+
 fragment <- page1$page_fragments[[1]]
 str(fragment, max.level = 2)
 ```
@@ -103,6 +107,7 @@ Use
 to get organized content by fragment type:
 
 ``` r
+
 # Extract first 2 pages with structured data
 pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 
@@ -139,6 +144,7 @@ json_for_llm <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 Access document metadata directly from the result:
 
 ``` r
+
 # View processing statistics
 cat("Parse ID:", result$parse_id, "\n")
 cat("Pages processed:", result$parsed_pages_count, "of", result$total_pages, "\n")
@@ -155,6 +161,7 @@ str(result$usage)
 Find all headers in a document:
 
 ``` r
+
 # Get all section headers
 headers <- list()
 for (page in result$pages) {
@@ -178,6 +185,7 @@ do.call(rbind, lapply(headers, as.data.frame))
 Get text fragments in the order they should be read:
 
 ``` r
+
 # For a specific page
 page_num <- 1
 page <- result$pages[[page_num]]
@@ -198,6 +206,7 @@ cat(paste(ordered_text, collapse = "\n"))
 Here’s a complete workflow for processing an academic paper:
 
 ``` r
+
 library(ohseer)
 library(jsonlite)
 
@@ -235,6 +244,7 @@ for (page in pages) {
     types. Always check what’s available:
 
     ``` r
+
     all_types <- unique(unlist(lapply(result$pages, function(p) {
       sapply(p$page_fragments, function(f) f$fragment_type)
     })))
@@ -254,6 +264,7 @@ for (page in pages) {
     succeeded:
 
     ``` r
+
     if (result$status != "successful") {
       stop("Parsing failed or is incomplete")
     }

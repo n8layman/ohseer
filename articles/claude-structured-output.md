@@ -9,6 +9,7 @@ JSON schema compliance through constrained decoding during inference.
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Process a document with Claude OCR using structured outputs
@@ -27,6 +28,7 @@ structure.
 ### API Configuration
 
 ``` r
+
 request_body <- list(
   model = "claude-opus-4-6",
   max_tokens = 16000,
@@ -120,6 +122,7 @@ The schema supports these fragment types:
 The default behavior provides structured, Tensorlake-compatible output:
 
 ``` r
+
 library(ohseer)
 
 # Process with default Tensorlake schema
@@ -152,6 +155,7 @@ You can provide your own JSON schema for custom output structures.
 ### Example: Simple Schema
 
 ``` r
+
 # Define a simple schema for extracting just titles and authors
 simple_schema <- list(
   type = "object",
@@ -182,6 +186,7 @@ cat("Authors:", paste(result$content[[1]]$text$authors, collapse = ", "), "\n")
 ### Example: Metadata Extraction
 
 ``` r
+
 # Schema for scientific paper metadata
 metadata_schema <- list(
   type = "object",
@@ -224,6 +229,7 @@ result <- claude_ocr_process_file(
 Process specific pages only:
 
 ``` r
+
 # Process first 3 pages
 result <- claude_ocr_process_file(
   "paper.pdf",
@@ -237,6 +243,7 @@ result <- claude_ocr_process_file(
 Choose between available models:
 
 ``` r
+
 # Use Opus 4.6 (most capable, slower, more expensive)
 result_opus <- claude_ocr_process_file("paper.pdf", model = "claude-opus-4-6")
 
@@ -249,6 +256,7 @@ result_sonnet <- claude_ocr_process_file("paper.pdf", model = "claude-sonnet-4-5
 Adjust image processing:
 
 ``` r
+
 result <- claude_ocr_process_file(
   "paper.pdf",
   dpi = 200,  # Higher DPI for better quality
@@ -262,6 +270,7 @@ Here’s a complete workflow for extracting structured data from a
 scientific paper:
 
 ``` r
+
 library(ohseer)
 library(jsonlite)
 
@@ -347,12 +356,14 @@ json_output <- toJSON(metadata_result$pages, auto_unbox = TRUE, pretty = TRUE)
     cost-effective):
 
     ``` r
+
     result <- claude_ocr_process_file("doc.pdf", model = "claude-sonnet-4-5")
     ```
 
 2.  **Page Selection**: Process only needed pages to save costs:
 
     ``` r
+
     # Metadata usually on first 1-2 pages
     result <- claude_ocr_process_file("doc.pdf", pages = c(1, 2))
     ```
@@ -360,6 +371,7 @@ json_output <- toJSON(metadata_result$pages, auto_unbox = TRUE, pretty = TRUE)
 3.  **Schema Design**: Keep schemas simple and focused:
 
     ``` r
+
     # Good: Simple, focused schema
     simple <- list(type = "object", properties = list(title = list(type = "string")))
 
@@ -369,6 +381,7 @@ json_output <- toJSON(metadata_result$pages, auto_unbox = TRUE, pretty = TRUE)
 4.  **Error Handling**: Always validate the response:
 
     ``` r
+
     if (is.null(result$pages) || length(result$pages) == 0) {
       stop("No pages returned from Claude OCR")
     }

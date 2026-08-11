@@ -10,6 +10,7 @@ transformations as needed.
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Parse a document with Mistral OCR
@@ -30,6 +31,7 @@ function returns a list with Mistral’s complete response structure.
 ### Top-Level Fields
 
 ``` r
+
 str(result, max.level = 1)
 ```
 
@@ -49,6 +51,7 @@ Each element in `result$pages` represents one page and contains:
 ### Page Fields
 
 ``` r
+
 page1 <- result$pages[[1]]
 str(page1, max.level = 1)
 ```
@@ -90,6 +93,7 @@ Tables are extracted and stored in the `tables` array of each page.
 ### Table Fields
 
 ``` r
+
 table1 <- page1$tables[[1]]
 str(table1)
 ```
@@ -131,6 +135,7 @@ the main content.
 ### Extraction Options
 
 ``` r
+
 result <- mistral_ocr("document.pdf",
                      extract_header = TRUE,  # Extract running headers
                      extract_footer = TRUE)  # Extract page numbers/footers
@@ -158,6 +163,7 @@ Extracting headers/footers separately:
 Each page includes dimension information for rendering calculations.
 
 ``` r
+
 page1$dimensions
 ```
 
@@ -176,6 +182,7 @@ Use
 to filter to specific pages:
 
 ``` r
+
 # Extract first 3 pages only
 first_three <- mistral_extract_pages(result, pages = c(1, 2, 3))
 
@@ -188,6 +195,7 @@ first_three <- mistral_extract_pages(result, pages = c(1, 2, 3))
 Combine markdown from all pages:
 
 ``` r
+
 all_text <- sapply(result$pages, function(p) p$markdown)
 full_document <- paste(all_text, collapse = "\n\n")
 ```
@@ -197,6 +205,7 @@ full_document <- paste(all_text, collapse = "\n\n")
 Collect all tables from the document:
 
 ``` r
+
 all_tables <- list()
 for (i in seq_along(result$pages)) {
   page <- result$pages[[i]]
@@ -227,6 +236,7 @@ do.call(rbind, lapply(all_tables, function(t) {
 Convert markdown tables to data frames:
 
 ``` r
+
 library(knitr)
 
 # Get first table
@@ -246,6 +256,7 @@ data_lines <- lines[!grepl("^\\|?[-\\s]+\\|[-\\s]+", lines)]
 Access all hyperlinks found on pages:
 
 ``` r
+
 for (i in seq_along(result$pages)) {
   page <- result$pages[[i]]
   if (length(page$hyperlinks) > 0) {
@@ -260,6 +271,7 @@ for (i in seq_along(result$pages)) {
 Here’s a complete workflow for processing a scientific paper:
 
 ``` r
+
 library(ohseer)
 library(jsonlite)
 
@@ -333,6 +345,7 @@ transformation. This means:
     1-based page references:
 
     ``` r
+
     # To get "page 1" (human numbering):
     page1 <- pages[[1]]  # R uses 1-based indexing
     # But page1$index will be 0
@@ -341,18 +354,21 @@ transformation. This means:
 2.  **Header/Footer Extraction**: Enable these for cleaner body text:
 
     ``` r
+
     result <- mistral_ocr("doc.pdf", extract_header = TRUE, extract_footer = TRUE)
     ```
 
 3.  **Table Format**: Request markdown format for easier parsing:
 
     ``` r
+
     result <- mistral_ocr("doc.pdf", table_format = "markdown")
     ```
 
 4.  **Image Handling**: Use `include_image_base64 = TRUE` to get images:
 
     ``` r
+
     result <- mistral_ocr("doc.pdf", include_image_base64 = TRUE)
     # Access with: pages[[1]]$images
     ```
@@ -360,6 +376,7 @@ transformation. This means:
 5.  **JSON Export**: For LLM processing, convert to JSON:
 
     ``` r
+
     library(jsonlite)
     json_str <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
     # Send to Claude, GPT, etc. for structured extraction
@@ -368,6 +385,7 @@ transformation. This means:
 6.  **Validate Results**: Check that OCR completed successfully:
 
     ``` r
+
     if (is.null(result$pages) || length(result$pages) == 0) {
       stop("OCR returned no pages")
     }

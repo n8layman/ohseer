@@ -9,6 +9,7 @@ Quick reference for using Tensorlake with `ohseer`.
 2.  Set environment variable:
 
     ``` r
+
     Sys.setenv(TENSORLAKE_API_KEY = "your-key-here")
     ```
 
@@ -23,6 +24,7 @@ TENSORLAKE_API_KEY=your-key-here
 ### Parse a Document
 
 ``` r
+
 library(ohseer)
 
 # Parse entire document
@@ -35,6 +37,7 @@ result <- tensorlake_ocr("document.pdf", pages = "1-5")
 ### Extract Structured Page Data
 
 ``` r
+
 library(jsonlite)
 
 # Extract structured data from first 2 pages
@@ -55,6 +58,7 @@ json_data <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ### Get Metadata
 
 ``` r
+
 # Access metadata directly from result
 result$total_pages        # Total pages in document
 result$parsed_pages_count # Pages successfully parsed
@@ -67,6 +71,7 @@ result$usage             # API usage stats
 ### Extract Citation Info from Academic Paper
 
 ``` r
+
 # Parse only first 2 pages (faster, cheaper for citations)
 result <- tensorlake_ocr("paper.pdf", pages = c(1, 2))
 
@@ -89,6 +94,7 @@ json_for_llm <- toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ### Extract Tables from Document
 
 ``` r
+
 # Parse entire document
 result <- tensorlake_ocr("report.pdf")
 
@@ -110,6 +116,7 @@ for (page in pages) {
 ### Get Structured Data for Multiple Pages
 
 ``` r
+
 # Parse entire document
 result <- tensorlake_ocr("document.pdf")
 
@@ -187,6 +194,7 @@ Error: Parse job timed out after 60 seconds
 **Parse Failed**
 
 ``` r
+
 result$status == "failed"
 ```
 

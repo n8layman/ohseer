@@ -20,6 +20,7 @@ tools
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Set API key (or use ANTHROPIC_API_KEY environment variable)
@@ -43,6 +44,7 @@ pages[[1]]$other          # Figures, captions, etc.
 ### Model Selection
 
 ``` r
+
 # Use Opus 4.5 for maximum accuracy (default)
 result <- claude_ocr("document.pdf", model = "claude-opus-4.5-20250514")
 
@@ -53,6 +55,7 @@ result <- claude_ocr("document.pdf", model = "claude-sonnet-4.5-20250929")
 ### Save Output
 
 ``` r
+
 # Save raw API response
 result <- claude_ocr("document.pdf", output_file = "claude_result.json")
 
@@ -64,6 +67,7 @@ jsonlite::write_json(pages, "pages.json", auto_unbox = TRUE, pretty = TRUE)
 ### Use with ecoextract
 
 ``` r
+
 library(ecoextract)
 
 # Process document
@@ -84,6 +88,7 @@ json_content <- jsonlite::toJSON(pages, auto_unbox = TRUE, pretty = TRUE)
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Set API key
@@ -102,6 +107,7 @@ The key to getting Mistral OCR 3 to return Tensorlake-formatted data is
 using `document_annotation_format`:
 
 ``` r
+
 # Define Tensorlake-compatible schema
 tensorlake_schema <- list(
   type = "object",
@@ -175,6 +181,7 @@ pages <- mistral_extract_pages(result)
 and footers:
 
 ``` r
+
 # Enable header/footer extraction (default = TRUE in updated code)
 result <- mistral_ocr(
   "document.pdf",
@@ -189,6 +196,7 @@ result <- mistral_ocr(
 ### Table Formatting
 
 ``` r
+
 # Get tables in HTML format
 result <- mistral_ocr("document.pdf", table_format = "html")
 
@@ -199,6 +207,7 @@ result <- mistral_ocr("document.pdf", table_format = "markdown")
 ### Cost Optimization
 
 ``` r
+
 # Use batch API for 50% discount ($0.001/page instead of $0.002/page)
 # (Batch API usage depends on your API client setup)
 
@@ -216,6 +225,7 @@ result <- mistral_ocr(
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Set API key
@@ -231,6 +241,7 @@ pages <- tensorlake_extract_pages(result)
 ### Process Specific Pages
 
 ``` r
+
 # Process only first 5 pages (saves cost and time)
 result <- tensorlake_ocr("document.pdf", pages = 1:5)
 
@@ -244,6 +255,7 @@ pages <- tensorlake_extract_pages(result, pages = c(1, 2))
 ### Exclude Fragment Types
 
 ``` r
+
 # By default, all fragment types are included (including headers/footers)
 pages <- tensorlake_extract_pages(result)
 
@@ -287,23 +299,24 @@ pages <- tensorlake_extract_pages(
 
 ## Provider Feature Comparison
 
-| Feature                      | Claude Opus 4.5 | Mistral OCR 3               | Tensorlake           |
-|------------------------------|-----------------|-----------------------------|----------------------|
-| **Accuracy Rank**            | \#1 (ELO 1696)  | \#19 (ELO 1434)             | Not ranked           |
-| **Cost/Page**                | ~\$0.045-0.09   | \$0.001-0.003               | \$0.01               |
-| **Structured Output**        | Yes (native)    | Yes (annotations)           | Yes (native)         |
-| **Header/Footer Extraction** | Yes             | Yes (extract_header/footer) | Yes                  |
-| **Table Formats**            | Markdown, HTML  | Markdown, HTML              | Markdown, HTML, Text |
-| **Handwriting**              | Excellent       | Good                        | Good                 |
-| **Multi-page Context**       | Excellent       | Good                        | Good                 |
-| **Batch Discount**           | 50%             | 50%                         | N/A                  |
-| **File Size Limit**          | None            | None                        | None                 |
+| Feature | Claude Opus 4.5 | Mistral OCR 3 | Tensorlake |
+|----|----|----|----|
+| **Accuracy Rank** | \#1 (ELO 1696) | \#19 (ELO 1434) | Not ranked |
+| **Cost/Page** | ~\$0.045-0.09 | \$0.001-0.003 | \$0.01 |
+| **Structured Output** | Yes (native) | Yes (annotations) | Yes (native) |
+| **Header/Footer Extraction** | Yes | Yes (extract_header/footer) | Yes |
+| **Table Formats** | Markdown, HTML | Markdown, HTML | Markdown, HTML, Text |
+| **Handwriting** | Excellent | Good | Good |
+| **Multi-page Context** | Excellent | Good | Good |
+| **Batch Discount** | 50% | 50% | N/A |
+| **File Size Limit** | None | None | None |
 
 ------------------------------------------------------------------------
 
 ## Complete Example: Processing a Scientific Paper
 
 ``` r
+
 library(ohseer)
 library(ecoextract)
 
@@ -375,6 +388,7 @@ ecoextract::extract_records(doc_id, db_conn)
 Make sure you’re using OCR 3 and have enabled extraction:
 
 ``` r
+
 result <- mistral_ocr(
   "document.pdf",
   model = "mistral-ocr-2512",  # OCR 3
@@ -388,6 +402,7 @@ result <- mistral_ocr(
 Ensure you’re using the `document_annotation_format` parameter:
 
 ``` r
+
 result <- mistral_ocr(
   "document.pdf",
   document_annotation_format = list(
@@ -402,6 +417,7 @@ result <- mistral_ocr(
 Check that the structured_output field exists:
 
 ``` r
+
 result <- claude_ocr("document.pdf")
 if (is.null(result$structured_output)) {
   # Claude may have returned non-JSON text
@@ -414,6 +430,7 @@ if (is.null(result$structured_output)) {
 Monitor token usage and optimize:
 
 ``` r
+
 # Check usage
 result$usage
 
@@ -444,6 +461,7 @@ TENSORLAKE_API_KEY=your-tensorlake-key-here
 Or set them in your R session:
 
 ``` r
+
 Sys.setenv(ANTHROPIC_API_KEY = "your-key")
 Sys.setenv(MISTRAL_API_KEY = "your-key")
 Sys.setenv(TENSORLAKE_API_KEY = "your-key")

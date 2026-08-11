@@ -52,6 +52,7 @@ Transform to Tensorlake format
 **Critical New Parameters**:
 
 ``` r
+
 extract_header = TRUE  # Extracts page headers separately
 extract_footer = TRUE  # Extracts page footers separately
 ```
@@ -64,6 +65,7 @@ like Tensorlake.
 **Structured Output via JSON Schema**:
 
 ``` r
+
 document_annotation_format = list(
   type = "json_schema",
   json_schema = your_schema
@@ -78,6 +80,7 @@ All providers now return identical structure via
 `{provider}_extract_pages()`:
 
 ``` r
+
 list(
   list(
     page_number = 1,
@@ -231,12 +234,12 @@ matching Tensorlake schema with all required fields.
 
 ### Comparison Table
 
-| Provider                       | Standard Cost/Page | Batch Cost/Page | Accuracy Rank              |
-|--------------------------------|--------------------|-----------------|----------------------------|
-| Claude Opus 4.5                | \$0.09             | \$0.045         | \#1 (ELO 1696)             |
-| Tensorlake                     | \$0.01             | N/A             | Not ranked (91.7% claimed) |
-| Mistral OCR 3                  | \$0.002            | \$0.001         | \#19 (ELO 1434)            |
-| Mistral OCR 3 (w/ annotations) | \$0.003            | \$0.0015        | \#19 (ELO 1434)            |
+| Provider | Standard Cost/Page | Batch Cost/Page | Accuracy Rank |
+|----|----|----|----|
+| Claude Opus 4.5 | \$0.09 | \$0.045 | \#1 (ELO 1696) |
+| Tensorlake | \$0.01 | N/A | Not ranked (91.7% claimed) |
+| Mistral OCR 3 | \$0.002 | \$0.001 | \#19 (ELO 1434) |
+| Mistral OCR 3 (w/ annotations) | \$0.003 | \$0.0015 | \#19 (ELO 1434) |
 
 ### Cost Per 10,000 Pages
 
@@ -292,6 +295,7 @@ validation - Be compatible with `ecoextract`
 All three providers work identically with `ecoextract`:
 
 ``` r
+
 library(ohseer)
 library(ecoextract)
 

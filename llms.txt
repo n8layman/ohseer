@@ -34,13 +34,21 @@ auditR (validation) → Structured Dataset
     outputs with JSON schemas
   - **Tensorlake**: Highest accuracy (91.7%), best for tables and forms
   - **Mistral OCR 3**: Native markdown output, cost-effective
+  - **olmOCR (AI2)**: Open-weights VLM, markdown output, runs on your
+    own GPU or a hosted provider (DeepInfra, Parasail, Cirrascale)
+  - **Chandra (Datalab)**: Academic-document OCR via Datalab’s hosted
+    API; strong tables/equations and extracts figures as images
   - **AWS Textract**: Reliable option for structured data extraction
 - **Consistent output**: Same interface across all providers
-- **Lightweight**: No heavy dependencies, uses httr2 for all API calls
+- **Standing on solid ground**: Chat-based providers (Claude, olmOCR,
+  dots.mocr) use [ellmer](https://ellmer.tidyverse.org) for LLM
+  plumbing; bespoke OCR APIs (Mistral, Tensorlake, Chandra, Textract)
+  use httr2 directly
 
 ## Installation
 
 ``` r
+
 # Using pak (recommended)
 pak::pak("n8layman/ohseer")
 
@@ -56,11 +64,15 @@ remotes::install_github("n8layman/ohseer")
 Set up API keys as environment variables:
 
 ``` r
+
 # Set for the current session
 Sys.setenv(
   ANTHROPIC_API_KEY = "your-claude-key",        # For Claude
   TENSORLAKE_API_KEY = "your-tensorlake-key",   # For Tensorlake
   MISTRAL_API_KEY = "your-mistral-key",         # For Mistral
+  OLMOCR_API_KEY = "your-provider-key",         # For olmOCR (DeepInfra/Parasail/etc.)
+  OLMOCR_SERVER = "https://api.parasail.io/v1", # olmOCR endpoint (optional; defaults to DeepInfra)
+  DATALAB_API_KEY = "your-datalab-key",         # For Chandra (Datalab)
   AWS_ACCESS_KEY_ID = "your-aws-key",           # For AWS Textract
   AWS_SECRET_ACCESS_KEY = "your-aws-secret"     # For AWS Textract
 )
@@ -88,6 +100,13 @@ AWS_SECRET_ACCESS_KEY=your-aws-secret
   Dashboard → API Key
 - **Mistral**: [mistral.ai](https://mistral.ai/) → Try the API → API
   keys
+- **olmOCR**: Any provider serving `allenai/olmOCR-2-7B-1025` over an
+  OpenAI-compatible API — e.g. [Parasail](https://parasail.io/),
+  [DeepInfra](https://deepinfra.com/),
+  [Cirrascale](https://cirrascale.com/), or your own `vllm serve`. Set
+  `OLMOCR_API_KEY` and `OLMOCR_SERVER`.
+- **Chandra (Datalab)**: [datalab.to](https://www.datalab.to/) → sign up
+  → API key. Set `DATALAB_API_KEY`.
 - **AWS Textract**: [aws.amazon.com](https://aws.amazon.com/) → IAM →
   Create access key with `AmazonTextractFullAccess`
 
@@ -96,6 +115,7 @@ AWS_SECRET_ACCESS_KEY=your-aws-secret
 ### Basic Usage
 
 ``` r
+
 library(ohseer)
 
 # Process with default provider (Tensorlake)
@@ -109,6 +129,7 @@ provider_used <- result$provider
 ### Choose a Specific Provider
 
 ``` r
+
 # Use Claude for highest accuracy
 result <- ohseer_ocr("document.pdf", provider = "claude")
 
@@ -124,6 +145,7 @@ result <- ohseer_ocr("document.pdf", provider = "tensorlake")
 Automatically try multiple providers in order until one succeeds:
 
 ``` r
+
 # Try Tensorlake first (highest quality), fall back to Mistral (lower cost)
 result <- ohseer_ocr(
   "document.pdf",
@@ -143,6 +165,7 @@ if (!is.na(result$error_log)) {
 ### Select Specific Pages
 
 ``` r
+
 # Process only first 2 pages
 result <- ohseer_ocr("document.pdf", pages = c(1, 2))
 
@@ -155,6 +178,7 @@ result <- ohseer_ocr("document.pdf", pages = c(1, 5, 10))
 Each provider accepts its own custom parameters via `...`:
 
 ``` r
+
 # Mistral: extract headers and footers separately
 result <- ohseer_ocr(
   "document.pdf",
@@ -185,6 +209,7 @@ All providers return a consistent structure when using
 [`ohseer_ocr()`](https://n8layman.github.io/ohseer/reference/ohseer_ocr.md):
 
 ``` r
+
 result <- ohseer_ocr("document.pdf")
 
 # Result structure:
@@ -206,12 +231,12 @@ provider-specific vignettes for details:
 
 ## Provider Comparison
 
-| Provider            | Accuracy                  | Speed     | Cost        | Best For                           |
-|---------------------|---------------------------|-----------|-------------|------------------------------------|
-| **Claude Opus 4.6** | ⭐⭐⭐⭐⭐ (#1 OCR Arena) | Medium    | High        | Structured outputs, custom schemas |
-| **Tensorlake**      | ⭐⭐⭐⭐⭐ (91.7%)        | Fast      | \$0.01/page | Tables, forms, batch processing    |
-| **Mistral OCR 3**   | ⭐⭐⭐                    | Very Fast | Low         | Markdown output, cost-sensitive    |
-| **AWS Textract**    | ⭐⭐⭐⭐ (88.4%)          | Fast      | Medium      | AWS ecosystem, reliability         |
+| Provider | Accuracy | Speed | Cost | Best For |
+|----|----|----|----|----|
+| **Claude Opus 4.6** | ⭐⭐⭐⭐⭐ (#1 OCR Arena) | Medium | High | Structured outputs, custom schemas |
+| **Tensorlake** | ⭐⭐⭐⭐⭐ (91.7%) | Fast | \$0.01/page | Tables, forms, batch processing |
+| **Mistral OCR 3** | ⭐⭐⭐ | Very Fast | Low | Markdown output, cost-sensitive |
+| **AWS Textract** | ⭐⭐⭐⭐ (88.4%) | Fast | Medium | AWS ecosystem, reliability |
 
 ## Advanced Usage
 
@@ -298,6 +323,33 @@ Process documents with Claude API using structured outputs
   : Process Document with Claude Opus 4.5 OCR
 - [`claude_extract_pages()`](https://n8layman.github.io/ohseer/reference/claude_extract_pages.md)
   : Extract Page Content from Claude OCR Results
+
+## olmOCR
+
+Process documents with olmOCR via an OpenAI-compatible endpoint
+
+- [`olmocr_ocr()`](https://n8layman.github.io/ohseer/reference/olmocr_ocr.md)
+  : Process Document with olmOCR
+- [`olmocr_extract_pages()`](https://n8layman.github.io/ohseer/reference/olmocr_extract_pages.md)
+  : Extract Page Content from olmOCR Results
+
+## Chandra OCR (Datalab)
+
+Process academic documents with Datalab’s Chandra API
+
+- [`chandra_ocr()`](https://n8layman.github.io/ohseer/reference/chandra_ocr.md)
+  : Process Document with Chandra OCR (Datalab)
+- [`chandra_extract_pages()`](https://n8layman.github.io/ohseer/reference/chandra_extract_pages.md)
+  : Extract Page Content from Chandra (Datalab) OCR Results
+
+## dots.mocr
+
+Process documents with a local dots.mocr vLLM server
+
+- [`dotsmocr_ocr()`](https://n8layman.github.io/ohseer/reference/dotsmocr_ocr.md)
+  : Process Document with a Local dots.mocr Model
+- [`dotsmocr_extract_pages()`](https://n8layman.github.io/ohseer/reference/dotsmocr_extract_pages.md)
+  : Extract Page Content from dots.mocr Results
 
 ## AWS Textract
 
