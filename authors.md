@@ -2,7 +2,7 @@
 
 ## Authors
 
-- **Nathan Layman**. Author, maintainer.
+- **Nathan Layman**. Author, maintainer, copyright holder.
   [](https://orcid.org/0000-0003-2238-6584)
 
 ## Citation
